@@ -6,8 +6,11 @@ module.exports = {
   extends: ["xo", "prettier"],
   overrides: [
     {
-      extends: ["xo-typescript", , "prettier"],
+      extends: ["xo-typescript", "prettier"],
       files: ["*.ts", "*.tsx"],
+      rules: {
+        "@typescript-eslint/triple-slash-reference": "off",
+      },
     },
   ],
   parserOptions: {
