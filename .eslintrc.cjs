@@ -10,6 +10,11 @@ module.exports = {
       files: ["*.ts", "*.tsx"],
       rules: {
         "@typescript-eslint/triple-slash-reference": "off",
+        "@typescript-eslint/consistent-type-definitions": [
+          "error",
+          "interface",
+        ],
+        "@typescript-eslint/class-literal-property-style": "off",
       },
     },
   ],
