@@ -14,6 +14,7 @@ module.exports = {
           "error",
           "interface",
         ],
+        "@typescript-eslint/class-literal-property-style": "off",
       },
     },
   ],
