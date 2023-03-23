@@ -25,6 +25,8 @@
     "vite": "^4.1.0"
   },
   "dependencies": {
-    "@commitlint/format": "^17.4.4"
+    "@commitlint/format": "^17.4.4",
+    "@fontsource/open-sans": "^4.5.14",
+    "@fontsource/saira-extra-condensed": "^4.5.10"
   }
 }
