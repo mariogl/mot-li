@@ -189,6 +189,7 @@ span[class^="panel__cell--"] {
 
 .keyboard__key {
   font-size: 1.2rem;
+  text-transform: uppercase;
   flex: 1;
   height: 50px;
   padding: 0 2px;

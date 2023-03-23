@@ -2,35 +2,47 @@ import { type KeyStructure, type KeyType } from "../types";
 import type DomAccessor from "./DomAccessor";
 
 class KeyboardBuilder {
-  private readonly keyLetters = "qwertyuiopasdfghjklçCzxcvbnmD";
+  private readonly keyLetters = ["qwertyuiop", "asdfghjklç", "CzxcvbnmD"];
 
   constructor(private readonly domAccessor: DomAccessor) {}
 
   public build() {
-    const keys: KeyStructure[] = this.keyLetters.split("").map((letterKey) => {
-      if (letterKey === "C") {
-        return this.createKey("env", "action");
-      }
+    const keys: KeyStructure[][] = [];
 
-      if (letterKey === "D") {
-        return this.createKey("esb", "action");
-      }
+    this.keyLetters.forEach((keyList) => {
+      keys.push(
+        keyList.split("").map((letterKey) => {
+          if (letterKey === "C") {
+            return this.createKey("env", "action");
+          }
 
-      return this.createKey(letterKey);
+          if (letterKey === "D") {
+            return this.createKey("esb", "action");
+          }
+
+          return this.createKey(letterKey);
+        })
+      );
     });
 
-    keys.forEach((key) => {
-      const keyButton = document.createElement("button");
+    keys.forEach((keyRow) => {
+      const row = document.createElement("div");
+      row.classList.add("keyboard__row");
+      this.domAccessor.getKeyboardElement().appendChild(row);
 
-      keyButton.className = `key key--${key.status}`;
-      if (key.type === "action") {
-        keyButton.classList.add("key--action");
-      }
+      keyRow.forEach((key) => {
+        const keyButton = document.createElement("button");
 
-      keyButton.dataset.type = key.type;
-      keyButton.textContent = key.symbol;
+        keyButton.className = `keyboard__key key--${key.status}`;
+        if (key.type === "action") {
+          keyButton.classList.add("keyboard__key--double");
+        }
 
-      this.domAccessor.getKeyboardElement().appendChild(keyButton);
+        keyButton.dataset.type = key.type;
+        keyButton.textContent = key.symbol;
+
+        row.appendChild(keyButton);
+      });
     });
   }
 

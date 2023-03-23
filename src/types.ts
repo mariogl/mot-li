@@ -8,7 +8,7 @@ export interface UserInterfaceStructure {
 export interface KeyStructure {
   symbol: string;
   type: KeyType;
-  status: "unused" | "correct" | "absent";
+  status: "unused" | "valid" | "invalid" | "positioned";
 }
 
 export interface GuessLetterStructure {
