@@ -23,7 +23,7 @@ class UserInterface implements UserInterfaceStructure {
 
   public onActionPressed() {}
 
-  public guessToHtml = (guessLetters: GuessLetterStructure[]) => {
+  public guessToHtml(guessLetters: GuessLetterStructure[]) {
     guessLetters.forEach((letter, position) => {
       this.domAccessor.setLetterStatus(
         this.gameState.currentGuessNumber,
@@ -31,7 +31,22 @@ class UserInterface implements UserInterfaceStructure {
         position
       );
     });
-  };
+  }
+
+  public setCurrentLetterElement() {
+    const currentGuess = this.domAccessor.getCurrentGuessElement(
+      this.gameState.currentGuessNumber
+    );
+    currentGuess
+      .querySelector(".letter--current")
+      ?.classList.remove("letter--current");
+
+    currentGuess
+      .querySelector(
+        `.letter:nth-child(${this.gameState.currentGuessLetterPosition + 1})`
+      )
+      ?.classList.add("letter--current");
+  }
 
   private keyboardAddEventListeners() {
     document.addEventListener("keyup", (event) => {

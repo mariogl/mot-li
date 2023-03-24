@@ -156,6 +156,7 @@ main {
   border-radius: 18px;
   background-color: var(--general-background);
   font-size: 2.5rem;
+  text-transform: uppercase;
   line-height: 3.75rem;
   max-width: 3.75rem;
   width: 100%;
@@ -165,7 +166,7 @@ main {
   justify-content: center;
 }
 
-.letter--unchecked {
+.letter:not(.letter--unchecked) {
   color: var(--general-background);
 }
 
@@ -220,7 +221,7 @@ main {
   color: var(--general-background);
 }
 
-.panel__cell--key-focus,
+.letter--current,
 .keyboard__key--key-focus {
   background-color: var(--letter-key-focus);
 }

@@ -1,7 +1,7 @@
-import { type Config } from "../types";
+import { type GuessStructure, type Config } from "../types";
 import { type GuessLetterStructure } from "../types";
 
-class Guess {
+class Guess implements GuessStructure {
   private readonly currentGuess: GuessLetterStructure[];
 
   constructor(private readonly config: Config) {

@@ -1,6 +1,8 @@
 export type KeyType = "letter" | "action";
 
 export interface UserInterfaceStructure {
+  guessToHtml(guessLetters: GuessLetterStructure[]): void;
+  setCurrentLetterElement(): void;
   onLetterPressed(letter: string): void;
   onActionPressed(): void;
 }
@@ -39,4 +41,9 @@ export interface DomAccessorStructure {
     letter: GuessLetterStructure,
     position: number
   ): void;
+}
+
+export interface GuessStructure {
+  setLetterSymbol(position: number, symbol: string): void;
+  getCurrentGuess(): GuessLetterStructure[];
 }

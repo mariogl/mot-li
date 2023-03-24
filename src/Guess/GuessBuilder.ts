@@ -22,6 +22,9 @@ class GuessBuilder {
     for (let i = 0; i < this.config.wordToGuess.length; i++) {
       const letter = document.createElement("div");
       letter.className = "letter letter--unchecked";
+      if (i === 0 && number === this.game.getCurrentGuessNumber()) {
+        letter.classList.add("letter--current");
+      }
 
       letter.addEventListener("click", () => {
         if (
