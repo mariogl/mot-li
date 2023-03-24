@@ -21,6 +21,7 @@ export interface GuessLetterStructure {
 export interface Config {
   maxGuesses: number;
   wordToGuess: string;
+  keyLetters: string[];
 }
 
 export interface GameState {
@@ -45,5 +46,6 @@ export interface DomAccessorStructure {
 
 export interface GuessStructure {
   setLetterSymbol(position: number, symbol: string): void;
+  getLetterSymbol(position: number): string;
   getCurrentGuess(): GuessLetterStructure[];
 }

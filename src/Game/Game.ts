@@ -15,6 +15,7 @@ class Game {
   private readonly config: Config = {
     wordToGuess: "potes",
     maxGuesses: 3,
+    keyLetters: ["qwertyuiop", "asdfghjklç", "CzxcvbnmD"],
   };
 
   private readonly gameState: GameState = {
@@ -24,19 +25,30 @@ class Game {
 
   private readonly guess: GuessStructure;
   private readonly userInterface: UserInterfaceStructure;
+  private readonly domAccessor: DomAccessorStructure;
 
   constructor() {
-    const domAccessor: DomAccessorStructure = new DomAccessor();
-    this.userInterface = new UserInterface(domAccessor, this.gameState);
+    this.domAccessor = new DomAccessor();
+    this.userInterface = new UserInterface(this.domAccessor, this.gameState);
 
-    const keyboardBuilder = new KeyboardBuilder(domAccessor);
-    const guessBuilder = new GuessBuilder(this.config, domAccessor, this);
+    const keyboardBuilder = new KeyboardBuilder(this.domAccessor, this.config);
+    const guessBuilder = new GuessBuilder(this.config, this.domAccessor, this);
 
     keyboardBuilder.build();
     guessBuilder.buildGuesses();
 
-    this.userInterface.onLetterPressed = (letter: string) => {
-      this.setLetterAndAdvance(letter);
+    this.userInterface.onLetterPressed = (pressedKey: string) => {
+      const key = pressedKey.toLocaleLowerCase();
+
+      if (key === "backspace" || key === "esb") {
+        this.deleteLetter();
+      } else if (
+        this.config.keyLetters.some((lettersGroup) =>
+          lettersGroup.includes(key)
+        )
+      ) {
+        this.setLetterAndAdvance(key);
+      }
     };
 
     this.guess = new Guess(this.config);
@@ -70,6 +82,7 @@ class Game {
 
   public setCurrentGuessLetterPosition(position: number) {
     this.gameState.currentGuessLetterPosition = position;
+    this.setCurrentLetterElement();
   }
 
   public setLetterAndAdvance(symbol: string) {
@@ -87,6 +100,40 @@ class Game {
     );
 
     this.userInterface.setCurrentLetterElement();
+  }
+
+  public deleteLetter() {
+    if (this.gameState.currentGuessLetterPosition === 0) {
+      return;
+    }
+
+    if (
+      this.gameState.currentGuessLetterPosition >=
+        this.config.wordToGuess.length ||
+      this.guess.getLetterSymbol(this.gameState.currentGuessLetterPosition) ===
+        ""
+    ) {
+      this.setCurrentGuessLetterPosition(
+        this.gameState.currentGuessLetterPosition - 1
+      );
+    }
+
+    this.setLetter("");
+  }
+
+  private setCurrentLetterElement() {
+    const currentGuess = this.domAccessor.getCurrentGuessElement(
+      this.gameState.currentGuessNumber
+    );
+    currentGuess
+      .querySelector(".letter--current")
+      ?.classList.remove("letter--current");
+
+    currentGuess
+      .querySelector(
+        `.letter:nth-child(${this.gameState.currentGuessLetterPosition + 1})`
+      )
+      ?.classList.add("letter--current");
   }
 
   private setLetter(symbol: string) {
