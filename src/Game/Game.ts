@@ -4,6 +4,8 @@ import {
   type GameState,
   type Config,
   type DomAccessorStructure,
+  type GuessStructure,
+  type UserInterfaceStructure,
 } from "../types";
 import DomAccessor from "../ui/DomAccessor";
 import KeyboardBuilder from "../ui/KeyboardBuilder";
@@ -20,9 +22,12 @@ class Game {
     currentGuessLetterPosition: 0,
   };
 
+  private readonly guess: GuessStructure;
+  private readonly userInterface: UserInterfaceStructure;
+
   constructor() {
     const domAccessor: DomAccessorStructure = new DomAccessor();
-    const userInterface = new UserInterface(domAccessor, this.gameState);
+    this.userInterface = new UserInterface(domAccessor, this.gameState);
 
     const keyboardBuilder = new KeyboardBuilder(domAccessor);
     const guessBuilder = new GuessBuilder(this.config, domAccessor, this);
@@ -30,11 +35,11 @@ class Game {
     keyboardBuilder.build();
     guessBuilder.buildGuesses();
 
-    userInterface.onLetterPressed = (letter: string) => {
-      console.log(letter);
+    this.userInterface.onLetterPressed = (letter: string) => {
+      this.setLetterAndAdvance(letter);
     };
 
-    const guess = new Guess(this.config);
+    this.guess = new Guess(this.config);
   }
 
   public incrementCurrentGuessNumber() {
@@ -65,6 +70,39 @@ class Game {
 
   public setCurrentGuessLetterPosition(position: number) {
     this.gameState.currentGuessLetterPosition = position;
+  }
+
+  public setLetterAndAdvance(symbol: string) {
+    this.setLetter(symbol);
+
+    if (
+      this.gameState.currentGuessLetterPosition >=
+      this.config.wordToGuess.length
+    ) {
+      return;
+    }
+
+    this.setCurrentGuessLetterPosition(
+      this.gameState.currentGuessLetterPosition + 1
+    );
+
+    this.userInterface.setCurrentLetterElement();
+  }
+
+  private setLetter(symbol: string) {
+    if (
+      this.gameState.currentGuessLetterPosition >=
+      this.config.wordToGuess.length
+    ) {
+      return;
+    }
+
+    this.guess.setLetterSymbol(
+      this.gameState.currentGuessLetterPosition,
+      symbol
+    );
+
+    this.userInterface.guessToHtml(this.guess.getCurrentGuess());
   }
 
   private resetCurrentGuessLetterPosition() {
