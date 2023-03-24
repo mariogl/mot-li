@@ -1,6 +1,6 @@
-import { type GuessLetterStructure } from "../types";
+import { type DomAccessorStructure, type GuessLetterStructure } from "../types";
 
-class DomAccessor {
+class DomAccessor implements DomAccessorStructure {
   private readonly guessesContainer: HTMLElement;
   private readonly keyboard: HTMLElement;
   private readonly keyboardKeys: NodeListOf<HTMLElement>;

@@ -75,7 +75,7 @@ main {
   height: calc(100vh - 80px);
 }
 
-.panel {
+.guesses {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -84,7 +84,7 @@ main {
   gap: 5px;
 }
 
-.panel__row {
+.guess {
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
@@ -151,7 +151,7 @@ main {
   z-index: -1;
 }
 
-.panel__cell {
+.letter {
   border: 1px solid var(--letter-key-focus);
   border-radius: 18px;
   background-color: var(--general-background);
@@ -165,7 +165,7 @@ main {
   justify-content: center;
 }
 
-span[class^="panel__cell--"] {
+.letter--unchecked {
   color: var(--general-background);
 }
 

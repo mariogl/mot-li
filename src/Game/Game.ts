@@ -1,53 +1,74 @@
+import Guess from "../Guess/Guess";
+import GuessBuilder from "../Guess/GuessBuilder";
+import {
+  type GameState,
+  type Config,
+  type DomAccessorStructure,
+} from "../types";
 import DomAccessor from "../ui/DomAccessor";
 import KeyboardBuilder from "../ui/KeyboardBuilder";
 import UserInterface from "../ui/UserInterface";
 
 class Game {
-  private readonly wordToGuess = "pota";
-  private readonly maxGuesses = 3;
+  private readonly config: Config = {
+    wordToGuess: "potes",
+    maxGuesses: 3,
+  };
 
-  private currentGuessNumber = 0;
-  private currentGuessLetterPosition = 0;
+  private readonly gameState: GameState = {
+    currentGuessNumber: 0,
+    currentGuessLetterPosition: 0,
+  };
 
   constructor() {
-    const domAccessor = new DomAccessor();
-    const userInterface = new UserInterface(domAccessor);
+    const domAccessor: DomAccessorStructure = new DomAccessor();
+    const userInterface = new UserInterface(domAccessor, this.gameState);
 
     const keyboardBuilder = new KeyboardBuilder(domAccessor);
+    const guessBuilder = new GuessBuilder(this.config, domAccessor, this);
 
     keyboardBuilder.build();
+    guessBuilder.buildGuesses();
 
     userInterface.onLetterPressed = (letter: string) => {
       console.log(letter);
     };
+
+    const guess = new Guess(this.config);
   }
 
   public incrementCurrentGuessNumber() {
-    if (this.currentGuessNumber < this.maxGuesses - 1) {
-      this.currentGuessNumber++;
+    if (this.gameState.currentGuessNumber < this.config.maxGuesses - 1) {
+      this.gameState.currentGuessNumber++;
     }
   }
 
   public incrementCurrentGuessLetterPosition() {
-    if (this.currentGuessLetterPosition > this.wordToGuess.length) {
+    if (
+      this.gameState.currentGuessLetterPosition > this.config.wordToGuess.length
+    ) {
       this.incrementCurrentGuessNumber();
       this.resetCurrentGuessLetterPosition();
       return;
     }
 
-    this.currentGuessLetterPosition++;
+    this.gameState.currentGuessLetterPosition++;
   }
 
   public getCurrentGuessNumber(): number {
-    return this.currentGuessNumber;
+    return this.gameState.currentGuessNumber;
   }
 
   public getCurrentGuessLetterPosition(): number {
-    return this.currentGuessLetterPosition;
+    return this.gameState.currentGuessLetterPosition;
+  }
+
+  public setCurrentGuessLetterPosition(position: number) {
+    this.gameState.currentGuessLetterPosition = position;
   }
 
   private resetCurrentGuessLetterPosition() {
-    this.currentGuessLetterPosition = 0;
+    this.gameState.currentGuessLetterPosition = 0;
   }
 }
 
