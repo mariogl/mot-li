@@ -20,6 +20,10 @@ class Guess implements GuessStructure {
   public getCurrentGuess(): GuessLetterStructure[] {
     return this.currentGuess;
   }
+
+  public getLetterSymbol(position: number): string {
+    return this.currentGuess[position].symbol;
+  }
 }
 
 export default Guess;

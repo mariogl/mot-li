@@ -58,9 +58,7 @@ class UserInterface implements UserInterfaceStructure {
     this.keyboard.addEventListener("click", (event) => {
       const pressedKey = event.target as HTMLButtonElement;
 
-      if (pressedKey.dataset.type === "letter") {
-        this.onLetterPressed(pressedKey.textContent!);
-      }
+      this.onLetterPressed(pressedKey.textContent!);
     });
   }
 }

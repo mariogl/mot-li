@@ -1,18 +1,20 @@
 import {
+  type Config,
   type DomAccessorStructure,
   type KeyStructure,
   type KeyType,
 } from "../types";
 
 class KeyboardBuilder {
-  private readonly keyLetters = ["qwertyuiop", "asdfghjklç", "CzxcvbnmD"];
-
-  constructor(private readonly domAccessor: DomAccessorStructure) {}
+  constructor(
+    private readonly domAccessor: DomAccessorStructure,
+    private readonly config: Config
+  ) {}
 
   public build() {
     const keys: KeyStructure[][] = [];
 
-    this.keyLetters.forEach((keyList) => {
+    this.config.keyLetters.forEach((keyList) => {
       keys.push(
         keyList.split("").map((letterKey) => {
           if (letterKey === "C") {
