@@ -1,10 +1,13 @@
-import { type KeyStructure, type KeyType } from "../types";
-import type DomAccessor from "./DomAccessor";
+import {
+  type DomAccessorStructure,
+  type KeyStructure,
+  type KeyType,
+} from "../types";
 
 class KeyboardBuilder {
   private readonly keyLetters = ["qwertyuiop", "asdfghjklç", "CzxcvbnmD"];
 
-  constructor(private readonly domAccessor: DomAccessor) {}
+  constructor(private readonly domAccessor: DomAccessorStructure) {}
 
   public build() {
     const keys: KeyStructure[][] = [];
