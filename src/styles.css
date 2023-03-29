@@ -4,6 +4,7 @@
   --letter-invalid: #000; /* 552222 */
   --letter-key-focus: #e8d9d9;
   --general-background: #fff;
+  --brand-highlighted: #ec4a49;
 }
 
 *,
@@ -55,8 +56,20 @@ h6 {
 }
 
 header {
-  height: 50px;
+  width: 100%;
+  max-width: 650px;
+  height: 60px;
   margin-bottom: 30px;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.logo--vilaweb img {
+  border: 2px solid var(--letter-key-focus);
+  border-radius: 50%;
 }
 
 h1 {
@@ -64,8 +77,92 @@ h1 {
   font-size: 3rem;
   font-family: "Saira Extra Condensed", sans-serif;
 }
+
 .title--colored {
   color: var(--letter-positioned);
+}
+
+/* navigation */
+
+.menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  border: 2px solid var(--letter-key-focus);
+  border-radius: 50%;
+}
+
+.menu__toggle {
+  width: 25px;
+  height: 22px;
+  display: inline-block;
+  position: relative;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.menu__toggle i {
+  position: absolute;
+  display: block;
+  height: 3px;
+  background: var(--letter-invalid);
+  width: 25px;
+  right: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.menu__toggle i:nth-child(1) {
+  top: 1px;
+}
+
+.menu__toggle i:nth-child(2) {
+  top: 9px;
+}
+
+.menu__toggle i:nth-child(3) {
+  top: 17px;
+}
+
+.menu__toggle.open i:nth-child(1) {
+  top: 10px;
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+
+.menu__toggle.open i:nth-child(2) {
+  background: transparent;
+}
+
+.menu__toggle.open i:nth-child(3) {
+  top: 10px;
+  -webkit-transform: rotateZ(-45deg);
+  transform: rotateZ(-45deg);
+}
+
+.menu__navigation {
+  color: var(--letter-positioned);
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--letter-invalid);
+  height: calc(100vh - (93px));
+  position: absolute;
+  right: -850px;
+  top: 94px;
+  transition: right linear 0.2s;
+  padding: 10px;
+}
+
+.menu__navigation.opened {
+  right: 0px;
+  transition: right linear 0.2s;
+  z-index: 1;
 }
 
 main {
@@ -75,7 +172,12 @@ main {
   height: calc(100vh - 80px);
 }
 
-.guesses {
+/* words pannel */
+
+/* words pannel */
+
+.guesses,
+.panel {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -169,6 +271,8 @@ main {
 .letter:not(.letter--unchecked) {
   color: var(--general-background);
 }
+
+/* keyboard */
 
 .keyboard {
   display: flex;
