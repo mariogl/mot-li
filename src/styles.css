@@ -1,10 +1,11 @@
 :root {
-  --letter-positioned: #63bcca; /*63bcca  63a142*/
-  --letter-valid: #ed8255;
-  --letter-invalid: #000; /* 552222 */
+  --letter-positioned: #59c99a; /*63bcca  63a142*/
+  --letter-valid: #c9a34f;
+  --letter-invalid: #595c63; /* 552222 */
   --letter-key-focus: #e8d9d9;
   --general-background: #fff;
-  --brand-highlighted: #ec4a49;
+  --brand-logo: #63bcca;
+  --dark: #000;
 }
 
 *,
@@ -55,6 +56,21 @@ h6 {
   overflow-wrap: break-word;
 }
 
+ul,
+li {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+a,
+a:visited {
+  color: var(--dark);
+}
+
+a:hover {
+  color: var(--brand-logo);
+}
+
 header {
   width: 100%;
   max-width: 650px;
@@ -79,7 +95,7 @@ h1 {
 }
 
 .title--colored {
-  color: var(--letter-positioned);
+  color: var(--brand-logo);
 }
 
 /* navigation */
@@ -148,21 +164,31 @@ h1 {
 
 .menu__navigation {
   color: var(--letter-positioned);
-  width: 100%;
-  max-width: 600px;
-  background-color: var(--letter-invalid);
-  height: calc(100vh - (93px));
+  width: 150px;
+  padding: 0;
+  /* background-color: var(--letter-invalid); */
+  /*  height: calc(100vh - (93px)); */
   position: absolute;
-  right: -850px;
-  top: 94px;
+  /*  right: -850px; */
+  top: 54px;
   transition: right linear 0.2s;
-  padding: 10px;
+  display: none;
 }
 
 .menu__navigation.opened {
-  right: 0px;
+  right: 8px;
   transition: right linear 0.2s;
   z-index: 1;
+  display: block;
+}
+.menu__navigation.opened ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu__navigation.opened ul li {
+  max-width: 20px;
 }
 
 main {
@@ -174,16 +200,15 @@ main {
 
 /* words pannel */
 
-/* words pannel */
-
-.guesses,
-.panel {
+.guesses {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   max-width: 330px;
-  margin: 0 auto;
+  margin: 70px auto 0;
   gap: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .guess {
@@ -307,19 +332,19 @@ main {
   flex: 2;
 }
 
-.panel__cell--positioned,
+.letter--positioned,
 .keyboard__key--positioned {
   background-color: var(--letter-positioned);
   color: var(--general-background);
 }
 
-.panel__cell--valid,
+.letter--valid,
 .keyboard__key--valid {
   background-color: var(--letter-valid);
   color: var(--general-background);
 }
 
-.panel__cell--invalid,
+.letter--invalid,
 .keyboard__key--invalid {
   background-color: var(--letter-invalid);
   color: var(--general-background);
@@ -328,52 +353,4 @@ main {
 .letter--current,
 .keyboard__key--key-focus {
   background-color: var(--letter-key-focus);
-}
-
-.box-8-retallat {
-  clip-path: polygon(
-    15% 0,
-    85% 0,
-    100% 15%,
-    100% 85%,
-    85% 100%,
-    15% 100%,
-    0 85%,
-    0 15%
-  );
-}
-
-.box-8-costats {
-  width: 65px;
-  aspect-ratio: 1;
-  clip-path: polygon(
-    96.04% 69.5%,
-    68.77% 96.34%,
-    30.5% 96.04%,
-    3.66% 68.77%,
-    3.96% 30.5%,
-    31.23% 3.66%,
-    69.5% 3.96%,
-    96.34% 31.23%
-  );
-  clip-path: polygon(
-    96.04% 69.5%,
-    68.77% 96.34%,
-    30.5% 96.04%,
-    3.66% 68.77%,
-    3.96% 30.5%,
-    31.23% 3.66%,
-    69.5% 3.96%,
-    96.34% 31.23%,
-    96.04% 69.5%,
-    calc(96.34% - 1.85px) calc(31.23% - -0.75px),
-    calc(69.5% - 0.78px) calc(3.96% - -1.84px),
-    calc(31.23% - -0.75px) calc(3.66% - -1.85px),
-    calc(3.96% - -1.84px) calc(30.5% - -0.78px),
-    calc(3.66% - -1.85px) calc(68.77% - 0.75px),
-    calc(30.5% - -0.78px) calc(96.04% - 1.84px),
-    calc(68.77% - 0.75px) calc(96.34% - 1.85px),
-    calc(96.04% - 1.84px) calc(69.5% - 0.78px),
-    calc(96.34% - 1.85px) calc(31.23% - -0.75px)
-  );
 }
