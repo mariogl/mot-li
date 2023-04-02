@@ -5,7 +5,6 @@ import {
   type GuessLetterStructure,
   type UserInterfaceStructure,
 } from "../types";
-import type DomAccessor from "./DomAccessor";
 
 class UserInterface implements UserInterfaceStructure {
   private readonly keyboard: HTMLElement;
