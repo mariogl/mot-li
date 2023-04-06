@@ -42,6 +42,8 @@ class Game {
 
       if (key === "backspace" || key === "esb") {
         this.deleteLetter();
+      } else if (key === "enter" || key === "env") {
+        this.checkGuess();
       } else if (
         this.config.keyLetters.some((lettersGroup) =>
           lettersGroup.includes(key)
@@ -51,7 +53,7 @@ class Game {
       }
     };
 
-    this.guess = new Guess(this.config);
+    this.guess = new Guess(this.config, this.userInterface);
   }
 
   public incrementCurrentGuessNumber() {
@@ -100,6 +102,14 @@ class Game {
     );
 
     this.userInterface.setCurrentLetterElement();
+  }
+
+  public checkGuess() {
+    if (!this.guess.isComplete()) {
+      return;
+    }
+
+    this.guess.checkGuessAgainstWord();
   }
 
   public deleteLetter() {

@@ -1,10 +1,17 @@
-import { type GuessStructure, type Config } from "../types";
+import {
+  type GuessStructure,
+  type Config,
+  type UserInterfaceStructure,
+} from "../types";
 import { type GuessLetterStructure } from "../types";
 
 class Guess implements GuessStructure {
   private readonly currentGuess: GuessLetterStructure[];
 
-  constructor(private readonly config: Config) {
+  constructor(
+    private readonly config: Config,
+    private readonly ui: UserInterfaceStructure
+  ) {
     this.currentGuess = Array(this.config.wordToGuess.length)
       .fill("")
       .map<GuessLetterStructure>(() => ({
@@ -23,6 +30,41 @@ class Guess implements GuessStructure {
 
   public getLetterSymbol(position: number): string {
     return this.currentGuess[position].symbol;
+  }
+
+  public checkGuessAgainstWord() {
+    const word = this.config.wordToGuess.toLocaleLowerCase().split("");
+
+    this.currentGuess.forEach((letter, position) => {
+      if (word.at(position) === letter.symbol.toLocaleLowerCase()) {
+        letter.status = "correct";
+        word[position] = "0";
+      }
+    });
+
+    this.currentGuess.forEach((letter, position) => {
+      if (word.at(position) === "0") {
+        return;
+      }
+
+      if (word.includes(letter.symbol.toLocaleLowerCase())) {
+        letter.status = "present";
+      } else {
+        letter.status = "absent";
+      }
+    });
+
+    this.ui.guessToHtml(this.currentGuess);
+  }
+
+  public getCurrentGuessWord(): string {
+    return this.currentGuess
+      .map((letter) => letter.symbol.toLocaleLowerCase())
+      .join("");
+  }
+
+  public isComplete(): boolean {
+    return this.currentGuess.every((letter) => letter.symbol !== "");
   }
 }
 
