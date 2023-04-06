@@ -48,4 +48,7 @@ export interface GuessStructure {
   setLetterSymbol(position: number, symbol: string): void;
   getLetterSymbol(position: number): string;
   getCurrentGuess(): GuessLetterStructure[];
+  getCurrentGuessWord(): string;
+  checkGuessAgainstWord(): void;
+  isComplete(): boolean;
 }

@@ -298,7 +298,6 @@ main {
 }
 
 /* keyboard */
-
 .keyboard {
   display: flex;
   flex-wrap: wrap;
@@ -332,19 +331,19 @@ main {
   flex: 2;
 }
 
-.letter--positioned,
+.letter--correct,
 .keyboard__key--positioned {
   background-color: var(--letter-positioned);
   color: var(--general-background);
 }
 
-.letter--valid,
+.letter--present,
 .keyboard__key--valid {
   background-color: var(--letter-valid);
   color: var(--general-background);
 }
 
-.letter--invalid,
+.letter--absent,
 .keyboard__key--invalid {
   background-color: var(--letter-invalid);
   color: var(--general-background);
