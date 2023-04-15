@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build-words": "node wordsBuilder"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
