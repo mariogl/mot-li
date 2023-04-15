@@ -37,21 +37,26 @@ class Game {
     this.domAccessor = new DomAccessor();
     this.userInterface = new UserInterface(this.domAccessor, this.gameState);
 
-    const keyboardBuilder = new KeyboardBuilder(this.domAccessor, this.config);
-    const guessBuilder = new GuessBuilder(this.config, this.domAccessor, this);
-
     this.storage = new Storage(
       this.config.storageCurrentGuessNumberName,
       this.config.storagePreviousGuessesName,
       this.config.isCompleteName
     );
 
+    this.gameState.hasFinished = this.storage.game.isComplete;
+
+    const keyboardBuilder = new KeyboardBuilder(this.domAccessor, this.config);
+    const guessBuilder = new GuessBuilder(
+      this.config,
+      this.domAccessor,
+      this,
+      this.storage
+    );
+
     keyboardBuilder.build();
     guessBuilder.buildGuesses();
 
-    this.gameState.hasFinished = this.storage.game.isComplete;
     this.setCurrentGuessNumber(this.storage.game.currentGuessNumber ?? 0);
-
     this.userInterface.onLetterPressed = (pressedKey: string) => {
       const key = pressedKey.toLocaleLowerCase();
 
@@ -150,6 +155,8 @@ class Game {
       return;
     }
 
+    this.storage.addGuess(this.guess.getCurrentGuess());
+
     this.incrementCurrentGuessNumber();
     this.guess.getNewBlankGuess();
   }
@@ -180,13 +187,13 @@ class Game {
   private lose() {
     this.userInterface.cancelEvents();
     this.gameState.hasFinished = true;
-    this.storage.setIsComplete();
+    this.storage.saveIsComplete();
   }
 
   private win() {
     this.userInterface.cancelEvents();
     this.gameState.hasFinished = true;
-    this.storage.setIsComplete();
+    this.storage.saveIsComplete();
   }
 
   private setLetter(symbol: string) {

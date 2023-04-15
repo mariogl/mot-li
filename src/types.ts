@@ -69,5 +69,6 @@ export interface StoredGameStructure {
 export interface StorageStructure {
   game: StoredGameStructure;
   saveCurrentGuessNumber: (currentGuessNumber: number) => void;
-  setIsComplete: () => void;
+  saveIsComplete: () => void;
+  addGuess: (guess: GuessLetterStructure[]) => void;
 }

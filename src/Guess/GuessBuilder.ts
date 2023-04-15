@@ -1,11 +1,16 @@
 import type Game from "../Game/Game";
-import { type DomAccessorStructure, type Config } from "../types";
+import {
+  type DomAccessorStructure,
+  type Config,
+  type StorageStructure,
+} from "../types";
 
 class GuessBuilder {
   constructor(
     private readonly config: Config,
     private readonly domAccessor: DomAccessorStructure,
-    private readonly game: Game
+    private readonly game: Game,
+    private readonly storage: StorageStructure
   ) {}
 
   public buildGuesses() {
@@ -21,7 +26,16 @@ class GuessBuilder {
 
     for (let i = 0; i < this.config.wordToGuess.length; i++) {
       const letter = document.createElement("div");
-      letter.className = "letter letter--unchecked";
+      letter.className = "letter";
+      if (this.storage.game.previousGuesses.length <= number) {
+        letter.classList.add("letter--unchecked");
+      } else {
+        letter.classList.add(
+          `letter--${this.storage.game.previousGuesses[number][i].status}`
+        );
+        letter.textContent =
+          this.storage.game.previousGuesses[number][i].symbol;
+      }
 
       letter.addEventListener("click", () => {
         if (
