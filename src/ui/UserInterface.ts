@@ -47,18 +47,32 @@ class UserInterface implements UserInterfaceStructure {
       ?.classList.add("letter--current");
   }
 
+  public cancelEvents() {
+    this.keyboardRemoveEventListeners();
+  }
+
+  private keyboardRemoveEventListeners() {
+    document.removeEventListener("keyup", this.handleActualKeyboardPress);
+
+    this.keyboard.removeEventListener("click", this.handleVirtualKeyboardPress);
+  }
+
+  private readonly handleActualKeyboardPress = (event: KeyboardEvent) => {
+    const pressedKey = event.key;
+
+    this.onLetterPressed(pressedKey);
+  };
+
+  private readonly handleVirtualKeyboardPress = (event: MouseEvent) => {
+    const pressedKey = event.target as HTMLButtonElement;
+
+    this.onLetterPressed(pressedKey.textContent!);
+  };
+
   private keyboardAddEventListeners() {
-    document.addEventListener("keyup", (event) => {
-      const pressedKey = event.key;
+    document.addEventListener("keyup", this.handleActualKeyboardPress);
 
-      this.onLetterPressed(pressedKey);
-    });
-
-    this.keyboard.addEventListener("click", (event) => {
-      const pressedKey = event.target as HTMLButtonElement;
-
-      this.onLetterPressed(pressedKey.textContent!);
-    });
+    this.keyboard.addEventListener("click", this.handleVirtualKeyboardPress);
   }
 }
 
