@@ -23,6 +23,9 @@ export interface Config {
   maxGuesses: number;
   wordToGuess: string;
   keyLetters: string[];
+  storageCurrentGuessNumberName: string;
+  storagePreviousGuessesName: string;
+  isCompleteName: string;
 }
 
 export interface GameState {
@@ -55,4 +58,16 @@ export interface GuessStructure {
   checkGuessAgainstWord(): void;
   isComplete(): boolean;
   isCurrentGuessCorrect(): boolean;
+}
+
+export interface StoredGameStructure {
+  currentGuessNumber: number;
+  previousGuesses: GuessLetterStructure[][];
+  isComplete: boolean;
+}
+
+export interface StorageStructure {
+  game: StoredGameStructure;
+  saveCurrentGuessNumber: (currentGuessNumber: number) => void;
+  setIsComplete: () => void;
 }

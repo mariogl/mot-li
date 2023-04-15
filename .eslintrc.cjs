@@ -24,5 +24,6 @@ module.exports = {
   },
   rules: {
     "no-console": "error",
+    "no-implicit-coercion": "off",
   },
 };
