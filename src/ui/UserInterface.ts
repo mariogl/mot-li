@@ -36,7 +36,8 @@ class UserInterface implements UserInterfaceStructure {
     const currentGuess = this.domAccessor.getCurrentGuessElement(
       this.gameState.currentGuessNumber
     );
-    currentGuess
+
+    document
       .querySelector(".letter--current")
       ?.classList.remove("letter--current");
 

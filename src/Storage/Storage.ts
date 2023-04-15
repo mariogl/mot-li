@@ -26,10 +26,21 @@ class Storage implements StorageStructure {
     );
   }
 
-  public setIsComplete() {
-    this.emptyGameData();
+  public savePreviousGuesses() {
+    localStorage.setItem(
+      this.storagePreviousGuessesName,
+      JSON.stringify(this.game.previousGuesses)
+    );
+  }
+
+  public saveIsComplete() {
     this.game.isComplete = true;
     localStorage.setItem(this.storageIsCompleteName, "true");
+  }
+
+  public addGuess(guess: GuessLetterStructure[]) {
+    this.game.previousGuesses.push(guess);
+    this.savePreviousGuesses();
   }
 
   private emptyGameData() {
