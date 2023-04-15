@@ -9,6 +9,7 @@ for (let length = 4; length <= 9; length++) {
     "utf-8"
   );
 
+  // eslint-disable-next-line no-console
   console.log(`Llegint ${originFilename}`);
 
   const targetFilename = `words${length}.ts`;
@@ -23,5 +24,6 @@ for (let length = 4; length <= 9; length++) {
     )};`
   );
 
+  // eslint-disable-next-line no-console
   console.log(`Generat ${targetFilename}`);
 }

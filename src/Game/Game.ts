@@ -11,10 +11,24 @@ import DomAccessor from "../ui/DomAccessor";
 import KeyboardBuilder from "../ui/KeyboardBuilder";
 import UserInterface from "../ui/UserInterface";
 import Storage from "../Storage/Storage";
+import allowedWordsWith4Letters from "../allowedWords/words4.js";
+import allowedWordsWith5Letters from "../allowedWords/words5.js";
+import allowedWordsWith6Letters from "../allowedWords/words6.js";
+import allowedWordsWith7Letters from "../allowedWords/words7.js";
+import allowedWordsWith8Letters from "../allowedWords/words8.js";
+import allowedWordsWith9Letters from "../allowedWords/words9.js";
 
 class Game {
   private readonly config: Config = {
     wordToGuess: "potes",
+    allowedWords: {
+      l4: allowedWordsWith4Letters,
+      l5: allowedWordsWith5Letters,
+      l6: allowedWordsWith6Letters,
+      l7: allowedWordsWith7Letters,
+      l8: allowedWordsWith8Letters,
+      l9: allowedWordsWith9Letters,
+    },
     maxGuesses: 3,
     keyLetters: ["qwertyuiop", "asdfghjklç", "CzxcvbnmD"],
     storageCurrentGuessNumberName: "currentGuessNumber",
@@ -148,6 +162,14 @@ class Game {
       return;
     }
 
+    if (
+      !this.config.allowedWords[`l${this.config.wordToGuess.length}`].includes(
+        this.guess.getCurrentGuessWord()
+      )
+    ) {
+      return;
+    }
+
     this.guess.checkGuessAgainstWord();
 
     if (this.guess.isCurrentGuessCorrect()) {
@@ -184,16 +206,18 @@ class Game {
     return this.gameState.hasFinished;
   }
 
-  private lose() {
+  private endGame() {
     this.userInterface.cancelEvents();
     this.gameState.hasFinished = true;
     this.storage.saveIsComplete();
   }
 
+  private lose() {
+    this.endGame();
+  }
+
   private win() {
-    this.userInterface.cancelEvents();
-    this.gameState.hasFinished = true;
-    this.storage.saveIsComplete();
+    this.endGame();
   }
 
   private setLetter(symbol: string) {

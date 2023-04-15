@@ -22,6 +22,7 @@ export interface GuessLetterStructure {
 export interface Config {
   maxGuesses: number;
   wordToGuess: string;
+  allowedWords: Record<string, string[]>;
   keyLetters: string[];
   storageCurrentGuessNumberName: string;
   storagePreviousGuessesName: string;
