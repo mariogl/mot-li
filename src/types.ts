@@ -3,6 +3,7 @@ export type KeyType = "letter" | "action";
 export interface UserInterfaceStructure {
   guessToHtml(guessLetters: GuessLetterStructure[]): void;
   setCurrentLetterElement(): void;
+  cancelEvents(): void;
   onLetterPressed(letter: string): void;
   onActionPressed(): void;
 }
@@ -27,6 +28,7 @@ export interface Config {
 export interface GameState {
   currentGuessNumber: number;
   currentGuessLetterPosition: number;
+  hasFinished: boolean;
 }
 
 export interface DomAccessorStructure {
@@ -49,6 +51,8 @@ export interface GuessStructure {
   getLetterSymbol(position: number): string;
   getCurrentGuess(): GuessLetterStructure[];
   getCurrentGuessWord(): string;
+  getNewBlankGuess(): void;
   checkGuessAgainstWord(): void;
   isComplete(): boolean;
+  isCurrentGuessCorrect(): boolean;
 }

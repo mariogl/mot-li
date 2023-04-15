@@ -21,6 +21,7 @@ class Game {
   private readonly gameState: GameState = {
     currentGuessNumber: 0,
     currentGuessLetterPosition: 0,
+    hasFinished: false,
   };
 
   private readonly guess: GuessStructure;
@@ -87,6 +88,16 @@ class Game {
     this.setCurrentLetterElement();
   }
 
+  public setCurrentGuessNumber(number: number) {
+    if (number >= this.config.maxGuesses) {
+      this.lose();
+      return;
+    }
+
+    this.gameState.currentGuessNumber = number;
+    this.setCurrentGuessLetterPosition(0);
+  }
+
   public setLetterAndAdvance(symbol: string) {
     this.setLetter(symbol);
 
@@ -110,6 +121,14 @@ class Game {
     }
 
     this.guess.checkGuessAgainstWord();
+
+    if (this.guess.isCurrentGuessCorrect()) {
+      this.win();
+      return;
+    }
+
+    this.setCurrentGuessNumber(this.gameState.currentGuessNumber + 1);
+    this.guess.getNewBlankGuess();
   }
 
   public deleteLetter() {
@@ -129,6 +148,24 @@ class Game {
     }
 
     this.setLetter("");
+  }
+
+  public hasFinished() {
+    return this.gameState.hasFinished;
+  }
+
+  private lose() {
+    // eslint-disable-next-line no-console
+    console.log("You loose");
+    this.userInterface.cancelEvents();
+    this.gameState.hasFinished = true;
+  }
+
+  private win() {
+    // eslint-disable-next-line no-console
+    console.log("You won");
+    this.userInterface.cancelEvents();
+    this.gameState.hasFinished = true;
   }
 
   private setCurrentLetterElement() {

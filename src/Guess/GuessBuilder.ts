@@ -28,6 +28,7 @@ class GuessBuilder {
 
       letter.addEventListener("click", () => {
         if (
+          this.game.hasFinished() ||
           this.domAccessor.getCurrentGuessElement(
             this.game.getCurrentGuessNumber()
           ).dataset.number !== guess.dataset.number

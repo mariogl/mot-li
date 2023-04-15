@@ -6,12 +6,16 @@ import {
 import { type GuessLetterStructure } from "../types";
 
 class Guess implements GuessStructure {
-  private readonly currentGuess: GuessLetterStructure[];
+  private currentGuess: GuessLetterStructure[] = [];
 
   constructor(
     private readonly config: Config,
     private readonly ui: UserInterfaceStructure
   ) {
+    this.getNewBlankGuess();
+  }
+
+  public getNewBlankGuess() {
     this.currentGuess = Array(this.config.wordToGuess.length)
       .fill("")
       .map<GuessLetterStructure>(() => ({
@@ -55,6 +59,10 @@ class Guess implements GuessStructure {
     });
 
     this.ui.guessToHtml(this.currentGuess);
+  }
+
+  public isCurrentGuessCorrect() {
+    return this.currentGuess.every((letter) => letter.status === "correct");
   }
 
   public getCurrentGuessWord(): string {
