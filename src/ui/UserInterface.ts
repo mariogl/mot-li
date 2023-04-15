@@ -58,12 +58,20 @@ class UserInterface implements UserInterfaceStructure {
   }
 
   private readonly handleActualKeyboardPress = (event: KeyboardEvent) => {
+    if (this.gameState.hasFinished) {
+      return;
+    }
+
     const pressedKey = event.key;
 
     this.onLetterPressed(pressedKey);
   };
 
   private readonly handleVirtualKeyboardPress = (event: MouseEvent) => {
+    if (this.gameState.hasFinished) {
+      return;
+    }
+
     const pressedKey = event.target as HTMLButtonElement;
 
     this.onLetterPressed(pressedKey.textContent!);

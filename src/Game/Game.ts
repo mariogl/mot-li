@@ -10,12 +10,16 @@ import {
 import DomAccessor from "../ui/DomAccessor";
 import KeyboardBuilder from "../ui/KeyboardBuilder";
 import UserInterface from "../ui/UserInterface";
+import Storage from "../Storage/Storage";
 
 class Game {
   private readonly config: Config = {
     wordToGuess: "potes",
     maxGuesses: 3,
     keyLetters: ["qwertyuiop", "asdfghjklç", "CzxcvbnmD"],
+    storageCurrentGuessNumberName: "currentGuessNumber",
+    storagePreviousGuessesName: "previousGuesses",
+    isCompleteName: "isComplete",
   };
 
   private readonly gameState: GameState = {
@@ -27,6 +31,7 @@ class Game {
   private readonly guess: GuessStructure;
   private readonly userInterface: UserInterfaceStructure;
   private readonly domAccessor: DomAccessorStructure;
+  private readonly storage: Storage;
 
   constructor() {
     this.domAccessor = new DomAccessor();
@@ -35,8 +40,17 @@ class Game {
     const keyboardBuilder = new KeyboardBuilder(this.domAccessor, this.config);
     const guessBuilder = new GuessBuilder(this.config, this.domAccessor, this);
 
+    this.storage = new Storage(
+      this.config.storageCurrentGuessNumberName,
+      this.config.storagePreviousGuessesName,
+      this.config.isCompleteName
+    );
+
     keyboardBuilder.build();
     guessBuilder.buildGuesses();
+
+    this.gameState.hasFinished = this.storage.game.isComplete;
+    this.setCurrentGuessNumber(this.storage.game.currentGuessNumber ?? 0);
 
     this.userInterface.onLetterPressed = (pressedKey: string) => {
       const key = pressedKey.toLocaleLowerCase();
@@ -59,8 +73,12 @@ class Game {
 
   public incrementCurrentGuessNumber() {
     if (this.gameState.currentGuessNumber < this.config.maxGuesses - 1) {
-      this.gameState.currentGuessNumber++;
+      this.setCurrentGuessNumber(this.gameState.currentGuessNumber + 1);
+      this.storage.saveCurrentGuessNumber(this.gameState.currentGuessNumber);
+      return;
     }
+
+    this.lose();
   }
 
   public incrementCurrentGuessLetterPosition() {
@@ -85,7 +103,7 @@ class Game {
 
   public setCurrentGuessLetterPosition(position: number) {
     this.gameState.currentGuessLetterPosition = position;
-    this.setCurrentLetterElement();
+    this.userInterface.setCurrentLetterElement();
   }
 
   public setCurrentGuessNumber(number: number) {
@@ -95,7 +113,12 @@ class Game {
     }
 
     this.gameState.currentGuessNumber = number;
-    this.setCurrentGuessLetterPosition(0);
+
+    if (!this.gameState.hasFinished) {
+      this.setCurrentGuessLetterPosition(0);
+    }
+
+    this.storage.saveCurrentGuessNumber(this.gameState.currentGuessNumber);
   }
 
   public setLetterAndAdvance(symbol: string) {
@@ -127,7 +150,7 @@ class Game {
       return;
     }
 
-    this.setCurrentGuessNumber(this.gameState.currentGuessNumber + 1);
+    this.incrementCurrentGuessNumber();
     this.guess.getNewBlankGuess();
   }
 
@@ -155,32 +178,15 @@ class Game {
   }
 
   private lose() {
-    // eslint-disable-next-line no-console
-    console.log("You loose");
     this.userInterface.cancelEvents();
     this.gameState.hasFinished = true;
+    this.storage.setIsComplete();
   }
 
   private win() {
-    // eslint-disable-next-line no-console
-    console.log("You won");
     this.userInterface.cancelEvents();
     this.gameState.hasFinished = true;
-  }
-
-  private setCurrentLetterElement() {
-    const currentGuess = this.domAccessor.getCurrentGuessElement(
-      this.gameState.currentGuessNumber
-    );
-    currentGuess
-      .querySelector(".letter--current")
-      ?.classList.remove("letter--current");
-
-    currentGuess
-      .querySelector(
-        `.letter:nth-child(${this.gameState.currentGuessLetterPosition + 1})`
-      )
-      ?.classList.add("letter--current");
+    this.storage.setIsComplete();
   }
 
   private setLetter(symbol: string) {
