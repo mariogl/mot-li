@@ -58,6 +58,8 @@ class Guess implements GuessStructure {
       }
     });
 
+    this.ui.setKeysStatus(this.currentGuess);
+
     this.ui.guessToHtml(this.currentGuess);
   }
 

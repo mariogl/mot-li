@@ -33,6 +33,7 @@ class Game {
     keyLetters: ["qwertyuiop", "asdfghjklç", "CzxcvbnmD"],
     storageCurrentGuessNumberName: "currentGuessNumber",
     storagePreviousGuessesName: "previousGuesses",
+    storageUsedKeysName: "usedKeys",
     isCompleteName: "isComplete",
   };
 
@@ -49,17 +50,27 @@ class Game {
 
   constructor() {
     this.domAccessor = new DomAccessor();
-    this.userInterface = new UserInterface(this.domAccessor, this.gameState);
 
     this.storage = new Storage(
       this.config.storageCurrentGuessNumberName,
       this.config.storagePreviousGuessesName,
-      this.config.isCompleteName
+      this.config.isCompleteName,
+      this.config.storageUsedKeysName
+    );
+
+    this.userInterface = new UserInterface(
+      this.domAccessor,
+      this.gameState,
+      this.storage
     );
 
     this.gameState.hasFinished = this.storage.game.isComplete;
 
-    const keyboardBuilder = new KeyboardBuilder(this.domAccessor, this.config);
+    const keyboardBuilder = new KeyboardBuilder(
+      this.domAccessor,
+      this.config,
+      this.storage
+    );
     const guessBuilder = new GuessBuilder(
       this.config,
       this.domAccessor,

@@ -9,12 +9,14 @@ class Storage implements StorageStructure {
     currentGuessNumber: 0,
     previousGuesses: [],
     isComplete: false,
+    usedKeys: [],
   };
 
   constructor(
     private readonly storageCurrentGuessNumberName: string,
     private readonly storagePreviousGuessesName: string,
-    private readonly storageIsCompleteName: string
+    private readonly storageIsCompleteName: string,
+    private readonly storageUsedKeysName: string
   ) {
     this.getStoredGame();
   }
@@ -43,6 +45,11 @@ class Storage implements StorageStructure {
     this.savePreviousGuesses();
   }
 
+  public saveUsedKeys(keys: GuessLetterStructure[]) {
+    this.game.usedKeys = keys;
+    localStorage.setItem(this.storageUsedKeysName, JSON.stringify(keys));
+  }
+
   private emptyGameData() {
     localStorage.removeItem(this.storageCurrentGuessNumberName);
     localStorage.removeItem(this.storagePreviousGuessesName);
@@ -69,6 +76,14 @@ class Storage implements StorageStructure {
 
     if (storedIsComplete) {
       this.game.isComplete = storedIsComplete;
+    }
+
+    const storedUsedKeys = JSON.parse(
+      localStorage.getItem(this.storageUsedKeysName)!
+    ) as GuessLetterStructure[];
+
+    if (storedUsedKeys) {
+      this.game.usedKeys = storedUsedKeys;
     }
   }
 }

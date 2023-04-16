@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import {
+  type StorageStructure,
   type DomAccessorStructure,
   type GameState,
   type GuessLetterStructure,
@@ -11,7 +12,8 @@ class UserInterface implements UserInterfaceStructure {
 
   constructor(
     readonly domAccessor: DomAccessorStructure,
-    private readonly gameState: GameState
+    private readonly gameState: GameState,
+    private readonly storage: StorageStructure
   ) {
     this.keyboard = domAccessor.getKeyboardElement();
 
@@ -50,6 +52,32 @@ class UserInterface implements UserInterfaceStructure {
 
   public cancelEvents() {
     this.keyboardRemoveEventListeners();
+  }
+
+  public setKeysStatus(letters: GuessLetterStructure[]) {
+    const usedKeys: GuessLetterStructure[] = [];
+
+    letters.forEach((letter) => {
+      document.querySelectorAll(".keyboard__key").forEach((keyElement) => {
+        if (letter.symbol === keyElement.textContent?.toLowerCase()) {
+          keyElement.classList.remove(
+            "keyboard__key--unused",
+            "keyboard__key--present",
+            "keyboard__key--correct",
+            "keyboard__key--absent"
+          );
+          keyElement.classList.add(`keyboard__key--${letter.status}`);
+
+          if (letter.status !== "unchecked") {
+            usedKeys.push({ symbol: letter.symbol, status: letter.status });
+          }
+        }
+      });
+    });
+
+    if (usedKeys.length > 0) {
+      this.storage.saveUsedKeys(usedKeys);
+    }
   }
 
   private keyboardRemoveEventListeners() {

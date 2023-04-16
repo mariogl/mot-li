@@ -332,19 +332,19 @@ main {
 }
 
 .letter--correct,
-.keyboard__key--positioned {
+.keyboard__key--correct {
   background-color: var(--letter-positioned);
   color: var(--general-background);
 }
 
 .letter--present,
-.keyboard__key--valid {
+.keyboard__key--present {
   background-color: var(--letter-valid);
   color: var(--general-background);
 }
 
 .letter--absent,
-.keyboard__key--invalid {
+.keyboard__key--absent {
   background-color: var(--letter-invalid);
   color: var(--general-background);
 }
