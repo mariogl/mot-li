@@ -4,6 +4,7 @@ export interface UserInterfaceStructure {
   guessToHtml(guessLetters: GuessLetterStructure[]): void;
   setCurrentLetterElement(): void;
   cancelEvents(): void;
+  setKeysStatus(letters: GuessLetterStructure[]): void;
   onLetterPressed(letter: string): void;
   onActionPressed(): void;
 }

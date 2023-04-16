@@ -38,7 +38,7 @@ class KeyboardBuilder {
       keyRow.forEach((key) => {
         const keyButton = document.createElement("button");
 
-        keyButton.className = `keyboard__key key--${key.status}`;
+        keyButton.className = `keyboard__key keyboard__key--${key.status}`;
         if (key.type === "action") {
           keyButton.classList.add("keyboard__key--double");
         }

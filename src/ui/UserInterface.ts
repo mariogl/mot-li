@@ -52,6 +52,22 @@ class UserInterface implements UserInterfaceStructure {
     this.keyboardRemoveEventListeners();
   }
 
+  public setKeysStatus(letters: GuessLetterStructure[]) {
+    letters.forEach((letter) => {
+      document.querySelectorAll(".keyboard__key").forEach((keyElement) => {
+        if (letter.symbol === keyElement.textContent?.toLowerCase()) {
+          keyElement.classList.remove(
+            "keyboard__key--unused",
+            "keyboard__key--present",
+            "keyboard__key--correct",
+            "keyboard__key--absent"
+          );
+          keyElement.classList.add(`keyboard__key--${letter.status}`);
+        }
+      });
+    });
+  }
+
   private keyboardRemoveEventListeners() {
     document.removeEventListener("keyup", this.handleActualKeyboardPress);
 
