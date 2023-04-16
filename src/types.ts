@@ -77,3 +77,7 @@ export interface StorageStructure {
   saveUsedKeys: (keys: GuessLetterStructure[]) => void;
   addGuess: (guess: GuessLetterStructure[]) => void;
 }
+
+export interface OpenMenu {
+  openMenu(): void;
+}
