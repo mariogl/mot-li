@@ -1,4 +1,5 @@
 import {
+  type StorageStructure,
   type Config,
   type DomAccessorStructure,
   type KeyStructure,
@@ -8,7 +9,8 @@ import {
 class KeyboardBuilder {
   constructor(
     private readonly domAccessor: DomAccessorStructure,
-    private readonly config: Config
+    private readonly config: Config,
+    private readonly storage: StorageStructure
   ) {}
 
   public build() {
@@ -38,7 +40,13 @@ class KeyboardBuilder {
       keyRow.forEach((key) => {
         const keyButton = document.createElement("button");
 
-        keyButton.className = `keyboard__key keyboard__key--${key.status}`;
+        const savedUsedKey = this.storage.game.usedKeys.find(
+          (usedKey) => usedKey.symbol === key.symbol
+        );
+
+        keyButton.className = `keyboard__key keyboard__key--${
+          savedUsedKey ? savedUsedKey.status : key.status
+        }`;
         if (key.type === "action") {
           keyButton.classList.add("keyboard__key--double");
         }

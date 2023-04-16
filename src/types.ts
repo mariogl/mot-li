@@ -27,6 +27,7 @@ export interface Config {
   keyLetters: string[];
   storageCurrentGuessNumberName: string;
   storagePreviousGuessesName: string;
+  storageUsedKeysName: string;
   isCompleteName: string;
 }
 
@@ -66,11 +67,13 @@ export interface StoredGameStructure {
   currentGuessNumber: number;
   previousGuesses: GuessLetterStructure[][];
   isComplete: boolean;
+  usedKeys: GuessLetterStructure[];
 }
 
 export interface StorageStructure {
   game: StoredGameStructure;
   saveCurrentGuessNumber: (currentGuessNumber: number) => void;
   saveIsComplete: () => void;
+  saveUsedKeys: (keys: GuessLetterStructure[]) => void;
   addGuess: (guess: GuessLetterStructure[]) => void;
 }
