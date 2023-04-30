@@ -1,0 +1,59 @@
+@use "../base/variables";
+@use "../base/base";
+
+/* keyboard */
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 0 5px 15px 5px;
+  gap: 5px;
+}
+
+.keyboard__row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.keyboard__key {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  flex: 1;
+  height: 50px;
+  padding: 0 2px;
+  border: none;
+  border-radius: 2px;
+  background-color: var(--letter-key-focus);
+}
+
+.keyboard__key--double {
+  flex: 2;
+}
+
+.letter--correct,
+.keyboard__key--correct {
+  background-color: var(--letter-positioned);
+  color: var(--general-background);
+}
+
+.letter--present,
+.keyboard__key--present {
+  background-color: var(--letter-valid);
+  color: var(--general-background);
+}
+
+.letter--absent,
+.keyboard__key--absent {
+  background-color: var(--letter-invalid);
+  color: var(--general-background);
+}
+
+.letter--current,
+.keyboard__key--key-focus {
+  background-color: var(--letter-key-focus);
+}
