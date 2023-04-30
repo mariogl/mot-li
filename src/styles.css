@@ -71,9 +71,17 @@ a:hover {
   color: var(--brand-logo);
 }
 
-header {
-  width: 100%;
+.container {
   max-width: 650px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+header {
+  border-bottom: 1px solid var(--brand-logo);
+}
+
+.header {
   height: 60px;
   margin-bottom: 30px;
   padding: 10px 15px;
@@ -163,24 +171,24 @@ h1 {
 }
 
 .menu__navigation {
+  display: none;
   color: var(--letter-positioned);
   width: 150px;
   padding: 0;
   /* background-color: var(--letter-invalid); */
   /*  height: calc(100vh - (93px)); */
   position: absolute;
-  /*  right: -850px; */
+  right: -1850px;
   top: 54px;
   transition: right linear 0.2s;
-  display: none;
 }
 
 .menu__navigation.opened {
   right: 8px;
-  transition: right linear 0.2s;
   z-index: 1;
   display: block;
 }
+
 .menu__navigation.opened ul {
   display: flex;
   justify-content: space-between;
@@ -201,7 +209,7 @@ main {
 /* words pannel */
 
 .guesses {
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
   width: 100%;
   max-width: 330px;
@@ -212,11 +220,47 @@ main {
 }
 
 .guess {
-  display: flex;
+  display: grid;
   flex-wrap: nowrap;
   width: 100%;
   justify-content: space-between;
   gap: 5px;
+}
+
+.guesses[data-letters="5"] .guess {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.guesses[data-letters="6"] {
+  max-width: 385px;
+}
+
+.guesses[data-letters="6"] .guess {
+  grid-template-columns: repeat(6, 1fr);
+}
+.guesses[data-letters="7"] {
+  max-width: 450px;
+}
+.guesses[data-letters="7"] .guess {
+  max-width: 450px;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.guesses[data-letters="8"] {
+  max-width: 515px;
+}
+
+.guesses[data-letters="8"] .guess {
+  max-width: 515px;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.guesses[data-letters="9"] {
+  max-width: 580px;
+}
+.guesses[data-letters="9"] .guess {
+  max-width: 580px;
+  grid-template-columns: repeat(9, 1fr);
 }
 
 .box {
@@ -284,10 +328,11 @@ main {
   background-color: var(--general-background);
   font-size: 2.5rem;
   text-transform: uppercase;
+  width: 100%;
   line-height: 3.75rem;
   max-width: 3.75rem;
-  width: 100%;
   height: 3.75rem;
+  /*   height: 3.75rem; */
   display: flex;
   align-items: center;
   justify-content: center;
