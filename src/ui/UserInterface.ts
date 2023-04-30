@@ -9,6 +9,8 @@ import {
 
 class UserInterface implements UserInterfaceStructure {
   private readonly keyboard: HTMLElement;
+  private readonly menu: HTMLElement;
+  private readonly menuToggler: HTMLElement;
 
   constructor(
     readonly domAccessor: DomAccessorStructure,
@@ -16,8 +18,11 @@ class UserInterface implements UserInterfaceStructure {
     private readonly storage: StorageStructure
   ) {
     this.keyboard = domAccessor.getKeyboardElement();
+    this.menuToggler = domAccessor.getMenuTogglerElement();
+    this.menu = domAccessor.getMenuElement();
 
     this.keyboardAddEventListeners();
+    this.menuAddEventListeners();
   }
 
   public onLetterPressed(letter: string) {}
@@ -110,6 +115,25 @@ class UserInterface implements UserInterfaceStructure {
     document.addEventListener("keyup", this.handleActualKeyboardPress);
 
     this.keyboard.addEventListener("click", this.handleVirtualKeyboardPress);
+  }
+
+  private menuAddEventListeners() {
+    this.menuToggler.addEventListener("click", () => {
+      this.domAccessor.toggleMenu();
+    });
+
+    document.addEventListener("click", (event: MouseEvent) => {
+      const clickedElement = event.target as HTMLElement;
+
+      if (
+        this.menuToggler.contains(clickedElement) ||
+        this.menu.contains(clickedElement)
+      ) {
+        return;
+      }
+
+      this.domAccessor.closeMenu();
+    });
   }
 }
 
