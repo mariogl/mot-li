@@ -85,6 +85,18 @@ class UserInterface implements UserInterfaceStructure {
     }
   }
 
+  public openModal(text: string): void {
+    this.domAccessor.openModal(text);
+
+    setTimeout(() => {
+      this.domAccessor.closeModal();
+    }, 2000);
+  }
+
+  public closeModal(): void {
+    this.domAccessor.closeModal();
+  }
+
   private keyboardRemoveEventListeners() {
     document.removeEventListener("keyup", this.handleActualKeyboardPress);
 

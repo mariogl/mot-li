@@ -7,6 +7,8 @@ export interface UserInterfaceStructure {
   setKeysStatus(letters: GuessLetterStructure[]): void;
   onLetterPressed(letter: string): void;
   onActionPressed(): void;
+  openModal(text: string): void;
+  closeModal(): void;
 }
 
 export interface KeyStructure {
@@ -54,6 +56,8 @@ export interface DomAccessorStructure {
     letter: GuessLetterStructure,
     position: number
   ): void;
+  openModal(text: string): void;
+  closeModal(): void;
 }
 
 export interface GuessStructure {

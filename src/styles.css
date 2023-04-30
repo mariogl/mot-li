@@ -353,3 +353,11 @@ main {
 .keyboard__key--key-focus {
   background-color: var(--letter-key-focus);
 }
+
+.modal {
+  display: none;
+}
+
+.modal--open {
+  display: block;
+}

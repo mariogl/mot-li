@@ -6,6 +6,7 @@ class DomAccessor implements DomAccessorStructure {
   private readonly keyboardKeys: NodeListOf<HTMLElement>;
   private readonly menu: HTMLElement;
   private readonly menuToggler: HTMLElement;
+  private readonly modal: HTMLElement;
 
   constructor() {
     this.guessesContainer = document.querySelector(".guesses")!;
@@ -13,6 +14,7 @@ class DomAccessor implements DomAccessorStructure {
     this.keyboardKeys = this.keyboard.querySelectorAll(".key");
     this.menu = document.querySelector(".menu__navigation")!;
     this.menuToggler = document.querySelector(".menu__toggle")!;
+    this.modal = document.querySelector(".modal")!;
   }
 
   public getCurrentGuessElement(currentGuessNumber: number): HTMLElement {
@@ -70,6 +72,16 @@ class DomAccessor implements DomAccessorStructure {
   public closeMenu() {
     this.menu.classList.remove("opened");
     this.menuToggler.classList.remove("open");
+  }
+
+  public openModal(text: string) {
+    this.modal.textContent = text;
+    this.modal.classList.add("modal--open");
+  }
+
+  public closeModal() {
+    this.modal.textContent = "";
+    this.modal.classList.remove("modal--open");
   }
 }
 
