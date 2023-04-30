@@ -1,0 +1,123 @@
+@use "../base/variables";
+@use "../base/base";
+
+.header {
+  border-bottom: 1px solid var(--brand-logo);
+  .container {
+    height: 60px;
+    margin-bottom: 30px;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+  }
+}
+
+.logo--vilaweb img {
+  border: 2px solid var(--letter-key-focus);
+  border-radius: 50%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-family: "Saira Extra Condensed", sans-serif;
+}
+
+.title--colored {
+  color: var(--brand-logo);
+}
+
+/* navigation */
+
+.menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  border: 2px solid var(--letter-key-focus);
+  border-radius: 50%;
+}
+
+.menu__toggle {
+  width: 25px;
+  height: 22px;
+  display: inline-block;
+  position: relative;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.menu__toggle i {
+  position: absolute;
+  display: block;
+  height: 3px;
+  background: var(--letter-invalid);
+  width: 25px;
+  right: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.menu__toggle i:nth-child(1) {
+  top: 1px;
+}
+
+.menu__toggle i:nth-child(2) {
+  top: 9px;
+}
+
+.menu__toggle i:nth-child(3) {
+  top: 17px;
+}
+
+.menu__toggle.open i:nth-child(1) {
+  top: 10px;
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+
+.menu__toggle.open i:nth-child(2) {
+  background: transparent;
+}
+
+.menu__toggle.open i:nth-child(3) {
+  top: 10px;
+  -webkit-transform: rotateZ(-45deg);
+  transform: rotateZ(-45deg);
+}
+
+.menu__navigation {
+  display: none;
+  color: var(--letter-positioned);
+  width: 150px;
+  padding: 0;
+  /* background-color: var(--letter-invalid); */
+  /*  height: calc(100vh - (93px)); */
+  position: absolute;
+  right: -1850px;
+  top: 54px;
+  transition: right linear 0.2s;
+}
+
+.menu__navigation.opened {
+  right: 8px;
+  z-index: 1;
+  display: block;
+}
+
+.menu__navigation.opened ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu__navigation.opened ul li {
+  max-width: 20px;
+}

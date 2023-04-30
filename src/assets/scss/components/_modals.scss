@@ -1,0 +1,26 @@
+@use "../base/variables";
+@use "../base/base";
+
+.modal,
+.supermodal {
+  display: none;
+}
+
+.modal--open,
+.supermodal--open {
+  display: block;
+}
+
+.modal {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--dark);
+  color: var(--general-background);
+  font-size: 1.2rem;
+  padding: 15px;
+  border-radius: 18px;
+  width: 100%;
+  text-align: center;
+}
