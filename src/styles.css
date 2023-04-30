@@ -398,3 +398,13 @@ main {
 .keyboard__key--key-focus {
   background-color: var(--letter-key-focus);
 }
+
+.modal,
+.supermodal {
+  display: none;
+}
+
+.modal--open,
+.supermodal--open {
+  display: block;
+}

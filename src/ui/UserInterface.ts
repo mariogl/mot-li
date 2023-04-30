@@ -5,6 +5,7 @@ import {
   type GameState,
   type GuessLetterStructure,
   type UserInterfaceStructure,
+  type SuperModalType,
 } from "../types";
 
 class UserInterface implements UserInterfaceStructure {
@@ -83,6 +84,26 @@ class UserInterface implements UserInterfaceStructure {
     if (usedKeys.length > 0) {
       this.storage.saveUsedKeys(usedKeys);
     }
+  }
+
+  public openModal(text: string): void {
+    this.domAccessor.openModal(text);
+
+    setTimeout(() => {
+      this.domAccessor.closeModal();
+    }, 2000);
+  }
+
+  public closeModal(): void {
+    this.domAccessor.closeModal();
+  }
+
+  public openSuperModal(type: SuperModalType): void {
+    this.domAccessor.openSuperModal(type);
+  }
+
+  public closeSuperModal(type: SuperModalType): void {
+    this.domAccessor.closeSuperModal(type);
   }
 
   private keyboardRemoveEventListeners() {
