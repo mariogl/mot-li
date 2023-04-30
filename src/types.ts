@@ -45,6 +45,10 @@ export interface DomAccessorStructure {
   getKeyboardElement(): HTMLElement;
   getKeyboardKeyElements(): NodeListOf<HTMLElement>;
   getGuessesContainer(): HTMLElement;
+  getMenuTogglerElement(): HTMLElement;
+  getMenuElement(): HTMLElement;
+  toggleMenu(): void;
+  closeMenu(): void;
   setLetterStatus(
     currentGuessNumber: number,
     letter: GuessLetterStructure,
@@ -76,8 +80,4 @@ export interface StorageStructure {
   saveIsComplete: () => void;
   saveUsedKeys: (keys: GuessLetterStructure[]) => void;
   addGuess: (guess: GuessLetterStructure[]) => void;
-}
-
-export interface OpenMenu {
-  openMenu(): void;
 }
