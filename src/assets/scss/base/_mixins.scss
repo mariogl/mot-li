@@ -1,0 +1,29 @@
+$baseFontSize: 16;
+@mixin fontSizeRem($sizeValue) {
+  font-size: ($sizeValue) * 1px;
+  font-size: calc($sizeValue / $baseFontSize) * 1rem;
+}
+
+@mixin bkp($class) {
+  @if $class==xxs {
+    @media (min-width: 415px) {
+      @content;
+    }
+  } @else if $class==sm {
+    @media (min-width: 576px) {
+      @content;
+    }
+  } @else if $class==md {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $class==lg {
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if $class==xl {
+    @media (min-width: 1064px) {
+      @content;
+    }
+  }
+}
