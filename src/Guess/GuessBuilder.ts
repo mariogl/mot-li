@@ -14,16 +14,22 @@ class GuessBuilder {
   ) {}
 
   public buildGuesses() {
+    this.addLettersToGuessesParent();
     for (let i = 0; i < this.config.maxGuesses; i++) {
       this.createGuess(i);
     }
   }
 
+  private addLettersToGuessesParent() {
+    const guessParent = this.domAccessor.getGuessesContainer();
+    guessParent.dataset.letters = `${this.config.wordToGuess.length}`;
+  }
+
   private createGuess(number: number) {
     const guess = document.createElement("div");
+
     guess.className = "guess";
     guess.dataset.number = `${number}`;
-    guess.dataset.letters = `${this.config.wordToGuess.length}`;
 
     for (let i = 0; i < this.config.wordToGuess.length; i++) {
       const letter = document.createElement("div");
