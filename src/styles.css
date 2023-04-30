@@ -77,11 +77,11 @@ a:hover {
   margin: 0 auto;
 }
 
-header {
+.header {
   border-bottom: 1px solid var(--brand-logo);
 }
 
-.header {
+.header .container {
   height: 60px;
   margin-bottom: 30px;
   padding: 10px 15px;
