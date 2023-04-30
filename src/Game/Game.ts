@@ -6,6 +6,7 @@ import {
   type DomAccessorStructure,
   type GuessStructure,
   type UserInterfaceStructure,
+  SuperModalType,
 } from "../types";
 import DomAccessor from "../ui/DomAccessor";
 import KeyboardBuilder from "../ui/KeyboardBuilder";
@@ -108,7 +109,7 @@ class Game {
       return;
     }
 
-    this.lose();
+    this.lost();
   }
 
   public incrementCurrentGuessLetterPosition() {
@@ -138,7 +139,7 @@ class Game {
 
   public setCurrentGuessNumber(number: number) {
     if (number >= this.config.maxGuesses) {
-      this.lose();
+      this.lost();
       return;
     }
 
@@ -227,11 +228,15 @@ class Game {
     this.storage.saveIsComplete();
   }
 
-  private lose() {
+  private lost() {
+    this.userInterface.openSuperModal(SuperModalType.lost);
+
     this.endGame();
   }
 
   private win() {
+    this.userInterface.openSuperModal(SuperModalType.won);
+
     this.endGame();
   }
 

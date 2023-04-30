@@ -9,6 +9,8 @@ export interface UserInterfaceStructure {
   onActionPressed(): void;
   openModal(text: string): void;
   closeModal(): void;
+  openSuperModal(type: SuperModalType): void;
+  closeSuperModal(type: SuperModalType): void;
 }
 
 export interface KeyStructure {
@@ -58,6 +60,8 @@ export interface DomAccessorStructure {
   ): void;
   openModal(text: string): void;
   closeModal(): void;
+  openSuperModal(type: SuperModalType): void;
+  closeSuperModal(type: SuperModalType): void;
 }
 
 export interface GuessStructure {
@@ -84,4 +88,9 @@ export interface StorageStructure {
   saveIsComplete: () => void;
   saveUsedKeys: (keys: GuessLetterStructure[]) => void;
   addGuess: (guess: GuessLetterStructure[]) => void;
+}
+
+export enum SuperModalType {
+  won,
+  lost,
 }

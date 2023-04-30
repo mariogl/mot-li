@@ -354,10 +354,12 @@ main {
   background-color: var(--letter-key-focus);
 }
 
-.modal {
+.modal,
+.supermodal {
   display: none;
 }
 
-.modal--open {
+.modal--open,
+.supermodal--open {
   display: block;
 }
