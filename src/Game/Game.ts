@@ -170,6 +170,8 @@ class Game {
 
   public checkGuess() {
     if (!this.guess.isComplete()) {
+      this.userInterface.openModal("No hi ha prou lletres");
+
       return;
     }
 
@@ -178,6 +180,8 @@ class Game {
         this.guess.getCurrentGuessWord()
       )
     ) {
+      this.userInterface.openModal("Paraula no trobada");
+
       return;
     }
 
