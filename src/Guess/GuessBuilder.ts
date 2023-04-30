@@ -23,6 +23,7 @@ class GuessBuilder {
     const guess = document.createElement("div");
     guess.className = "guess";
     guess.dataset.number = `${number}`;
+    guess.dataset.letters = `${this.config.wordToGuess.length}`;
 
     for (let i = 0; i < this.config.wordToGuess.length; i++) {
       const letter = document.createElement("div");
