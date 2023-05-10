@@ -17,7 +17,11 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  gap: 5px;
+  gap: 2px;
+
+  @media screen and (min-width: 329px) {
+    gap: 5px;
+  }
 }
 
 .keyboard__key {
@@ -33,6 +37,13 @@
 
 .keyboard__key--double {
   flex: 2;
+}
+
+.keyboard__key.keyboard__key--double {
+  font-size: 1rem;
+  @media screen and (min-width: 329px) {
+    font-size: 1.2rem;
+  }
 }
 
 .letter--correct,
