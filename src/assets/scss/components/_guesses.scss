@@ -1,6 +1,6 @@
 @use "../base/variables";
 @use "../base/base";
-@use "../base/mixins";
+@use "../base/mixins" as mix;
 
 /* main */
 
@@ -39,43 +39,6 @@ main {
   gap: 5px;
 }
 
-.guesses[data-letters="5"] .guess {
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.guesses[data-letters="6"] {
-  max-width: 385px;
-}
-
-.guesses[data-letters="6"] .guess {
-  grid-template-columns: repeat(6, 1fr);
-}
-.guesses[data-letters="7"] {
-  max-width: 450px;
-}
-.guesses[data-letters="7"] .guess {
-  max-width: 450px;
-  grid-template-columns: repeat(7, 1fr);
-}
-
-.guesses[data-letters="8"] {
-  max-width: 515px;
-}
-
-.guesses[data-letters="8"] .guess {
-  max-width: 515px;
-  grid-template-columns: repeat(8, 1fr);
-}
-
-.guesses[data-letters="9"] {
-  max-width: 580px;
-}
-
-.guesses[data-letters="9"] .guess {
-  max-width: 580px;
-  grid-template-columns: repeat(9, 1fr);
-}
-
 .letter {
   border: 1px solid var(--letter-key-focus);
   border-radius: 18px;
@@ -86,21 +49,103 @@ main {
   line-height: 3.75rem;
   max-width: 3.75rem;
   height: 3.75rem;
-  /*   height: 3.75rem; */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.letter:not(.letter--unchecked) {
-  color: var(--general-background);
+.guesses[data-letters="5"] .guess {
+  grid-template-columns: repeat(5, 1fr);
+  @media screen and (max-width: 320px) {
+    .letter {
+      font-size: 2.2rem;
+      line-height: 3.1rem;
+      height: 3.1rem;
+      border-radius: 16px;
+    }
+  }
 }
 
-@media screen and (max-width: 320px) {
-  .letter {
-    font-size: 2.2rem;
-    line-height: 3.1rem;
-    height: 3.1rem;
-    border-radius: 16px;
+.guesses[data-letters="6"] {
+  max-width: 385px;
+  .guess {
+    max-width: 385px;
+    grid-template-columns: repeat(6, 1fr);
   }
+  @media screen and (max-width: 330px) {
+    .letter {
+      height: 2.75rem;
+      font-size: 2rem;
+      border-radius: 13px;
+    }
+  }
+}
+.guesses[data-letters="7"] {
+  max-width: 450px;
+  .guess {
+    max-width: 450px;
+    grid-template-columns: repeat(7, 1fr);
+  }
+  @media screen and (max-width: 290px) {
+    .letter {
+      height: 2.2rem;
+      font-size: 1.4rem;
+      border-radius: 10px;
+    }
+  }
+  @media screen and (min-width: 290px) and (max-width: 380px) {
+    .letter {
+      height: 2.75rem;
+      font-size: 2rem;
+      border-radius: 13px;
+    }
+  }
+}
+
+.guesses[data-letters="8"] {
+  max-width: 515px;
+  .guess {
+    max-width: 515px;
+    grid-template-columns: repeat(8, 1fr);
+  }
+  @media screen and (max-width: 329px) {
+    .letter {
+      height: 2.2rem;
+      font-size: 1.4rem;
+      border-radius: 10px;
+    }
+  }
+  @media screen and (min-width: 330px) and (max-width: 440px) {
+    .letter {
+      height: 2.75rem;
+      font-size: 2rem;
+      border-radius: 13px;
+    }
+  }
+}
+
+.guesses[data-letters="9"] {
+  max-width: 580px;
+  .guess {
+    max-width: 580px;
+    grid-template-columns: repeat(9, 1fr);
+  }
+  @media screen and (max-width: 369px) {
+    .letter {
+      height: 1.9rem;
+      font-size: 1.3rem;
+      border-radius: 8px;
+    }
+  }
+  @media screen and (min-width: 370px) and (max-width: 550px) {
+    .letter {
+      height: 2.75rem;
+      font-size: 2rem;
+      border-radius: 13px;
+    }
+  }
+}
+
+.letter:not(.letter--unchecked) {
+  color: var(--general-background);
 }
