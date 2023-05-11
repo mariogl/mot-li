@@ -12,6 +12,7 @@ class UserInterface implements UserInterfaceStructure {
   private readonly keyboard: HTMLElement;
   private readonly menu: HTMLElement;
   private readonly menuToggler: HTMLElement;
+  private readonly buttonClose: HTMLElement;
 
   constructor(
     readonly domAccessor: DomAccessorStructure,
@@ -21,9 +22,11 @@ class UserInterface implements UserInterfaceStructure {
     this.keyboard = domAccessor.getKeyboardElement();
     this.menuToggler = domAccessor.getMenuTogglerElement();
     this.menu = domAccessor.getMenuElement();
+    this.buttonClose = domAccessor.getButtonCloseElement();
 
     this.keyboardAddEventListeners();
     this.menuAddEventListeners();
+    this.modalAddEventListeners();
   }
 
   public onLetterPressed(letter: string) {}
@@ -100,10 +103,17 @@ class UserInterface implements UserInterfaceStructure {
 
   public openSuperModal(type: SuperModalType): void {
     this.domAccessor.openSuperModal(type);
+    setTimeout(() => {
+      this.domAccessor.closeSuperModal(type);
+    }, 2000);
   }
 
   public closeSuperModal(type: SuperModalType): void {
     this.domAccessor.closeSuperModal(type);
+  }
+
+  public closeBigModal(): void {
+    this.domAccessor.closeBigModal();
   }
 
   private keyboardRemoveEventListeners() {
@@ -156,6 +166,23 @@ class UserInterface implements UserInterfaceStructure {
       this.domAccessor.closeMenu();
     });
   }
-}
 
+  private modalAddEventListeners() {
+    this.buttonClose.addEventListener("click", () => {
+      this.domAccessor.closeBigModal();
+    });
+
+    document.addEventListener("click", (event: MouseEvent) => {
+      const clickedElement = event.target as HTMLElement;
+      /* Mario: para acceder a este elemtno que está en domaccessor como bigmodalSolution tengo que crear una función get que lo coja,y meterlo en el consttructor de aquí, como he hecho con el buttonClose? */
+      if (
+        document.querySelector(".bigmodal--solution").contains(clickedElement)
+      ) {
+        return;
+      }
+
+      this.domAccessor.closeBigModal();
+    });
+  }
+}
 export default UserInterface;

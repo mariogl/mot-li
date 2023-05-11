@@ -1,0 +1,21 @@
+@use "../base/variables";
+@use "../base/base";
+
+.button {
+  background-color: transparent;
+  background-color: #fff;
+  border: 2px solid var(--button-border);
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.button--close {
+  border-radius: 50%;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -12,6 +12,10 @@ class DomAccessor implements DomAccessorStructure {
   private readonly menuToggler: HTMLElement;
   private readonly modal: HTMLElement;
   private readonly superModals: Record<SuperModalType, HTMLElement>;
+  private readonly bigModalStatistics: HTMLElement;
+  private readonly bigModalSolution: HTMLElement;
+  private readonly body: HTMLElement;
+  private readonly buttonClose: HTMLElement;
 
   constructor() {
     this.guessesContainer = document.querySelector(".guesses")!;
@@ -19,11 +23,15 @@ class DomAccessor implements DomAccessorStructure {
     this.keyboardKeys = this.keyboard.querySelectorAll(".key");
     this.menu = document.querySelector(".menu__navigation")!;
     this.menuToggler = document.querySelector(".menu__toggle")!;
+    this.body = document.body;
     this.modal = document.querySelector(".modal")!;
     this.superModals = {
       [SuperModalType.won]: document.querySelector(".supermodal--won")!,
       [SuperModalType.lost]: document.querySelector(".supermodal--lost")!,
     };
+    this.bigModalSolution = document.querySelector(".bigmodal--solution")!;
+    this.buttonClose = this.bigModalSolution.querySelector(".button--close")!;
+    this.bigModalStatistics = document.querySelector(".bigmodal--statistics")!;
   }
 
   public getCurrentGuessElement(currentGuessNumber: number): HTMLElement {
@@ -73,6 +81,10 @@ class DomAccessor implements DomAccessorStructure {
     currentGuessLetterElement.classList.add(`letter--${letter.status}`);
   }
 
+  public getButtonCloseElement() {
+    return this.buttonClose;
+  }
+
   public toggleMenu() {
     this.menu.classList.toggle("opened");
     this.menuToggler.classList.toggle("open");
@@ -95,10 +107,21 @@ class DomAccessor implements DomAccessorStructure {
 
   public openSuperModal(type: SuperModalType): void {
     this.superModals[type].classList.add("supermodal--open");
+    this.openBigModal();
   }
 
   public closeSuperModal(type: SuperModalType): void {
     this.superModals[type].classList.remove("supermodal--open");
+  }
+
+  public openBigModal() {
+    this.bigModalSolution.classList.add("bigmodal--open");
+    this.body.classList.add("modal--open");
+  }
+
+  public closeBigModal() {
+    this.bigModalSolution.classList.remove("bigmodal--open");
+    this.body.classList.remove("modal--open");
   }
 }
 
