@@ -62,6 +62,8 @@ export interface DomAccessorStructure {
   closeModal(): void;
   openSuperModal(type: SuperModalType): void;
   closeSuperModal(type: SuperModalType): void;
+  closeBigModal(): void;
+  getButtonCloseElement(): HTMLElement;
 }
 
 export interface GuessStructure {
