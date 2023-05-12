@@ -6,6 +6,7 @@ import {
   type GuessLetterStructure,
   type UserInterfaceStructure,
   type SuperModalType,
+  BigModalType,
 } from "../types";
 
 class UserInterface implements UserInterfaceStructure {
@@ -13,6 +14,7 @@ class UserInterface implements UserInterfaceStructure {
   private readonly menu: HTMLElement;
   private readonly menuToggler: HTMLElement;
   private readonly buttonClose: HTMLElement;
+  private readonly buttonOpenStatistics: HTMLElement;
 
   constructor(
     readonly domAccessor: DomAccessorStructure,
@@ -23,6 +25,7 @@ class UserInterface implements UserInterfaceStructure {
     this.menuToggler = domAccessor.getMenuTogglerElement();
     this.menu = domAccessor.getMenuElement();
     this.buttonClose = domAccessor.getButtonCloseElement();
+    this.buttonOpenStatistics = domAccessor.getButtonOpenStatistics();
 
     this.keyboardAddEventListeners();
     this.menuAddEventListeners();
@@ -112,10 +115,6 @@ class UserInterface implements UserInterfaceStructure {
     this.domAccessor.closeSuperModal(type);
   }
 
-  public closeBigModal(): void {
-    this.domAccessor.closeBigModal();
-  }
-
   private keyboardRemoveEventListeners() {
     document.removeEventListener("keyup", this.handleActualKeyboardPress);
 
@@ -169,8 +168,19 @@ class UserInterface implements UserInterfaceStructure {
 
   private modalAddEventListeners() {
     this.buttonClose.addEventListener("click", () => {
-      this.domAccessor.closeBigModal();
+      if (this.buttonClose.closest(".bigmodal--solution")) {
+        this.domAccessor.closeBigModal(BigModalType.solution);
+      } else {
+        this.domAccessor.closeBigModal(BigModalType.statistics);
+      }
     });
+
+    this.buttonOpenStatistics.addEventListener("click", () => {
+      this.domAccessor.closeBigModal(BigModalType.solution);
+      this.domAccessor.openBigModal(BigModalType.statistics);
+    });
+
+    /* No deja poner todos: esto sólo si alguno de los modales está abierto, ahora escucha todo el rato: */
 
     document.addEventListener("click", (event: MouseEvent) => {
       const clickedElement = event.target as HTMLElement;
@@ -181,7 +191,8 @@ class UserInterface implements UserInterfaceStructure {
         return;
       }
 
-      this.domAccessor.closeBigModal();
+      this.domAccessor.closeBigModal(BigModalType.solution);
+      this.domAccessor.closeBigModal(BigModalType.statistics);
     });
   }
 }

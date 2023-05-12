@@ -16,9 +16,11 @@ body.modal--open:after {
 }
 
 .modal--open,
-.supermodal--open,
-.bigmodal--open {
+.supermodal--open {
   display: block;
+}
+.bigmodal--open {
+  display: flex;
 }
 
 .modal,
@@ -38,16 +40,19 @@ body.modal--open:after {
 
 .bigmodal {
   position: absolute;
+  width: 100%;
+  max-width: 450px;
   min-height: 50%;
-  top: 50%;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 44%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--general-background);
   color: var(--dark);
-  padding: 15px 10px;
+  padding: 20px;
   border-radius: 18px;
   border: 1px solid #ddd;
-  text-align: center;
 }
 
 .bigmodal__header {
@@ -64,8 +69,12 @@ body.modal--open:after {
   color: var(--brand-logo);
 }
 .bigmodal__definition {
-  margin-top: 20px;
+  margin: 20px 0;
   font-weight: 400;
+  text-align: left;
+  > p {
+    padding-left: 10px;
+  }
 }
 .bigmodal__examples {
   background: #fbf3f3;
@@ -78,6 +87,8 @@ body.modal--open:after {
   }
 }
 .bigmodal__footer {
+  display: flex;
+  justify-content: space-around;
 }
 
 .row {
