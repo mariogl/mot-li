@@ -2,6 +2,7 @@ import {
   SuperModalType,
   type DomAccessorStructure,
   type GuessLetterStructure,
+  BigModalType,
 } from "../types";
 
 class DomAccessor implements DomAccessorStructure {
@@ -12,10 +13,12 @@ class DomAccessor implements DomAccessorStructure {
   private readonly menuToggler: HTMLElement;
   private readonly modal: HTMLElement;
   private readonly superModals: Record<SuperModalType, HTMLElement>;
+  private readonly bigModals: Record<BigModalType, HTMLElement>;
   private readonly bigModalStatistics: HTMLElement;
   private readonly bigModalSolution: HTMLElement;
   private readonly body: HTMLElement;
   private readonly buttonClose: HTMLElement;
+  private readonly buttonStatistics: HTMLElement;
 
   constructor() {
     this.guessesContainer = document.querySelector(".guesses")!;
@@ -29,9 +32,16 @@ class DomAccessor implements DomAccessorStructure {
       [SuperModalType.won]: document.querySelector(".supermodal--won")!,
       [SuperModalType.lost]: document.querySelector(".supermodal--lost")!,
     };
-    this.bigModalSolution = document.querySelector(".bigmodal--solution")!;
-    this.buttonClose = this.bigModalSolution.querySelector(".button--close")!;
-    this.bigModalStatistics = document.querySelector(".bigmodal--statistics")!;
+    this.bigModals = {
+      [BigModalType.solution]: document.querySelector(".bigmodal--solution")!,
+      [BigModalType.statistics]: document.querySelector(
+        ".bigmodal--statistics"
+      )!,
+    };
+    this.buttonClose = document.querySelector(".button--close")!;
+    this.buttonStatistics = this.bigModals[BigModalType.solution].querySelector(
+      ".button--statistics"
+    )!;
   }
 
   public getCurrentGuessElement(currentGuessNumber: number): HTMLElement {
@@ -85,6 +95,10 @@ class DomAccessor implements DomAccessorStructure {
     return this.buttonClose;
   }
 
+  public getButtonOpenStatistics() {
+    return this.buttonStatistics;
+  }
+
   public toggleMenu() {
     this.menu.classList.toggle("opened");
     this.menuToggler.classList.toggle("open");
@@ -107,20 +121,20 @@ class DomAccessor implements DomAccessorStructure {
 
   public openSuperModal(type: SuperModalType): void {
     this.superModals[type].classList.add("supermodal--open");
-    this.openBigModal();
+    this.openBigModal(BigModalType.solution);
   }
 
   public closeSuperModal(type: SuperModalType): void {
     this.superModals[type].classList.remove("supermodal--open");
   }
 
-  public openBigModal() {
-    this.bigModalSolution.classList.add("bigmodal--open");
+  public openBigModal(type: BigModalType): void {
+    this.bigModals[type].classList.add("bigmodal--open");
     this.body.classList.add("modal--open");
   }
 
-  public closeBigModal() {
-    this.bigModalSolution.classList.remove("bigmodal--open");
+  public closeBigModal(type: BigModalType): void {
+    this.bigModals[type].classList.remove("bigmodal--open");
     this.body.classList.remove("modal--open");
   }
 }
