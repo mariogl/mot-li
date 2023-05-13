@@ -1,0 +1,56 @@
+.admin {
+  font-weight: 400;
+  background-color: #f3f4f6;
+}
+.admin .logo--motli {
+  @media screen and (max-width: 460px) {
+    font-size: 1.6rem;
+  }
+}
+
+.admin main {
+  padding: 40px;
+}
+
+.admin__title {
+  margin-bottom: 2rem;
+}
+
+.form__label {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  @media screen and (min-width: 460px) {
+    width: 280px;
+  }
+}
+
+input,
+textarea {
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  border-radius: 10px;
+  &:focus,
+  &:focus-visible {
+    border: 1px solid var(--brand-logo);
+    outline: 1px solid var(--brand-logo);
+  }
+}
+
+input[type="text"],
+input[type="url"],
+textarea {
+  width: 100%;
+  @media screen and (min-width: 460px) {
+    width: 300px;
+  }
+}
+
+.form__wrap-element {
+  margin-bottom: 25px;
+  @media screen and (min-width: 460px) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+}

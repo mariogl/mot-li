@@ -30,7 +30,7 @@ class Game {
       l8: allowedWordsWith8Letters,
       l9: allowedWordsWith9Letters,
     },
-    maxGuesses: 6,
+    maxGuesses: 3,
     keyLetters: ["qwertyuiop", "asdfghjklç", "CzxcvbnmD"],
     storageCurrentGuessNumberName: "currentGuessNumber",
     storagePreviousGuessesName: "previousGuesses",

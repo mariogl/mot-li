@@ -180,8 +180,6 @@ class UserInterface implements UserInterfaceStructure {
       this.domAccessor.openBigModal(BigModalType.statistics);
     });
 
-    /* No deja poner todos: esto sólo si alguno de los modales está abierto, ahora escucha todo el rato: */
-
     document.addEventListener("click", (event: MouseEvent) => {
       const clickedElement = event.target as HTMLElement;
       /* Mario: para acceder a este elemtno que está en domaccessor como bigmodalSolution tengo que crear una función get que lo coja,y meterlo en el consttructor de aquí, como he hecho con el buttonClose? */
