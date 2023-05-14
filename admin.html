@@ -6,6 +6,7 @@
   <link rel="icon" type="image/png" href="/FaviconMotli.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mot-li: administració</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script type="module" src="/src/admin.ts"></script>
 </head>
 
@@ -15,7 +16,6 @@
     <div class="container">
       <a href="//www.vilaweb.cat" title="Ves a VilaWeb" class="logo--vilaweb"><img src="logo_vilaweb.svg" width="42" height="42" alt="VilaWeb"></a>
       <h1 class="logo--motli"><span class="title--colored">Mot</span>-li! / Administració</h1>
-
       <div class="menu">
         <span class="menu__toggle">
           <i></i>
@@ -64,7 +64,7 @@
   </header>
   <main>
     <h2 class="admin__title">Introduïr un joc nou</h2>
-    <form class="form form--admin">
+    <form class="form form--admin" id="newGame">
       <div class="form__wrap-element">
         <label class="form__label" for="dateGame">
           Data del joc del dia:
@@ -93,7 +93,9 @@
         <label class="form__label" for="wordDefinition">
           Definició i exemples del mot:
         </label>
-        <textarea id="wordDefinition"></textarea>
+        <div class="wrap-editor textarea">
+          <div data-tiny-editor data-fontname="no" data-formatblock="no" data-forecolor="no" contenteditable="true" id="wordDefinition"></div>
+        </div>
       </div>
       <div class="form__wrap-element">
         <label class="form__label" for="linkRodamots">
@@ -101,7 +103,9 @@
         </label>
         <input type="url" id="linkRodamots" />
       </div>
-
+      <div class="form__wrap-element">
+        <button type="submit" id="addGame" form="newGame" class="button button--submit">Desa el nou joc</button>
+      </div>
     </form>
   </main>
 </body>
