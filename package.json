@@ -29,6 +29,8 @@
   "dependencies": {
     "@commitlint/format": "^17.4.4",
     "@fontsource/open-sans": "^4.5.14",
-    "@fontsource/saira-extra-condensed": "^4.5.10"
+    "@fontsource/saira-extra-condensed": "^4.5.10",
+    "font-awesome": "^4.7.0",
+    "tiny-editor": "^0.3.0"
   }
 }
