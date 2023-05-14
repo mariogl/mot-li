@@ -2,12 +2,29 @@
 @use "../base/base";
 
 .button {
-  background-color: transparent;
-  background-color: #fff;
+  background-color: var(--light-color);
+  color: var(--dark);
+  text-align: center;
   border: 2px solid var(--button-border);
   border-radius: 30px;
+  font-weight: 700;
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 8px 20px;
+  &:hover,
+  &:focus {
+    background-color: var(--brand-logo);
+    color: var(--light-color);
+  }
+}
+
+.button--reverse {
+  background-color: var(--brand-logo);
+  color: var(--light-color);
+  &:hover,
+  &:focus {
+    background-color: var(--light-color);
+    color: var(--dark);
+  }
 }
 
 .button--close {
