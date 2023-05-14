@@ -58,6 +58,7 @@ body.modal--open:after {
   transform: translate(-50%, -50%);
   background-color: var(--general-background);
   color: var(--dark);
+  font-weight: 400;
   padding: 10px;
   border-radius: 18px;
   border: 1px solid #ddd;
@@ -70,6 +71,8 @@ body.modal--open:after {
   }
 }
 
+/* bigmodal general */
+
 .bigmodal__header {
   display: flex;
   justify-content: space-between;
@@ -78,6 +81,9 @@ body.modal--open:after {
 .bigmodal__title {
   font-size: 1.2rem;
 }
+
+/* bigmodal--solution */
+
 .bigmodal__solution {
   text-align: center;
   font-size: 1.3rem;
@@ -111,6 +117,8 @@ body.modal--open:after {
   }
 }
 
+/* bigmodal-stats */
+
 .row {
   display: flex;
   gap: 5px;
@@ -128,5 +136,40 @@ body.modal--open:after {
     span {
       font-size: 1.8rem;
     }
+  }
+}
+
+/* bigmodal--info */
+
+.bigmodal--info {
+  top: 65px;
+  transform: translate(-50%, 0);
+}
+
+.bigmodal__rules {
+  margin-top: 20px;
+  ul,
+  li {
+    list-style-type: square;
+  }
+  ul {
+    margin-left: 10px;
+  }
+  li {
+    padding-left: 5px;
+    margin-bottom: 10px;
+  }
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+.info__letters {
+  letter-spacing: 11px;
+  font-size: 2rem;
+  margin-top: 15px;
+  & > .letter--correct {
+    padding: 2px 0 2px 9px;
+    border-radius: 10px;
   }
 }

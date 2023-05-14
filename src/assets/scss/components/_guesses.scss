@@ -27,8 +27,6 @@ main {
   width: 100%;
   max-width: 330px;
   gap: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .guess {
@@ -54,6 +52,13 @@ main {
   justify-content: center;
 }
 
+.guesses[data-letters="4"] {
+  max-width: 260px;
+  .guess {
+    max-width: 260px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 .guesses[data-letters="5"] .guess {
   grid-template-columns: repeat(5, 1fr);
   @media screen and (max-width: 320px) {
