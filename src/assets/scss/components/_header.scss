@@ -70,19 +70,19 @@
 }
 
 .menu__toggle i:nth-child(1) {
-  top: 1px;
+  top: 0;
 }
 
 .menu__toggle i:nth-child(2) {
-  top: 8px;
+  top: 7px;
 }
 
 .menu__toggle i:nth-child(3) {
-  top: 15px;
+  top: 14px;
 }
 
 .menu__toggle.open i:nth-child(1) {
-  top: 8px;
+  top: 7px;
   -webkit-transform: rotateZ(45deg);
   transform: rotateZ(45deg);
 }
@@ -92,7 +92,7 @@
 }
 
 .menu__toggle.open i:nth-child(3) {
-  top: 8px;
+  top: 7px;
   -webkit-transform: rotateZ(-45deg);
   transform: rotateZ(-45deg);
 }
