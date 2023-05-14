@@ -6,6 +6,7 @@ body.modal--open:after {
   position: absolute;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
 
 .modal,
@@ -23,6 +24,10 @@ body.modal--open:after {
   display: flex;
 }
 
+.modal {
+  padding: 8px;
+}
+
 .modal,
 .supermodal {
   position: absolute;
@@ -32,15 +37,18 @@ body.modal--open:after {
   background-color: var(--dark);
   color: var(--general-background);
   font-size: 1.2rem;
-  padding: 15px;
   border-radius: 18px;
-  width: 60%;
+  width: 90%;
   text-align: center;
+
+  @media screen and (min-width: 340px) {
+    width: 60%;
+  }
 }
 
 .bigmodal {
   position: absolute;
-  width: 100%;
+  width: 95%;
   max-width: 450px;
   min-height: 50%;
   flex-direction: column;
@@ -50,9 +58,16 @@ body.modal--open:after {
   transform: translate(-50%, -50%);
   background-color: var(--general-background);
   color: var(--dark);
-  padding: 20px;
+  padding: 10px;
   border-radius: 18px;
   border: 1px solid #ddd;
+  z-index: 2;
+  @media screen and (min-width: 340px) {
+    padding: 15px;
+  }
+  @media screen and (min-width: 390px) {
+    padding: 20px;
+  }
 }
 
 .bigmodal__header {
@@ -88,7 +103,12 @@ body.modal--open:after {
 }
 .bigmodal__footer {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  gap: 15px;
+  @media screen and (min-width: 340px) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
 }
 
 .row {
@@ -103,6 +123,8 @@ body.modal--open:after {
     flex: 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     span {
       font-size: 1.8rem;
     }
