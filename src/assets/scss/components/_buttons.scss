@@ -10,11 +10,22 @@
   font-weight: 700;
   cursor: pointer;
   padding: 8px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover,
   &:focus {
     background-color: var(--brand-logo);
     color: var(--light-color);
   }
+}
+
+.button--text-icon {
+  font-weight: 400;
+  background-color: transparent;
+  padding: 0 10px 0 0;
+  border: 0;
+  gap: 10px;
 }
 
 .button--reverse {
@@ -35,4 +46,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.button--icon {
+  background-color: transparent;
+  border: 2px solid var(--button-border);
+  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  &:hover,
+  &:focus {
+    background-color: var(--brand-logo);
+    color: var(--light-color);
+  }
 }
