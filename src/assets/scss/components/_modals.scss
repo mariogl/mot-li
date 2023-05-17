@@ -58,7 +58,6 @@ body.modal--open:after {
   transform: translate(-50%, -50%);
   background-color: var(--general-background);
   color: var(--dark);
-  font-weight: 400;
   padding: 10px;
   border-radius: 18px;
   border: 1px solid #ddd;
@@ -90,7 +89,7 @@ body.modal--open:after {
   color: var(--brand-logo);
 }
 .bigmodal__definition {
-  margin: 20px 0;
+  margin: 20px 0 5px 0;
   font-weight: 400;
   text-align: left;
   > p {
@@ -107,6 +106,14 @@ body.modal--open:after {
     margin-bottom: 10px;
   }
 }
+
+.bigmodal__external-link {
+  display: block;
+  margin-bottom: 25px;
+  font-weight: 400;
+  text-align: center;
+}
+
 .bigmodal__footer {
   display: flex;
   flex-direction: column;
