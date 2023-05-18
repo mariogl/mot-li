@@ -1,6 +1,6 @@
 import axios from "axios";
 import { type GamesPrivateRepository } from "./types";
-import { type GameDataStructure, type GameStructure } from "../types";
+import { type GameDataStructure, type GameStructure } from "../../types";
 
 class GamesApiRepository implements GamesPrivateRepository {
   constructor(private readonly apiUrl: string) {}
