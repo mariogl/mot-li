@@ -1,8 +1,8 @@
 import axios from "axios";
-import { type GamesRepository } from "./types";
+import { type GamesPrivateRepository } from "./types";
 import { type GameDataStructure, type GameStructure } from "../types";
 
-class GamesApiRepository implements GamesRepository {
+class GamesApiRepository implements GamesPrivateRepository {
   constructor(private readonly apiUrl: string) {}
 
   async getGames(): Promise<GameStructure[]> {
