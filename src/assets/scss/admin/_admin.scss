@@ -21,6 +21,10 @@
   margin-bottom: 2em;
 }
 
+.admin__title {
+  margin-bottom: 20px;
+}
+
 .form__label {
   display: block;
   width: 100%;
@@ -45,6 +49,7 @@ textarea {
 
 input[type="text"],
 input[type="url"],
+input[type="password"],
 textarea,
 .wrap-editor {
   width: 100%;
