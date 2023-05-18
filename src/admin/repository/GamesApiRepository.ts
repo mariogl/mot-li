@@ -41,6 +41,14 @@ class GamesApiRepository implements GamesRepository {
 
     return id;
   }
+
+  async updateGame(game: GameStructure): Promise<GameStructure> {
+    const {
+      data: { game: updatedGame },
+    } = await axios.put<{ game: GameStructure }>(`${this.apiUrl}/games`, game);
+
+    return updatedGame;
+  }
 }
 
 export default GamesApiRepository;
