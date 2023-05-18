@@ -33,6 +33,14 @@ class GamesApiRepository implements GamesRepository {
 
     return game;
   }
+
+  async deleteGame(gameId: string): Promise<string> {
+    const {
+      data: { id },
+    } = await axios.delete<{ id: string }>(`${this.apiUrl}/games/${gameId}`);
+
+    return id;
+  }
 }
 
 export default GamesApiRepository;
