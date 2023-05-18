@@ -12,6 +12,16 @@ class GamesApiRepository implements GamesRepository {
 
     return games;
   }
+
+  async getCurrentGame(): Promise<GameStructure> {
+    const {
+      data: { game },
+    } = await axios.get<{ game: GameStructure }>(
+      `${this.apiUrl}/games/current`
+    );
+
+    return game;
+  }
 }
 
 export default GamesApiRepository;
