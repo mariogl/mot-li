@@ -6,15 +6,17 @@
   <link rel="icon" type="image/png" href="/FaviconMotli.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mot-li: administració</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-  <script type="module" src="/src/admin.ts"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <script type="module" src="/src/admin/index.ts"></script>
 </head>
 
 <body class="admin">
 
   <header class="header">
     <div class="container">
-      <a href="//www.vilaweb.cat" title="Ves a VilaWeb" class="logo--vilaweb"><img src="logo_vilaweb.svg" width="42" height="42" alt="VilaWeb"></a>
+      <a href="//www.vilaweb.cat" title="Ves a VilaWeb" class="logo--vilaweb"><img src="logo_vilaweb.svg" width="42"
+          height="42" alt="VilaWeb"></a>
       <h1 class="logo--motli"><span class="title--colored">Mot</span>-li! / Administració</h1>
       <div class="menu">
         <span class="menu__toggle">
@@ -68,7 +70,8 @@
           Definició i exemples del mot:
         </label>
         <div class="wrap-editor textarea">
-          <div data-tiny-editor data-fontname="no" data-formatblock="no" data-forecolor="no" contenteditable="true" id="wordDefinition"></div>
+          <div data-tiny-editor data-fontname="no" data-formatblock="no" data-forecolor="no" contenteditable="true"
+            id="wordDefinition"></div>
         </div>
       </div>
       <div class="form__wrap-element">
@@ -90,7 +93,8 @@
         <input type="number" min="4" max="8" value="6" id="numGuesses" />
       </div>
       <div class="form__wrap-element">
-        <button type="submit" id="addGame" form="newGame" class="button button--submit button--reverse">Desa el nou joc</button>
+        <button type="submit" id="addGame" form="newGame" class="button button--submit button--reverse">Desa el nou
+          joc</button>
       </div>
     </form>
   </main>

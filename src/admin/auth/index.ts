@@ -1,34 +1,17 @@
-import { type UserData } from "./types";
+import AuthLocalStorageRepository from "../repository/localStorage/AuthLocalStorageRepository";
+import Auth from "./Auth";
 
-class Auth {
-  private user: UserData = {
-    isLogged: false,
-    token: "",
-  };
+const auth = new Auth();
+const authLocalStorageRepository = new AuthLocalStorageRepository();
 
-  constructor() {
-    this.logoutUser();
-  }
+const token = authLocalStorageRepository.getToken();
 
-  public logoutUser(): void {
-    this.user = {
-      isLogged: false,
-      token: "",
-    };
-  }
-
-  loginUser(token: string): void {
-    this.user.isLogged = true;
-    this.user.token = token;
-  }
-
-  public isUserLogged(): boolean {
-    return this.user.isLogged;
-  }
-
-  public getToken(): string {
-    return this.user.token;
-  }
+if (token) {
+  auth.loginUser(token);
 }
 
-export default Auth;
+if (!auth.isUserLogged()) {
+  window.location.href = "admin-login.html";
+}
+
+export default auth;
