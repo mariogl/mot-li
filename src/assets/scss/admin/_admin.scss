@@ -110,16 +110,20 @@ textarea,
   }
 }
 .games-list {
-}
+  .game-container {
+    padding: 0 15px;
+    background-color: var(--brand-logo);
 
-.games-list li {
-  padding: 0 15px;
-  background-color: var(--brand-logo);
-  &:nth-child(odd) {
-    background-color: var(--general-background);
+    &:nth-child(odd) {
+      background-color: var(--general-background);
+    }
+
+    &--dummy {
+      display: none;
+    }
   }
-}
 
-.games-list .button--icon {
-  border: 2px solid transparent;
+  .button--icon {
+    border: 2px solid transparent;
+  }
 }
