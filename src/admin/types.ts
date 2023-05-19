@@ -10,3 +10,7 @@ export interface GameStructure extends GameDataStructure {
   id: string;
   length: number;
 }
+
+export interface UserCredentials {
+  password: string;
+}
