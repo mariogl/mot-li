@@ -6,12 +6,14 @@ const authLocalStorageRepository = new AuthLocalStorageRepository();
 
 const token = authLocalStorageRepository.getToken();
 
-if (token) {
-  auth.loginUser(token);
-}
+if (!window.location.href.endsWith("admin-login.html")) {
+  if (token) {
+    auth.loginUser(token);
+  }
 
-if (!auth.isUserLogged()) {
-  window.location.href = "admin-login.html";
+  if (!auth.isUserLogged()) {
+    window.location.href = "admin-login.html";
+  }
 }
 
 export default auth;
