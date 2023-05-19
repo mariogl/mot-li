@@ -3,12 +3,17 @@ import { type GamesPrivateRepository } from "./types";
 import { type GameDataStructure, type GameStructure } from "../../types";
 
 class GamesApiRepository implements GamesPrivateRepository {
-  constructor(private readonly apiUrl: string) {}
+  constructor(
+    private readonly apiUrl: string,
+    private readonly token: string
+  ) {}
 
   async getGames(): Promise<GameStructure[]> {
     const {
       data: { games },
-    } = await axios.get<{ games: GameStructure[] }>(`${this.apiUrl}/games`);
+    } = await axios.get<{ games: GameStructure[] }>(`${this.apiUrl}/games`, {
+      headers: { authorization: `Bearer ${this.token}` },
+    });
 
     return games;
   }
