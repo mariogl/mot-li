@@ -20,6 +20,9 @@ if (window.location.href.endsWith("admin-list.html")) {
     const gameWord = gameElement.querySelector(".game__word")!;
     gameWord.textContent = game.word;
 
+    const gameDate = gameElement.querySelector(".game__date")!;
+    gameDate.textContent = new Date(game.date).toLocaleDateString();
+
     gameElement.classList.remove("game-container--dummy");
 
     gamesListElement?.appendChild(gameElement);
