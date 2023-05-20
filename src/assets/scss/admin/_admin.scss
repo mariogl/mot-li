@@ -18,7 +18,7 @@
 .admin .main-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2em;
+  margin-bottom: 4em;
 }
 
 .admin__title {
@@ -126,4 +126,10 @@ textarea,
   .button--icon {
     border: 2px solid transparent;
   }
+}
+
+/* toasts (modal) */
+
+.modal {
+  top: 150px;
 }
