@@ -1,9 +1,10 @@
 import auth from "../auth";
 import GamesApiRepository from "../repository/games/GamesApiRepository";
+import { adminUrls } from "../urls";
 
 const currentUrl = new URL(window.location.href);
 
-if (currentUrl.pathname === "/admin-list.html") {
+if (currentUrl.pathname === adminUrls.list) {
   const token = auth.getToken();
 
   const gamesRepository = new GamesApiRepository(

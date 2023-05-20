@@ -1,10 +1,11 @@
 import auth from "../auth";
 import GamesApiRepository from "../repository/games/GamesApiRepository";
 import { type GameDataStructure } from "../types";
+import { adminUrls } from "../urls";
 
 const currentUrl = new URL(window.location.href);
 
-if (currentUrl.pathname === "/admin-new-game.html") {
+if (currentUrl.pathname === adminUrls.newGame) {
   const form = document.querySelector(".form--admin")!;
 
   const wordDate: HTMLInputElement = form.querySelector("#dateGame")!;
