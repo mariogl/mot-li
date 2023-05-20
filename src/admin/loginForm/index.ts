@@ -2,11 +2,11 @@ import auth from "../auth";
 import AuthLocalStorageRepository from "../repository/localStorage/AuthLocalStorageRepository";
 import UserApiRepository from "../repository/user/UserApiRepository";
 
-if (window.location.href.endsWith("admin-login.html")) {
+const currentUrl = new URL(window.location.href);
+
+if (currentUrl.pathname === "/admin-login.html") {
   const form = document.querySelector(".form--admin")!;
-  const password: HTMLInputElement = document.querySelector(
-    ".form--admin #password"
-  )!;
+  const password: HTMLInputElement = form.querySelector("#password")!;
   const error = document.querySelector(".error")!;
 
   const userRepository = new UserApiRepository(
