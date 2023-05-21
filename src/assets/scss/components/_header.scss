@@ -44,6 +44,31 @@
   height: 42px;
   border: 2px solid var(--letter-key-focus);
   border-radius: 50%;
+
+  &:hover,
+  &:focus {
+    background-color: var(--brand-logo);
+    border: 2px solid var(--brand-logo);
+    transition: all 1000ms linear;
+    .menu__toggle i {
+      background-color: var(--light-color);
+      transition: background-color 1000ms linear;
+    }
+  }
+  li {
+    color: var(--dark);
+  }
+}
+.dark .menu {
+  background-color: var(--letter-key-focus);
+  &:hover,
+  &:focus {
+    background-color: var(--brand-logo);
+    .menu__toggle i {
+      background-color: var(--dark);
+      transition: background-color 1000ms linear;
+    }
+  }
 }
 
 .menu__toggle {
@@ -61,12 +86,16 @@
   position: absolute;
   display: block;
   height: 2px;
-  background: var(--letter-invalid);
+  background-color: var(--letter-invalid);
   width: 20px;
   right: 0;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   cursor: pointer;
+}
+.dark .menu__toggle i {
+  background-color: var(--dark);
+  transition: background-color 1000ms linear;
 }
 
 .menu__toggle i:nth-child(1) {
@@ -87,6 +116,7 @@
   transform: rotateZ(45deg);
 }
 
+.dark .menu__toggle.open i:nth-child(2),
 .menu__toggle.open i:nth-child(2) {
   background: transparent;
 }
@@ -102,8 +132,6 @@
   color: var(--letter-positioned);
   width: 150px;
   padding: 0;
-  /* background-color: var(--letter-invalid); */
-  /*  height: calc(100vh - (93px)); */
   position: absolute;
   right: -1850px;
   top: 54px;

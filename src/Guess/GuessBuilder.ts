@@ -34,6 +34,7 @@ class GuessBuilder {
     for (let i = 0; i < this.config.wordToGuess.length; i++) {
       const letter = document.createElement("div");
       letter.className = "letter";
+      letter.setAttribute("tabindex", "0");
       if (this.storage.game.previousGuesses.length <= number) {
         letter.classList.add("letter--unchecked");
       } else {

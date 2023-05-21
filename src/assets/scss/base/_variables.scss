@@ -1,4 +1,5 @@
-:root {
+body,
+body[data-theme="light"] {
   --letter-positioned: #59c99a; /*63bcca  63a142*/
   --letter-valid: #c9a34f;
   --letter-invalid: #595c63; /* 552222 */
@@ -7,5 +8,14 @@
   --brand-logo: #63bcca;
   --dark: #000;
   --button-border: #e7e7e7;
+  --light-color: var(--general-background);
+}
+
+body[data-theme="dark"] {
+  --letter-invalid: #3e4045; /* 552222 */
+  --letter-key-focus: #6e6e6e; /*  #e8d9d9; */
+  --general-background: #000;
+  --dark: #fff;
+  --button-border: var(--general-background);
   --light-color: var(--general-background);
 }

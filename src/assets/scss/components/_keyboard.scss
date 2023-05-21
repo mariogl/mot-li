@@ -35,6 +35,10 @@
   background-color: var(--letter-key-focus);
 }
 
+.dark .keyboard__key {
+  color: var(--dark);
+}
+
 .keyboard__key--double {
   flex: 2;
 }

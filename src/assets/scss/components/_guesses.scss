@@ -51,6 +51,9 @@ main {
   align-items: center;
   justify-content: center;
 }
+.dark .letter:not(.letter--unchecked) {
+  border: var(--general-background);
+}
 
 .guesses[data-letters="4"] {
   max-width: 260px;
@@ -153,4 +156,8 @@ main {
 
 .letter:not(.letter--unchecked) {
   color: var(--general-background);
+}
+
+.dark .letter:not(.letter--unchecked) {
+  color: var(--dark);
 }
