@@ -49,10 +49,10 @@
   &:focus {
     background-color: var(--brand-logo);
     border: 2px solid var(--brand-logo);
-    transition: all 1000ms linear;
+    transition: all 500ms linear;
     .menu__toggle i {
       background-color: var(--light-color);
-      transition: background-color 1000ms linear;
+      transition: background-color 500ms linear;
     }
   }
   li {
@@ -66,7 +66,7 @@
     background-color: var(--brand-logo);
     .menu__toggle i {
       background-color: var(--dark);
-      transition: background-color 1000ms linear;
+      transition: background-color 500ms linear;
     }
   }
 }
@@ -95,7 +95,7 @@
 }
 .dark .menu__toggle i {
   background-color: var(--dark);
-  transition: background-color 1000ms linear;
+  transition: background-color 500ms linear;
 }
 
 .menu__toggle i:nth-child(1) {
@@ -134,8 +134,18 @@
   padding: 0;
   position: absolute;
   right: -1850px;
-  top: 54px;
+  top: 65px;
   transition: right linear 0.2s;
+}
+
+.menu__navigation .button--icon {
+  width: 40px;
+  height: 40px;
+}
+
+.menu__navigation .button--stats svg {
+  width: 20px;
+  height: 20px;
 }
 
 .menu__navigation.opened {
@@ -151,5 +161,4 @@
 }
 
 .menu__navigation.opened ul li {
-  max-width: 20px;
 }
