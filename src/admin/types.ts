@@ -14,3 +14,7 @@ export interface GameStructure extends GameDataStructure {
 export interface UserCredentials {
   password: string;
 }
+
+export interface CustomError extends Error {
+  statusCode: number;
+}
