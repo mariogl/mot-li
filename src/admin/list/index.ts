@@ -1,9 +1,10 @@
 import auth from "../auth";
 import GamesApiRepository from "../repository/games/GamesApiRepository";
+import { adminUrls } from "../urls";
 
 const currentUrl = new URL(window.location.href);
 
-if (currentUrl.pathname === "/admin-list.html") {
+if (currentUrl.pathname === adminUrls.list) {
   const token = auth.getToken();
 
   const gamesRepository = new GamesApiRepository(
@@ -24,6 +25,10 @@ if (currentUrl.pathname === "/admin-list.html") {
 
     const gameDate = gameElement.querySelector(".game__date")!;
     gameDate.textContent = new Date(game.date).toLocaleDateString();
+
+    const gameEditLink: HTMLAnchorElement =
+      gameElement.querySelector(".button--edit")!;
+    gameEditLink.href += `?id=${game.id}`;
 
     gameElement.classList.remove("game-container--dummy");
 

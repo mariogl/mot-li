@@ -18,6 +18,19 @@ class GamesApiRepository implements GamesPrivateRepository {
     return games;
   }
 
+  async getGameById(gameId: string): Promise<GameStructure> {
+    const {
+      data: { game },
+    } = await axios.get<{ game: GameStructure }>(
+      `${this.apiUrl}/games/${gameId}`,
+      {
+        headers: { authorization: `Bearer ${this.token}` },
+      }
+    );
+
+    return game;
+  }
+
   async getCurrentGame(): Promise<GameStructure> {
     const {
       data: { game },
@@ -33,7 +46,10 @@ class GamesApiRepository implements GamesPrivateRepository {
       data: { game },
     } = await axios.post<{ game: GameStructure }>(
       `${this.apiUrl}/games`,
-      newGameData
+      newGameData,
+      {
+        headers: { authorization: `Bearer ${this.token}` },
+      }
     );
 
     return game;
@@ -42,15 +58,30 @@ class GamesApiRepository implements GamesPrivateRepository {
   async deleteGame(gameId: string): Promise<string> {
     const {
       data: { id },
-    } = await axios.delete<{ id: string }>(`${this.apiUrl}/games/${gameId}`);
+    } = await axios.delete<{ id: string }>(`${this.apiUrl}/games/${gameId}`, {
+      headers: { authorization: `Bearer ${this.token}` },
+    });
 
     return id;
   }
 
   async updateGame(game: GameStructure): Promise<GameStructure> {
+    const gameToUpdate = {
+      ...game,
+      _id: game.id,
+    };
+
+    delete (gameToUpdate as any).id;
+
     const {
       data: { game: updatedGame },
-    } = await axios.put<{ game: GameStructure }>(`${this.apiUrl}/games`, game);
+    } = await axios.put<{ game: GameStructure }>(
+      `${this.apiUrl}/games`,
+      gameToUpdate,
+      {
+        headers: { authorization: `Bearer ${this.token}` },
+      }
+    );
 
     return updatedGame;
   }

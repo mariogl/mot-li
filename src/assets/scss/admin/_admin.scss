@@ -25,6 +25,18 @@
   margin-bottom: 20px;
 }
 
+.loading {
+  display: none;
+}
+
+.on {
+  display: block;
+}
+
+.off {
+  display: none;
+}
+
 .form__label {
   display: block;
   width: 100%;
