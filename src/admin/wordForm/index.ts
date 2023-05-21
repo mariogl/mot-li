@@ -1,4 +1,5 @@
 import auth from "../auth";
+import Modal from "../modals/Modal";
 import GamesApiRepository from "../repository/games/GamesApiRepository";
 import { type GameDataStructure } from "../types";
 import { adminUrls } from "../urls";
@@ -9,6 +10,8 @@ if (
   currentUrl.pathname === adminUrls.newGame ||
   currentUrl.pathname === adminUrls.editGame
 ) {
+  const modal = new Modal();
+
   const isEditing = currentUrl.pathname === adminUrls.editGame;
   let gameId: string;
 
@@ -85,9 +88,12 @@ if (
 
         window.location.href = "admin-list.html?message=modified";
       } catch (error) {
-        // Cambiar por toast
-        // eslint-disable-next-line no-console
-        console.log(error);
+        modal.setMessage(
+          (error as Error).message.includes("409")
+            ? "Ja existeix un joc per aquest dia. Prova una altra data"
+            : "Ha ocurregut un error"
+        );
+        modal.open();
       }
     } else {
       try {
@@ -95,9 +101,12 @@ if (
 
         window.location.href = "admin-list.html?message=created";
       } catch (error) {
-        // Cambiar por toast
-        // eslint-disable-next-line no-console
-        console.log(error);
+        modal.setMessage(
+          (error as Error).message.includes("409")
+            ? "Ja existeix un joc per aquest dia. Prova una altra data"
+            : "Ha ocurregut un error"
+        );
+        modal.open();
       }
     }
   });
