@@ -26,6 +26,10 @@ if (currentUrl.pathname === adminUrls.list) {
     const gameDate = gameElement.querySelector(".game__date")!;
     gameDate.textContent = new Date(game.date).toLocaleDateString();
 
+    const gameEditLink: HTMLAnchorElement =
+      gameElement.querySelector(".button--edit")!;
+    gameEditLink.href += `?id=${game.id}`;
+
     gameElement.classList.remove("game-container--dummy");
 
     gamesListElement?.appendChild(gameElement);

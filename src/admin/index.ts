@@ -5,5 +5,5 @@ import "@fontsource/saira-extra-condensed/600.css";
 import "tiny-editor";
 import "./auth";
 import "./loginForm";
-import "./newWordForm";
+import "./wordForm";
 import "./list";
