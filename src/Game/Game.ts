@@ -18,10 +18,11 @@ import allowedWordsWith6Letters from "../allowedWords/words6.js";
 import allowedWordsWith7Letters from "../allowedWords/words7.js";
 import allowedWordsWith8Letters from "../allowedWords/words8.js";
 import allowedWordsWith9Letters from "../allowedWords/words9.js";
+import { type GamesRepository } from "../admin/repository/games/types";
 
 class Game {
   private readonly config: Config = {
-    wordToGuess: "potes",
+    wordToGuess: "",
     allowedWords: {
       l4: allowedWordsWith4Letters,
       l5: allowedWordsWith5Letters,
@@ -30,7 +31,7 @@ class Game {
       l8: allowedWordsWith8Letters,
       l9: allowedWordsWith9Letters,
     },
-    maxGuesses: 3,
+    maxGuesses: 0,
     keyLetters: ["qwertyuiop", "asdfghjklç", "CzxcvbnmD"],
     storageCurrentGuessNumberName: "currentGuessNumber",
     storagePreviousGuessesName: "previousGuesses",
@@ -44,14 +45,28 @@ class Game {
     hasFinished: false,
   };
 
-  private readonly guess: GuessStructure;
-  private readonly userInterface: UserInterfaceStructure;
   private readonly domAccessor: DomAccessorStructure;
-  private readonly storage: Storage;
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  private guess: GuessStructure = {} as GuessStructure;
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  private userInterface: UserInterfaceStructure = {} as UserInterfaceStructure;
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  private storage: Storage = {} as Storage;
 
-  constructor() {
+  constructor(gamesRepository: GamesRepository) {
     this.domAccessor = new DomAccessor();
 
+    (async () => {
+      const gameOfTheDay = await gamesRepository.getCurrentGame();
+
+      this.config.wordToGuess = gameOfTheDay.word;
+      this.config.maxGuesses = gameOfTheDay.guesses;
+
+      this.startGame();
+    })();
+  }
+
+  startGame() {
     this.storage = new Storage(
       this.config.storageCurrentGuessNumberName,
       this.config.storagePreviousGuessesName,
@@ -65,6 +80,8 @@ class Game {
       this.storage
     );
 
+    this.guess = new Guess(this.config, this.userInterface);
+
     this.gameState.hasFinished = this.storage.game.isComplete;
 
     const keyboardBuilder = new KeyboardBuilder(
@@ -72,6 +89,7 @@ class Game {
       this.config,
       this.storage
     );
+
     const guessBuilder = new GuessBuilder(
       this.config,
       this.domAccessor,
@@ -83,6 +101,7 @@ class Game {
     guessBuilder.buildGuesses();
 
     this.setCurrentGuessNumber(this.storage.game.currentGuessNumber ?? 0);
+
     this.userInterface.onLetterPressed = (pressedKey: string) => {
       const key = pressedKey.toLocaleLowerCase();
 
@@ -98,8 +117,6 @@ class Game {
         this.setLetterAndAdvance(key);
       }
     };
-
-    this.guess = new Guess(this.config, this.userInterface);
   }
 
   public incrementCurrentGuessNumber() {
