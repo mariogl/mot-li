@@ -18,30 +18,7 @@
       <a href="//www.vilaweb.cat" title="Ves a VilaWeb" class="logo--vilaweb"><img src="logo_vilaweb.svg" width="42"
           height="42" alt="VilaWeb"></a>
       <h1 class="logo--motli"><span class="title--colored">Mot</span>-li! / Administració</h1>
-      <div class="menu">
-        <span class="menu__toggle">
-          <i></i>
-          <i></i>
-          <i></i>
-        </span>
-        <nav class="menu__navigation">
-          <ul>
-            <li>
-              <a href="">
-                Joc nou
-              </a>
-            </li>
-            <li>
-              <a href="">
-                Llistat pròxims jocs
-              </a>
-            </li>
-            <li>
-
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <button class="button button--logout">Sortir</button>
     </div>
   </header>
   <main class="container">
@@ -59,7 +36,7 @@
             <span class="game__word"></span>
           </div>
           <div>
-            <a href="admin-edit-game.html" class="button button--icon button--edit"><i class="fas fa-pen"></i><span
+            <a href="admin-edit-game.html" class="button button--icon button--edit"><i class=" fas fa-pen"></i><span
                 class="sr-only">Edita</span>
             </a>
             <button class="button button--icon button--delete"><i class="fas fa-trash"></i><span
@@ -69,6 +46,18 @@
         </article>
       </li>
     </ul>
-
   </main>
+  <div class="modal modal--new">
+    <p>Joc creat</p>
+  </div>
+  <div class="modal modal--update">
+    <p>Joc editat i desat</p>
+  </div>
+  <div class="bigmodal bigmodal--delete">
+    <p>Estàs segur que vols esborrar aquest registre?</p>
+    <button class="button button-small">Sí</button>
+    <button class="button button-small">No</button>
+  </div>
+
+
 </body>
