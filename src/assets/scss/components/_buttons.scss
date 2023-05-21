@@ -8,6 +8,7 @@
   border: 2px solid var(--button-border);
   border-radius: 30px;
   font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
   padding: 8px 20px;
   display: flex;
@@ -17,6 +18,7 @@
   &:focus {
     background-color: var(--brand-logo);
     color: var(--light-color);
+    text-decoration: none;
   }
 }
 
@@ -55,11 +57,19 @@
   width: 40px;
   height: 40px;
   padding: 0;
-  text-decoration: none;
   &:hover,
   &:focus {
     background-color: var(--brand-logo);
     color: var(--light-color);
-    text-decoration: none;
+  }
+}
+
+.button--text-icon {
+  &:hover,
+  &:focus {
+    .button--icon {
+      background-color: var(--brand-logo);
+      color: var(--light-color);
+    }
   }
 }
