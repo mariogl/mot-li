@@ -98,10 +98,12 @@ export interface StoredGameStructure {
 
 export interface StorageStructure {
   game: StoredGameStructure;
+  isDarkTheme: boolean;
   saveCurrentGuessNumber: (currentGuessNumber: number) => void;
   saveIsComplete: () => void;
   saveUsedKeys: (keys: GuessLetterStructure[]) => void;
   addGuess: (guess: GuessLetterStructure[]) => void;
+  setDarkTheme: (isDark: boolean) => void;
 }
 
 export enum SuperModalType {

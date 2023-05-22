@@ -37,7 +37,7 @@ class DomAccessor implements DomAccessorStructure {
     this.infoOpener = document.querySelector(
       ".menu__navigation .button--info"
     )!;
-    this.themeSwitcher = document.querySelector(".switch")!;
+    this.themeSwitcher = document.querySelector("#darkMode")!;
   }
 
   public getCurrentGuessElement(currentGuessNumber: number): HTMLElement {

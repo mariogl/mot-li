@@ -32,6 +32,8 @@ class UserInterface implements UserInterfaceStructure {
     this.infoOpener = domAccessor.getInfoOpener();
     this.themeSwitcher = domAccessor.getThemeSwitcher();
 
+    this.setTheme();
+
     this.keyboardAddEventListeners();
     this.menuAddEventListeners();
   }
@@ -133,6 +135,16 @@ class UserInterface implements UserInterfaceStructure {
     this.domAccessor.closeSuperModal(type);
   }
 
+  private setTheme() {
+    if (this.storage.isDarkTheme) {
+      document.body.classList.add("dark");
+      (this.domAccessor.getThemeSwitcher() as HTMLInputElement).checked = true;
+    } else {
+      document.body.classList.remove("dark");
+      (this.domAccessor.getThemeSwitcher() as HTMLInputElement).checked = false;
+    }
+  }
+
   private keyboardRemoveEventListeners() {
     document.removeEventListener("keyup", this.handleActualKeyboardPress);
 
@@ -197,6 +209,8 @@ class UserInterface implements UserInterfaceStructure {
 
     this.themeSwitcher.addEventListener("click", () => {
       document.body.classList.toggle("dark");
+
+      this.storage.setDarkTheme(document.body.classList.contains("dark"));
     });
   }
 }
