@@ -252,16 +252,20 @@ class Game {
   }
 
   private win() {
-    const openStatistics = () => {
-      this.userInterface.createBigModal("statistics");
-    };
+    this.userInterface.openSuperModal(SuperModalType.won);
 
-    this.userInterface.createBigModal("solution", [
-      () => {
+    setTimeout(() => {
+      const openStatistics = () => {
         this.userInterface.createBigModal("statistics");
-      },
-      openStatistics,
-    ]);
+      };
+
+      this.userInterface.createBigModal("solution", [
+        () => {
+          this.userInterface.createBigModal("statistics");
+        },
+        openStatistics,
+      ]);
+    }, 2000);
 
     this.endGame();
   }
