@@ -44,10 +44,7 @@ if (
     loadingElement.classList.remove("on");
     form.classList.remove("off");
 
-    const date = new Date(game.date);
-    wordDate.value = `${date.getFullYear()}-${String(
-      date.getMonth() + 1
-    ).padStart(2, "0")}-${String(date.getDay()).padStart(2, "0")}`;
+    wordDate.value = game.date.split("T")[0];
     wordWord.value = game.word;
     wordDefinition.innerHTML = game.definition;
     wordLink.value = game.link;
@@ -71,7 +68,7 @@ if (
 
     const newGameData: GameDataStructure = {
       word: wordWord.value,
-      date: new Date(wordDate.value),
+      date: wordDate.value,
       link: wordLink.value,
       linkText: wordTextLink.value,
       guesses: +wordGuesses.value,

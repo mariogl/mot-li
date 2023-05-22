@@ -1,6 +1,6 @@
 export interface GameDataStructure {
   word: string;
-  date: Date;
+  date: string;
   guesses: number;
   link: string;
   linkText: string;
