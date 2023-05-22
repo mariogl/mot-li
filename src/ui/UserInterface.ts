@@ -16,6 +16,7 @@ class UserInterface implements UserInterfaceStructure {
   private readonly statisticsOpener: HTMLElement;
   private readonly optionsOpener: HTMLElement;
   private readonly infoOpener: HTMLElement;
+  private readonly themeSwitcher: HTMLElement;
   private bigModalOpened: BigModal | undefined;
 
   constructor(
@@ -29,6 +30,7 @@ class UserInterface implements UserInterfaceStructure {
     this.statisticsOpener = domAccessor.getStatisticsOpener();
     this.optionsOpener = domAccessor.getOptionsOpener();
     this.infoOpener = domAccessor.getInfoOpener();
+    this.themeSwitcher = domAccessor.getThemeSwitcher();
 
     this.keyboardAddEventListeners();
     this.menuAddEventListeners();
@@ -191,6 +193,10 @@ class UserInterface implements UserInterfaceStructure {
 
     this.infoOpener.addEventListener("click", () => {
       this.createBigModal("info");
+    });
+
+    this.themeSwitcher.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
     });
   }
 }

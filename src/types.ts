@@ -75,6 +75,7 @@ export interface DomAccessorStructure {
   getStatisticsOpener(): HTMLElement;
   getOptionsOpener(): HTMLElement;
   getInfoOpener(): HTMLElement;
+  getThemeSwitcher(): HTMLElement;
 }
 
 export interface GuessStructure {

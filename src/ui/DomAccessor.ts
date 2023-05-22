@@ -13,6 +13,7 @@ class DomAccessor implements DomAccessorStructure {
   private readonly statisticsOpener: HTMLElement;
   private readonly optionsOpener: HTMLElement;
   private readonly infoOpener: HTMLElement;
+  private readonly themeSwitcher: HTMLElement;
   private readonly modal: HTMLElement;
   private readonly superModals: Record<SuperModalType, HTMLElement>;
 
@@ -36,6 +37,7 @@ class DomAccessor implements DomAccessorStructure {
     this.infoOpener = document.querySelector(
       ".menu__navigation .button--info"
     )!;
+    this.themeSwitcher = document.querySelector(".switch")!;
   }
 
   public getCurrentGuessElement(currentGuessNumber: number): HTMLElement {
@@ -123,6 +125,10 @@ class DomAccessor implements DomAccessorStructure {
 
   public getInfoOpener() {
     return this.infoOpener;
+  }
+
+  public getThemeSwitcher() {
+    return this.themeSwitcher;
   }
 }
 
