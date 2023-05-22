@@ -6,7 +6,7 @@ import "@fontsource/saira-extra-condensed/600.css";
 import GamesApiRepository from "./admin/repository/games/GamesApiRepository";
 
 const gamesRepository = new GamesApiRepository(
-  import.meta.env.VITE_API_URL as string,
+  import.meta.env.VITE_API_URL,
   ""
 );
 

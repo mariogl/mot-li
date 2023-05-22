@@ -205,12 +205,12 @@ class Game {
 
     this.guess.checkGuessAgainstWord();
 
+    this.storage.addGuess(this.guess.getCurrentGuess());
+
     if (this.guess.isCurrentGuessCorrect()) {
       this.win();
       return;
     }
-
-    this.storage.addGuess(this.guess.getCurrentGuess());
 
     this.incrementCurrentGuessNumber();
     this.guess.getNewBlankGuess();
