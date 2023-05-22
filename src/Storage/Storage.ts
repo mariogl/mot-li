@@ -12,6 +12,8 @@ class Storage implements StorageStructure {
     usedKeys: [],
   };
 
+  public isDarkTheme = false;
+
   constructor(
     private readonly storageCurrentGuessNumberName: string,
     private readonly storagePreviousGuessesName: string,
@@ -19,6 +21,7 @@ class Storage implements StorageStructure {
     private readonly storageUsedKeysName: string
   ) {
     this.getStoredGame();
+    this.isDarkTheme = localStorage.getItem("theme") === "dark";
   }
 
   public saveCurrentGuessNumber(currentGuessNumber: number) {
@@ -50,9 +53,10 @@ class Storage implements StorageStructure {
     localStorage.setItem(this.storageUsedKeysName, JSON.stringify(keys));
   }
 
-  private emptyGameData() {
-    localStorage.removeItem(this.storageCurrentGuessNumberName);
-    localStorage.removeItem(this.storagePreviousGuessesName);
+  public setDarkTheme(isDark: boolean) {
+    this.isDarkTheme = isDark;
+
+    localStorage.setItem("theme", isDark ? "dark" : "light");
   }
 
   private getStoredGame() {

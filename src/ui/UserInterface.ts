@@ -16,6 +16,7 @@ class UserInterface implements UserInterfaceStructure {
   private readonly statisticsOpener: HTMLElement;
   private readonly optionsOpener: HTMLElement;
   private readonly infoOpener: HTMLElement;
+  private readonly themeSwitcher: HTMLElement;
   private bigModalOpened: BigModal | undefined;
 
   constructor(
@@ -29,6 +30,9 @@ class UserInterface implements UserInterfaceStructure {
     this.statisticsOpener = domAccessor.getStatisticsOpener();
     this.optionsOpener = domAccessor.getOptionsOpener();
     this.infoOpener = domAccessor.getInfoOpener();
+    this.themeSwitcher = domAccessor.getThemeSwitcher();
+
+    this.setTheme();
 
     this.keyboardAddEventListeners();
     this.menuAddEventListeners();
@@ -131,6 +135,16 @@ class UserInterface implements UserInterfaceStructure {
     this.domAccessor.closeSuperModal(type);
   }
 
+  private setTheme() {
+    if (this.storage.isDarkTheme) {
+      document.body.classList.add("dark");
+      (this.domAccessor.getThemeSwitcher() as HTMLInputElement).checked = true;
+    } else {
+      document.body.classList.remove("dark");
+      (this.domAccessor.getThemeSwitcher() as HTMLInputElement).checked = false;
+    }
+  }
+
   private keyboardRemoveEventListeners() {
     document.removeEventListener("keyup", this.handleActualKeyboardPress);
 
@@ -191,6 +205,12 @@ class UserInterface implements UserInterfaceStructure {
 
     this.infoOpener.addEventListener("click", () => {
       this.createBigModal("info");
+    });
+
+    this.themeSwitcher.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+
+      this.storage.setDarkTheme(document.body.classList.contains("dark"));
     });
   }
 }

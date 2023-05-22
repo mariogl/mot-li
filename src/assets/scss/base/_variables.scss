@@ -1,5 +1,5 @@
 body,
-body[data-theme="light"] {
+body:not(.dark) {
   --letter-positioned: #59c99a; /*63bcca  63a142*/
   --letter-valid: #c9a34f;
   --letter-invalid: #595c63; /* 552222 */
@@ -11,7 +11,7 @@ body[data-theme="light"] {
   --light-color: var(--general-background);
 }
 
-body[data-theme="dark"] {
+body.dark {
   --letter-invalid: #3e4045; /* 552222 */
   --letter-key-focus: #6e6e6e; /*  #e8d9d9; */
   --general-background: #000;

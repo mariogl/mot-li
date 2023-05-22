@@ -222,29 +222,5 @@
     </div>
   </div>
 </body>
-<script>
-  /*script provisional per a fer proves amb els modals fins que posem ordre a l'userinterface */
-
-  document.querySelectorAll(".switch").forEach((theSwitch) => {
-    theSwitch.addEventListener("click", handleClickEvent, false);
-  });
-
-  function handleClickEvent(evt) {
-    const el = evt.target;
-
-    if (document.body.classList.contains('dark')) {
-      document.body.setAttribute('data-theme', 'light');
-    } else {
-      document.body.setAttribute('data-theme', 'dark');
-    }
-    document.body.classList.toggle("dark");
-    if (el.getAttribute("aria-checked") === "true") {
-      el.setAttribute("aria-checked", "false");
-    } else {
-      el.setAttribute("aria-checked", "true");
-    }
-  }
-
-</script>
 
 </html>
