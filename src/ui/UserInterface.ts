@@ -6,15 +6,17 @@ import {
   type GuessLetterStructure,
   type UserInterfaceStructure,
   type SuperModalType,
-  BigModalType,
 } from "../types";
+import BigModal from "./BigModal";
 
 class UserInterface implements UserInterfaceStructure {
   private readonly keyboard: HTMLElement;
   private readonly menu: HTMLElement;
   private readonly menuToggler: HTMLElement;
-  private readonly buttonClose: HTMLElement;
-  private readonly buttonOpenStatistics: HTMLElement;
+  private readonly statisticsOpener: HTMLElement;
+  private readonly optionsOpener: HTMLElement;
+  private readonly infoOpener: HTMLElement;
+  private bigModalOpened: BigModal | undefined;
 
   constructor(
     readonly domAccessor: DomAccessorStructure,
@@ -24,12 +26,12 @@ class UserInterface implements UserInterfaceStructure {
     this.keyboard = domAccessor.getKeyboardElement();
     this.menuToggler = domAccessor.getMenuTogglerElement();
     this.menu = domAccessor.getMenuElement();
-    this.buttonClose = domAccessor.getButtonCloseElement();
-    this.buttonOpenStatistics = domAccessor.getButtonOpenStatistics();
+    this.statisticsOpener = domAccessor.getStatisticsOpener();
+    this.optionsOpener = domAccessor.getOptionsOpener();
+    this.infoOpener = domAccessor.getInfoOpener();
 
     this.keyboardAddEventListeners();
     this.menuAddEventListeners();
-    this.modalAddEventListeners();
   }
 
   public onLetterPressed(letter: string) {}
@@ -104,6 +106,16 @@ class UserInterface implements UserInterfaceStructure {
     this.domAccessor.closeModal();
   }
 
+  public createBigModal(type: string, actions?: Array<() => void>) {
+    this.bigModalOpened?.close();
+
+    const modal = new BigModal(type);
+
+    this.bigModalOpened = modal;
+
+    modal.open(actions);
+  }
+
   public openSuperModal(type: SuperModalType): void {
     this.domAccessor.openSuperModal(type);
     setTimeout(() => {
@@ -164,34 +176,19 @@ class UserInterface implements UserInterfaceStructure {
 
       this.domAccessor.closeMenu();
     });
-  }
 
-  private modalAddEventListeners() {
-    this.buttonClose.addEventListener("click", () => {
-      if (this.buttonClose.closest(".bigmodal--solution")) {
-        this.domAccessor.closeBigModal(BigModalType.solution);
-      } else {
-        this.domAccessor.closeBigModal(BigModalType.statistics);
-      }
+    this.statisticsOpener.addEventListener("click", () => {
+      this.createBigModal("statistics");
     });
 
-    this.buttonOpenStatistics.addEventListener("click", () => {
-      this.domAccessor.closeBigModal(BigModalType.solution);
-      this.domAccessor.openBigModal(BigModalType.statistics);
+    this.optionsOpener.addEventListener("click", () => {
+      this.createBigModal("options");
     });
 
-    document.addEventListener("click", (event: MouseEvent) => {
-      const clickedElement = event.target as HTMLElement;
-      /* Mario: para acceder a este elemtno que está en domaccessor como bigmodalSolution tengo que crear una función get que lo coja,y meterlo en el consttructor de aquí, como he hecho con el buttonClose? */
-      if (
-        document.querySelector(".bigmodal--solution").contains(clickedElement)
-      ) {
-        return;
-      }
-
-      this.domAccessor.closeBigModal(BigModalType.solution);
-      this.domAccessor.closeBigModal(BigModalType.statistics);
+    this.infoOpener.addEventListener("click", () => {
+      this.createBigModal("info");
     });
   }
 }
+
 export default UserInterface;
