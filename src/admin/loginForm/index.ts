@@ -10,9 +10,7 @@ if (currentUrl.pathname === adminUrls.login) {
   const password: HTMLInputElement = form.querySelector("#password")!;
   const error = document.querySelector(".error")!;
 
-  const userRepository = new UserApiRepository(
-    import.meta.env.VITE_API_URL as string
-  );
+  const userRepository = new UserApiRepository(import.meta.env.VITE_API_URL);
 
   form.addEventListener("submit", async (event: Event) => {
     event.preventDefault();

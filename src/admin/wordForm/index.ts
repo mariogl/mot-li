@@ -27,7 +27,7 @@ if (
   const token = auth.getToken();
 
   const gamesRepository = new GamesApiRepository(
-    import.meta.env.VITE_API_URL as string,
+    import.meta.env.VITE_API_URL,
     token
   );
 
