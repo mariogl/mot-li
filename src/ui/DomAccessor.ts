@@ -2,7 +2,6 @@ import {
   SuperModalType,
   type DomAccessorStructure,
   type GuessLetterStructure,
-  BigModalType,
 } from "../types";
 
 class DomAccessor implements DomAccessorStructure {
@@ -11,14 +10,11 @@ class DomAccessor implements DomAccessorStructure {
   private readonly keyboardKeys: NodeListOf<HTMLElement>;
   private readonly menu: HTMLElement;
   private readonly menuToggler: HTMLElement;
+  private readonly statisticsOpener: HTMLElement;
+  private readonly optionsOpener: HTMLElement;
+  private readonly infoOpener: HTMLElement;
   private readonly modal: HTMLElement;
   private readonly superModals: Record<SuperModalType, HTMLElement>;
-  private readonly bigModals: Record<BigModalType, HTMLElement>;
-  private readonly bigModalStatistics: HTMLElement;
-  private readonly bigModalSolution: HTMLElement;
-  private readonly body: HTMLElement;
-  private readonly buttonClose: HTMLElement;
-  private readonly buttonStatistics: HTMLElement;
 
   constructor() {
     this.guessesContainer = document.querySelector(".guesses")!;
@@ -26,21 +22,19 @@ class DomAccessor implements DomAccessorStructure {
     this.keyboardKeys = this.keyboard.querySelectorAll(".key");
     this.menu = document.querySelector(".menu__navigation")!;
     this.menuToggler = document.querySelector(".menu__toggle")!;
-    this.body = document.body;
     this.modal = document.querySelector(".modal")!;
     this.superModals = {
       [SuperModalType.won]: document.querySelector(".supermodal--won")!,
       [SuperModalType.lost]: document.querySelector(".supermodal--lost")!,
     };
-    this.bigModals = {
-      [BigModalType.solution]: document.querySelector(".bigmodal--solution")!,
-      [BigModalType.statistics]: document.querySelector(
-        ".bigmodal--statistics"
-      )!,
-    };
-    this.buttonClose = document.querySelector(".button--close")!;
-    this.buttonStatistics = this.bigModals[BigModalType.solution].querySelector(
-      ".button--statistics"
+    this.statisticsOpener = document.querySelector(
+      ".menu__navigation .button--stats"
+    )!;
+    this.optionsOpener = document.querySelector(
+      ".menu__navigation .button--options"
+    )!;
+    this.infoOpener = document.querySelector(
+      ".menu__navigation .button--info"
     )!;
   }
 
@@ -91,14 +85,6 @@ class DomAccessor implements DomAccessorStructure {
     currentGuessLetterElement.classList.add(`letter--${letter.status}`);
   }
 
-  public getButtonCloseElement() {
-    return this.buttonClose;
-  }
-
-  public getButtonOpenStatistics() {
-    return this.buttonStatistics;
-  }
-
   public toggleMenu() {
     this.menu.classList.toggle("opened");
     this.menuToggler.classList.toggle("open");
@@ -121,21 +107,22 @@ class DomAccessor implements DomAccessorStructure {
 
   public openSuperModal(type: SuperModalType): void {
     this.superModals[type].classList.add("supermodal--open");
-    this.openBigModal(BigModalType.solution);
   }
 
   public closeSuperModal(type: SuperModalType): void {
     this.superModals[type].classList.remove("supermodal--open");
   }
 
-  public openBigModal(type: BigModalType): void {
-    this.bigModals[type].classList.add("bigmodal--open");
-    this.body.classList.add("modal--open");
+  public getStatisticsOpener() {
+    return this.statisticsOpener;
   }
 
-  public closeBigModal(type: BigModalType): void {
-    this.bigModals[type].classList.remove("bigmodal--open");
-    this.body.classList.remove("modal--open");
+  public getOptionsOpener() {
+    return this.optionsOpener;
+  }
+
+  public getInfoOpener() {
+    return this.infoOpener;
   }
 }
 

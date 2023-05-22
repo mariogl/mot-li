@@ -7,6 +7,7 @@ export interface UserInterfaceStructure {
   setKeysStatus(letters: GuessLetterStructure[]): void;
   onLetterPressed(letter: string): void;
   onActionPressed(): void;
+  createBigModal(type: string, actions?: Array<() => void>): void;
   openModal(text: string): void;
   closeModal(): void;
   openSuperModal(type: SuperModalType): void;
@@ -62,10 +63,9 @@ export interface DomAccessorStructure {
   closeModal(): void;
   openSuperModal(type: SuperModalType): void;
   closeSuperModal(type: SuperModalType): void;
-  closeBigModal(type: BigModalType): void;
-  openBigModal(type: BigModalType): void;
-  getButtonCloseElement(): HTMLElement;
-  getButtonOpenStatistics(): HTMLElement;
+  getStatisticsOpener(): HTMLElement;
+  getOptionsOpener(): HTMLElement;
+  getInfoOpener(): HTMLElement;
 }
 
 export interface GuessStructure {
@@ -97,9 +97,4 @@ export interface StorageStructure {
 export enum SuperModalType {
   won,
   lost,
-}
-
-export enum BigModalType {
-  solution,
-  statistics,
 }
