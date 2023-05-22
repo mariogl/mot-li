@@ -1,10 +1,31 @@
+export interface BigModalOptions {
+  solution?: {
+    word: string;
+    definition: string;
+    link: string;
+    linkText: string;
+  };
+}
 class BigModal {
   modal: HTMLElement;
   closeButton: HTMLElement;
 
-  constructor(type: string) {
+  constructor(type: string, options?: BigModalOptions) {
     this.modal = document.querySelector(`.bigmodal--${type}`)!;
     this.closeButton = this.modal.querySelector(".button--close")!;
+
+    if (options?.solution) {
+      const word = document.querySelector(".bigmodal__solution")!;
+      const definition = document.querySelector(".bigmodal__definition")!;
+      const link: HTMLAnchorElement = document.querySelector(
+        ".bigmodal__external-link"
+      )!;
+
+      word.textContent = options.solution.word;
+      definition.innerHTML = options.solution.definition;
+      link.textContent = options.solution.linkText;
+      link.href = options.solution.link;
+    }
   }
 
   open(actions?: Array<() => void>) {

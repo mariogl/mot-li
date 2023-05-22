@@ -1,3 +1,5 @@
+import { type BigModalOptions } from "./ui/BigModal";
+
 export type KeyType = "letter" | "action";
 
 export interface UserInterfaceStructure {
@@ -7,7 +9,11 @@ export interface UserInterfaceStructure {
   setKeysStatus(letters: GuessLetterStructure[]): void;
   onLetterPressed(letter: string): void;
   onActionPressed(): void;
-  createBigModal(type: string, actions?: Array<() => void>): void;
+  createBigModal(
+    type: string,
+    actions?: Array<() => void>,
+    options?: BigModalOptions
+  ): void;
   openModal(text: string): void;
   closeModal(): void;
   openSuperModal(type: SuperModalType): void;
@@ -34,6 +40,9 @@ export interface Config {
   storagePreviousGuessesName: string;
   storageUsedKeysName: string;
   isCompleteName: string;
+  wordLink: string;
+  wordLinkText: string;
+  wordDefinition: string;
 }
 
 export interface GameState {

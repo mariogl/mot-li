@@ -7,7 +7,7 @@ import {
   type UserInterfaceStructure,
   type SuperModalType,
 } from "../types";
-import BigModal from "./BigModal";
+import BigModal, { type BigModalOptions } from "./BigModal";
 
 class UserInterface implements UserInterfaceStructure {
   private readonly keyboard: HTMLElement;
@@ -106,10 +106,14 @@ class UserInterface implements UserInterfaceStructure {
     this.domAccessor.closeModal();
   }
 
-  public createBigModal(type: string, actions?: Array<() => void>) {
+  public createBigModal(
+    type: string,
+    actions?: Array<() => void>,
+    options?: BigModalOptions
+  ) {
     this.bigModalOpened?.close();
 
-    const modal = new BigModal(type);
+    const modal = new BigModal(type, options);
 
     this.bigModalOpened = modal;
 

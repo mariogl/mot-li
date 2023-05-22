@@ -23,6 +23,9 @@ import { type GamesRepository } from "../admin/repository/games/types";
 class Game {
   private readonly config: Config = {
     wordToGuess: "",
+    wordDefinition: "",
+    wordLink: "",
+    wordLinkText: "",
     allowedWords: {
       l4: allowedWordsWith4Letters,
       l5: allowedWordsWith5Letters,
@@ -61,6 +64,9 @@ class Game {
 
       this.config.wordToGuess = gameOfTheDay.word;
       this.config.maxGuesses = gameOfTheDay.guesses;
+      this.config.wordLink = gameOfTheDay.link;
+      this.config.wordLinkText = gameOfTheDay.linkText;
+      this.config.wordDefinition = gameOfTheDay.definition;
 
       this.startGame();
     })();
@@ -119,7 +125,14 @@ class Game {
     };
 
     if (this.gameState.hasFinished) {
-      this.userInterface.createBigModal("solution");
+      this.userInterface.createBigModal("solution", [], {
+        solution: {
+          word: this.config.wordToGuess,
+          definition: this.config.wordDefinition,
+          link: this.config.wordLink,
+          linkText: this.config.wordLinkText,
+        },
+      });
     }
   }
 
