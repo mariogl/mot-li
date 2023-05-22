@@ -117,6 +117,10 @@ class Game {
         this.setLetterAndAdvance(key);
       }
     };
+
+    if (this.gameState.hasFinished) {
+      this.userInterface.createBigModal("solution");
+    }
   }
 
   public incrementCurrentGuessNumber() {
