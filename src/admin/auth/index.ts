@@ -19,8 +19,16 @@ if (currentUrl.pathname === adminUrls.login) {
   }
 
   if (!auth.isUserLogged()) {
-    window.location.href = "admin-login.html";
+    window.location.href = adminUrls.login;
   }
 }
+
+document.querySelector(".button--logout")?.addEventListener("click", () => {
+  auth.logoutUser();
+
+  authLocalStorageRepository.logOut();
+
+  window.location.href = adminUrls.login;
+});
 
 export default auth;
