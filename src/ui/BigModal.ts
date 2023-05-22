@@ -1,3 +1,5 @@
+import { type Stats } from "../types";
+
 export interface BigModalOptions {
   solution?: {
     word: string;
@@ -5,6 +7,7 @@ export interface BigModalOptions {
     link: string;
     linkText: string;
   };
+  statistics?: Stats;
 }
 class BigModal {
   modal: HTMLElement;
@@ -25,6 +28,17 @@ class BigModal {
       definition.innerHTML = options.solution.definition;
       link.textContent = options.solution.linkText;
       link.href = options.solution.link;
+    }
+
+    if (options?.statistics) {
+      const games = document.querySelector(".stats__games")!;
+      const wins = document.querySelector(".stats__wins")!;
+
+      const winsPercentage =
+        (options.statistics.wins / options.statistics.games) * 100;
+
+      games.textContent = `${options.statistics.games}`;
+      wins.textContent = `${winsPercentage}`;
     }
   }
 

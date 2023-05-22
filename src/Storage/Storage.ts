@@ -2,6 +2,7 @@ import {
   type StorageStructure,
   type GuessLetterStructure,
   type StoredGameStructure,
+  type Stats,
 } from "../types";
 
 class Storage implements StorageStructure {
@@ -14,6 +15,8 @@ class Storage implements StorageStructure {
 
   public isDarkTheme = false;
 
+  public statistics: Stats = { games: 1, wins: 0 };
+
   constructor(
     private readonly storageCurrentGuessNumberName: string,
     private readonly storagePreviousGuessesName: string,
@@ -21,7 +24,10 @@ class Storage implements StorageStructure {
     private readonly storageUsedKeysName: string
   ) {
     this.getStoredGame();
-    this.isDarkTheme = localStorage.getItem("theme") === "dark";
+
+    this.getDarkTheme();
+
+    this.getStoredStats();
   }
 
   public saveCurrentGuessNumber(currentGuessNumber: number) {
@@ -53,10 +59,29 @@ class Storage implements StorageStructure {
     localStorage.setItem(this.storageUsedKeysName, JSON.stringify(keys));
   }
 
+  public getDarkTheme() {
+    this.isDarkTheme = localStorage.getItem("theme") === "dark";
+  }
+
   public setDarkTheme(isDark: boolean) {
     this.isDarkTheme = isDark;
 
     localStorage.setItem("theme", isDark ? "dark" : "light");
+  }
+
+  public setStats(key: string, number: number) {
+    this.statistics[key as keyof Stats] = number;
+
+    localStorage.setItem("stats", JSON.stringify(this.statistics));
+  }
+
+  private getStoredStats() {
+    const localStorageStats = localStorage.getItem("stats");
+    if (!localStorageStats) {
+      return;
+    }
+
+    this.statistics = JSON.parse(localStorageStats) as Stats;
   }
 
   private getStoredGame() {

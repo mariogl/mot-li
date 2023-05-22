@@ -125,15 +125,29 @@ class Game {
     };
 
     if (this.gameState.hasFinished) {
-      this.userInterface.createBigModal("solution", [], {
+      this.openSolutionModal();
+    }
+  }
+
+  public openSolutionModal() {
+    const openStatistics = () => {
+      this.userInterface.createBigModal("statistics", [], {
+        statistics: this.storage.statistics,
+      });
+    };
+
+    this.userInterface.createBigModal(
+      "solution",
+      [openStatistics, openStatistics],
+      {
         solution: {
           word: this.config.wordToGuess,
           definition: this.config.wordDefinition,
           link: this.config.wordLink,
           linkText: this.config.wordLinkText,
         },
-      });
-    }
+      }
+    );
   }
 
   public incrementCurrentGuessNumber() {
@@ -259,29 +273,28 @@ class Game {
   private endGame() {
     this.userInterface.cancelEvents();
     this.gameState.hasFinished = true;
+
     this.storage.saveIsComplete();
+    this.storage.setStats("games", this.storage.statistics.games + 1);
   }
 
   private lost() {
     this.userInterface.openSuperModal(SuperModalType.lost);
 
+    setTimeout(() => {
+      this.openSolutionModal();
+    }, 2000);
+
     this.endGame();
   }
 
   private win() {
+    this.storage.setStats("wins", this.storage.statistics.wins + 1);
+
     this.userInterface.openSuperModal(SuperModalType.won);
 
     setTimeout(() => {
-      const openStatistics = () => {
-        this.userInterface.createBigModal("statistics");
-      };
-
-      this.userInterface.createBigModal("solution", [
-        () => {
-          this.userInterface.createBigModal("statistics");
-        },
-        openStatistics,
-      ]);
+      this.openSolutionModal();
     }, 2000);
 
     this.endGame();

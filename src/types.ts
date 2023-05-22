@@ -96,9 +96,15 @@ export interface StoredGameStructure {
   usedKeys: GuessLetterStructure[];
 }
 
+export interface Stats {
+  games: number;
+  wins: number;
+}
+
 export interface StorageStructure {
   game: StoredGameStructure;
   isDarkTheme: boolean;
+  statistics: Stats;
   saveCurrentGuessNumber: (currentGuessNumber: number) => void;
   saveIsComplete: () => void;
   saveUsedKeys: (keys: GuessLetterStructure[]) => void;
