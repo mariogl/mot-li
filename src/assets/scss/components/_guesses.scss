@@ -18,7 +18,10 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
+  padding: 10px 5px;
+  @media screen and (max-width: 350px) {
+    padding: 10px 5px;
+  }
 }
 
 .guesses {
