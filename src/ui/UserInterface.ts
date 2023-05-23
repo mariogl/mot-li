@@ -38,7 +38,9 @@ class UserInterface implements UserInterfaceStructure {
     this.menuAddEventListeners();
   }
 
-  public onLetterPressed(letter: string) {}
+  public onLetterPressed(letter: string) {
+    throw new Error(`Method not implemented: onLetterPressed(${letter})`);
+  }
 
   public onActionPressed() {}
 
