@@ -7,6 +7,7 @@ import {
   type GuessStructure,
   type UserInterfaceStructure,
   SuperModalType,
+  type Stats,
 } from "../types";
 import DomAccessor from "../ui/DomAccessor";
 import KeyboardBuilder from "../ui/KeyboardBuilder";
@@ -308,6 +309,12 @@ class Game {
     ) {
       this.storage.setStats("maxStreak", this.storage.statistics.currentStreak);
     }
+
+    this.storage.statistics.lastWinGuesses =
+      this.gameState.currentGuessNumber + 1;
+    this.storage.statistics[
+      `guesses${this.storage.statistics.lastWinGuesses}` as keyof Stats
+    ]++;
 
     this.userInterface.openSuperModal(SuperModalType.won);
 

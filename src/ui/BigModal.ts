@@ -36,6 +36,89 @@ class BigModal {
       const currentStreak = document.querySelector(".stats__current")!;
       const maxStreak = document.querySelector(".stats__max")!;
 
+      const bars = {
+        b1: document.querySelector(".guess-bars .bar--first"),
+        b2: document.querySelector(".guess-bars .bar--second")!,
+        b3: document.querySelector(".guess-bars .bar--third")!,
+        b4: document.querySelector(".guess-bars .bar--fourth")!,
+        b5: document.querySelector(".guess-bars .bar--fifth")!,
+        b6: document.querySelector(".guess-bars .bar--sixth")!,
+      };
+
+      (bars.b1 as HTMLElement).dataset.guess = `${options.statistics.guesses1}`;
+      (bars.b2 as HTMLElement).dataset.guess = `${options.statistics.guesses2}`;
+      (bars.b3 as HTMLElement).dataset.guess = `${options.statistics.guesses3}`;
+      (bars.b4 as HTMLElement).dataset.guess = `${options.statistics.guesses4}`;
+      (bars.b5 as HTMLElement).dataset.guess = `${options.statistics.guesses5}`;
+      (bars.b6 as HTMLElement).dataset.guess = `${options.statistics.guesses6}`;
+
+      let b1Percentage =
+        options.statistics.wins === 0
+          ? 0
+          : (options.statistics.guesses1 / options.statistics.wins) * 100;
+      if (b1Percentage < 9) {
+        b1Percentage = 9;
+      }
+
+      let b2Percentage =
+        options.statistics.wins === 0
+          ? 0
+          : (options.statistics.guesses2 / options.statistics.wins) * 100;
+      if (b2Percentage < 9) {
+        b2Percentage = 9;
+      }
+
+      let b3Percentage =
+        options.statistics.wins === 0
+          ? 0
+          : (options.statistics.guesses3 / options.statistics.wins) * 100;
+      if (b3Percentage < 9) {
+        b3Percentage = 9;
+      }
+
+      let b4Percentage =
+        options.statistics.wins === 0
+          ? 0
+          : (options.statistics.guesses4 / options.statistics.wins) * 100;
+      if (b4Percentage < 9) {
+        b4Percentage = 9;
+      }
+
+      let b5Percentage =
+        options.statistics.wins === 0
+          ? 0
+          : (options.statistics.guesses5 / options.statistics.wins) * 100;
+      if (b5Percentage < 9) {
+        b5Percentage = 9;
+      }
+
+      let b6Percentage =
+        options.statistics.wins === 0
+          ? 0
+          : (options.statistics.guesses6 / options.statistics.wins) * 100;
+      if (b6Percentage < 9) {
+        b6Percentage = 9;
+      }
+
+      (bars.b1 as HTMLElement).style.width = `${b1Percentage}%`;
+      (bars.b2 as HTMLElement).style.width = `${b2Percentage}%`;
+      (bars.b3 as HTMLElement).style.width = `${b3Percentage}%`;
+      (bars.b4 as HTMLElement).style.width = `${b4Percentage}%`;
+      (bars.b5 as HTMLElement).style.width = `${b5Percentage}%`;
+      (bars.b6 as HTMLElement).style.width = `${b6Percentage}%`;
+
+      document.querySelectorAll(".guess-bars .bar").forEach((bar) => {
+        bar.classList.remove("bar--current");
+      });
+
+      if (options.statistics.lastWinGuesses > 0) {
+        document
+          .querySelector(
+            `.guess-bars [data-guesses="${options.statistics.lastWinGuesses}"]`
+          )
+          ?.classList.add("bar--current");
+      }
+
       const winsPercentage =
         options.statistics.games === 0
           ? 0
