@@ -80,6 +80,10 @@ class Game {
       this.config.storageUsedKeysName
     );
 
+    if (this.storage.game.lastWord !== this.config.wordToGuess) {
+      this.storage.resetGame();
+    }
+
     this.userInterface = new UserInterface(
       this.domAccessor,
       this.gameState,
@@ -237,6 +241,8 @@ class Game {
     this.guess.checkGuessAgainstWord();
 
     this.storage.addGuess(this.guess.getCurrentGuess());
+
+    this.storage.setLastWord(this.config.wordToGuess);
 
     if (this.guess.isCurrentGuessCorrect()) {
       this.win();

@@ -11,6 +11,7 @@ class Storage implements StorageStructure {
     previousGuesses: [],
     isComplete: false,
     usedKeys: [],
+    lastWord: "",
   };
 
   public isDarkTheme = false;
@@ -30,6 +31,10 @@ class Storage implements StorageStructure {
     this.getStoredStats();
   }
 
+  public setLastWord(word: string) {
+    localStorage.setItem("lastWord", this.encodeWord(word));
+  }
+
   public saveCurrentGuessNumber(currentGuessNumber: number) {
     localStorage.setItem(
       this.storageCurrentGuessNumberName,
@@ -47,6 +52,11 @@ class Storage implements StorageStructure {
   public saveIsComplete() {
     this.game.isComplete = true;
     localStorage.setItem(this.storageIsCompleteName, "true");
+  }
+
+  public saveIsNotComplete() {
+    this.game.isComplete = false;
+    localStorage.setItem(this.storageIsCompleteName, "false");
   }
 
   public addGuess(guess: GuessLetterStructure[]) {
@@ -75,6 +85,18 @@ class Storage implements StorageStructure {
     localStorage.setItem("stats", JSON.stringify(this.statistics));
   }
 
+  public resetGame() {
+    this.game.currentGuessNumber = 0;
+    this.game.previousGuesses = [];
+    this.game.isComplete = false;
+    this.game.usedKeys = [];
+
+    this.saveCurrentGuessNumber(this.game.currentGuessNumber);
+    this.savePreviousGuesses();
+    this.saveIsNotComplete();
+    this.saveUsedKeys(this.game.usedKeys);
+  }
+
   private getStoredStats() {
     const localStorageStats = localStorage.getItem("stats");
     if (!localStorageStats) {
@@ -101,7 +123,8 @@ class Storage implements StorageStructure {
       this.game.previousGuesses = storedPreviousGuesses;
     }
 
-    const storedIsComplete = !!localStorage.getItem(this.storageIsCompleteName);
+    const storedIsComplete =
+      localStorage.getItem(this.storageIsCompleteName) === "true";
 
     if (storedIsComplete) {
       this.game.isComplete = storedIsComplete;
@@ -114,6 +137,28 @@ class Storage implements StorageStructure {
     if (storedUsedKeys) {
       this.game.usedKeys = storedUsedKeys;
     }
+
+    const lastWord = localStorage.getItem("lastWord");
+
+    if (lastWord) {
+      this.game.lastWord = this.decodeWord(lastWord);
+    }
+  }
+
+  private encodeWord(word: string) {
+    return this.obfuscateWord(word);
+  }
+
+  private decodeWord(word: string) {
+    return this.obfuscateWord(word);
+  }
+
+  private obfuscateWord(word: string): string {
+    return word.replace(/[a-zA-Z]/gi, (text) =>
+      String.fromCharCode(
+        text.charCodeAt(0) + (text.toLowerCase() < "n" ? 13 : -13)
+      )
+    );
   }
 }
 
