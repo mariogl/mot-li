@@ -21,10 +21,11 @@ body.dark.modal--open:after {
 }
 
 .modal--open,
-.supermodal--open {
+.supermodal--open,
+.bigmodal--open {
   display: block;
 }
-.bigmodal--open {
+.bigmodal--statistics.bigmodal--open {
   display: flex;
 }
 
@@ -53,7 +54,6 @@ body.dark.modal--open:after {
 .bigmodal {
   position: absolute;
   width: 95%;
-  overflow: scroll;
   max-width: 450px;
   min-height: 50%;
   font-weight: 400;
@@ -86,6 +86,7 @@ body.dark.modal--open:after {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .bigmodal__title {
@@ -98,6 +99,7 @@ body.dark.modal--open:after {
     margin: 30px 0 15px;
     font-size: 1.2rem;
     text-decoration: underline dotted;
+    text-underline-offset: 2px;
   }
   p {
     margin-bottom: 10px;
@@ -108,11 +110,12 @@ body.dark.modal--open:after {
 
 .bigmodal__solution {
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 2rem;
+  font-weight: 700;
   color: var(--brand-logo);
 }
 .bigmodal__definition {
-  margin: 20px 0 5px 0;
+  margin: 20px 0 15px 0;
   font-weight: 400;
   text-align: left;
   > p {
@@ -123,8 +126,8 @@ body.dark.modal--open:after {
 blockquote {
   background: #fbf3f3;
   border-radius: 0.25em;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 10px !important;
+  margin: 10px 0 !important;
   font-style: italic;
   p {
     margin-bottom: 10px;
@@ -158,6 +161,11 @@ blockquote {
 
 /* bigmodal-stats */
 
+.table--statistics,
+.guess-bars {
+  margin-bottom: 20px;
+}
+
 .row {
   display: flex;
   gap: 5px;
@@ -178,10 +186,17 @@ blockquote {
   }
 }
 
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* bigmodal--info */
 
 .bigmodal--info {
   height: 90%;
+  overflow-y: scroll;
   top: 65px;
   transform: translate(-50%, 0);
 }

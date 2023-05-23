@@ -14,9 +14,12 @@
   }
 }
 
-.logo--vilaweb img {
-  border: 2px solid var(--letter-key-focus);
+.logo--vilaweb {
   border-radius: 50%;
+  img {
+    border: 2px solid var(--letter-key-focus);
+    border-radius: 50%;
+  }
 }
 
 .logo--motli {
@@ -134,7 +137,7 @@
   padding: 0;
   position: absolute;
   right: -1850px;
-  top: 65px;
+  top: 57px;
   transition: right linear 0.2s;
 }
 
@@ -149,7 +152,7 @@
 }
 
 .menu__navigation.opened {
-  right: 8px;
+  right: 0;
   z-index: 1;
   display: block;
 }

@@ -1,0 +1,52 @@
+@keyframes load {
+  from {
+    width: 0%;
+  }
+}
+@-webkit-keyframes load {
+  from {
+    width: 0%;
+  }
+}
+@-moz-keyframes load {
+  from {
+    width: 0%;
+  }
+}
+@-o-keyframes load {
+  from {
+    width: 0%;
+  }
+}
+
+.bar {
+  list-style-type: decimal;
+  background-color: #eee;
+  padding: 2px;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #000;
+  font-weight: bold;
+  animation: load 2s 0s;
+  -webkit-animation: load 2s 0s;
+  -moz-animation: load 2s 0s;
+  -o-animation: load 2s 0s;
+}
+.bar::before {
+  content: attr(data-guess);
+  background-color: var(--letter-invalid);
+  color: var(--light-color);
+  display: inline-block;
+  text-align: right;
+  padding: 5px 10px 5px 10px;
+  border-radius: inherit;
+  width: 100%;
+}
+.bar.bar--first {
+  width: 40%;
+}
+
+.bar.bar--current::before {
+  background-color: var(--brand-logo);
+}

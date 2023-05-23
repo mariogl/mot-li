@@ -61,10 +61,19 @@ li {
 a,
 a:visited {
   color: var(--dark);
+  text-underline-offset: 2px;
 }
 
 a:hover {
   color: var(--brand-logo);
+}
+
+body *:focus-visible {
+  outline: 1px solid var(--dark);
+}
+
+body.dark *:focus-visible {
+  outline: 1px solid var(--brand-logo);
 }
 
 .sr-only {
