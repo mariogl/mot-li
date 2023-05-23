@@ -58,6 +58,7 @@ export interface DomAccessorStructure {
   ): NodeListOf<HTMLElement>;
   getKeyboardElement(): HTMLElement;
   getKeyboardKeyElements(): NodeListOf<HTMLElement>;
+  getCountdown(): HTMLElement;
   getGuessesContainer(): HTMLElement;
   getMenuTogglerElement(): HTMLElement;
   getMenuElement(): HTMLElement;
