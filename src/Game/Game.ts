@@ -316,7 +316,38 @@ class Game {
       `guesses${this.storage.statistics.lastWinGuesses}` as keyof Stats
     ]++;
 
-    this.userInterface.openSuperModal(SuperModalType.won);
+    let winMessage: string;
+
+    switch (this.storage.statistics.lastWinGuesses) {
+      case 1:
+        winMessage = "Increïble!";
+        break;
+      case 2:
+        winMessage = "Excel·lent!";
+        break;
+      case 3:
+        winMessage = "Fantàstic!";
+        break;
+      case 4:
+        winMessage = "Justa la fusta!";
+        break;
+      case 5:
+        winMessage = "Molt bé!";
+        break;
+      case 6:
+        winMessage = "Bé!";
+        break;
+      case 7:
+        winMessage = "Gairebé!";
+        break;
+      case 8:
+        winMessage = "Pels pèls!";
+        break;
+      default:
+        winMessage = "Has guanyat";
+    }
+
+    this.userInterface.openModal(winMessage);
 
     setTimeout(() => {
       this.openSolutionModal();
