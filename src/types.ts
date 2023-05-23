@@ -103,6 +103,13 @@ export interface Stats {
   wins: number;
   currentStreak: number;
   maxStreak: number;
+  guesses1: number;
+  guesses2: number;
+  guesses3: number;
+  guesses4: number;
+  guesses5: number;
+  guesses6: number;
+  lastWinGuesses: number;
 }
 
 export interface StorageStructure {

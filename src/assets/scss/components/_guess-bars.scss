@@ -1,21 +1,21 @@
 @keyframes load {
   from {
-    width: 0%;
+    width: 9%;
   }
 }
 @-webkit-keyframes load {
   from {
-    width: 0%;
+    width: 9%;
   }
 }
 @-moz-keyframes load {
   from {
-    width: 0%;
+    width: 9%;
   }
 }
 @-o-keyframes load {
   from {
-    width: 0%;
+    width: 9%;
   }
 }
 
@@ -28,6 +28,7 @@
   font-size: 14px;
   color: #000;
   font-weight: bold;
+  width: 9%;
   animation: load 2s 0s;
   -webkit-animation: load 2s 0s;
   -moz-animation: load 2s 0s;

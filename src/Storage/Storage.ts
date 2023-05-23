@@ -19,8 +19,15 @@ class Storage implements StorageStructure {
   public statistics: Stats = {
     games: 0,
     wins: 0,
-    currentStreak: 3,
-    maxStreak: 6,
+    currentStreak: 0,
+    maxStreak: 0,
+    guesses1: 0,
+    guesses2: 0,
+    guesses3: 0,
+    guesses4: 0,
+    guesses5: 0,
+    guesses6: 0,
+    lastWinGuesses: 0,
   };
 
   constructor(
@@ -108,7 +115,12 @@ class Storage implements StorageStructure {
       return;
     }
 
-    this.statistics = JSON.parse(localStorageStats) as Stats;
+    const localStorageStatsData = JSON.parse(localStorageStats) as Stats;
+
+    this.statistics = {
+      ...this.statistics,
+      ...localStorageStatsData,
+    };
   }
 
   private getStoredGame() {
