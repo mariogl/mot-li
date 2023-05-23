@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+import CountDownTimer from "../CountDownTimer/CountDownTimer";
 import {
   type StorageStructure,
   type DomAccessorStructure,
@@ -33,6 +34,8 @@ class UserInterface implements UserInterfaceStructure {
     this.themeSwitcher = domAccessor.getThemeSwitcher();
 
     this.setTheme();
+
+    this.startCountdown();
 
     this.keyboardAddEventListeners();
     this.menuAddEventListeners();
@@ -137,6 +140,29 @@ class UserInterface implements UserInterfaceStructure {
     this.domAccessor.closeSuperModal(type);
   }
 
+  private startCountdown() {
+    const countdownElement = this.domAccessor.getCountdown();
+
+    const now = new Date();
+    const tonight = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      0,
+      0,
+      0,
+      0
+    );
+
+    if (now.getHours() >= 0 && now.getHours() < 24) {
+      tonight.setDate(tonight.getDate() + 1);
+    }
+
+    new CountDownTimer(tonight, (countdown) => {
+      countdownElement.textContent = countdown;
+    });
+  }
+
   private setTheme() {
     if (this.storage.isDarkTheme) {
       document.body.classList.add("dark");
@@ -198,7 +224,9 @@ class UserInterface implements UserInterfaceStructure {
     });
 
     this.statisticsOpener.addEventListener("click", () => {
-      this.createBigModal("statistics");
+      this.createBigModal("statistics", [], {
+        statistics: this.storage.statistics,
+      });
     });
 
     this.optionsOpener.addEventListener("click", () => {

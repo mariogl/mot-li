@@ -38,7 +38,9 @@ class BigModal {
         (options.statistics.wins / options.statistics.games) * 100;
 
       games.textContent = `${options.statistics.games}`;
-      wins.textContent = `${winsPercentage}`;
+      wins.textContent = Number.isInteger(winsPercentage)
+        ? `${winsPercentage}`
+        : winsPercentage.toFixed(2);
     }
   }
 

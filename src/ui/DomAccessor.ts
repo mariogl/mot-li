@@ -16,6 +16,7 @@ class DomAccessor implements DomAccessorStructure {
   private readonly themeSwitcher: HTMLElement;
   private readonly modal: HTMLElement;
   private readonly superModals: Record<SuperModalType, HTMLElement>;
+  private readonly countdown: HTMLElement;
 
   constructor() {
     this.guessesContainer = document.querySelector(".guesses")!;
@@ -24,6 +25,7 @@ class DomAccessor implements DomAccessorStructure {
     this.menu = document.querySelector(".menu__navigation")!;
     this.menuToggler = document.querySelector(".menu__toggle")!;
     this.modal = document.querySelector(".modal")!;
+    this.countdown = document.querySelector(".countdown__timer")!;
     this.superModals = {
       [SuperModalType.won]: document.querySelector(".supermodal--won")!,
       [SuperModalType.lost]: document.querySelector(".supermodal--lost")!,
@@ -38,6 +40,10 @@ class DomAccessor implements DomAccessorStructure {
       ".menu__navigation .button--info"
     )!;
     this.themeSwitcher = document.querySelector("#darkMode")!;
+  }
+
+  public getCountdown(): HTMLElement {
+    return this.countdown;
   }
 
   public getCurrentGuessElement(currentGuessNumber: number): HTMLElement {
