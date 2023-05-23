@@ -33,14 +33,21 @@ class BigModal {
     if (options?.statistics) {
       const games = document.querySelector(".stats__games")!;
       const wins = document.querySelector(".stats__wins")!;
+      const currentStreak = document.querySelector(".stats__current")!;
+      const maxStreak = document.querySelector(".stats__max")!;
 
       const winsPercentage =
-        (options.statistics.wins / options.statistics.games) * 100;
+        options.statistics.games === 0
+          ? 0
+          : (options.statistics.wins / options.statistics.games) * 100;
 
       games.textContent = `${options.statistics.games}`;
       wins.textContent = Number.isInteger(winsPercentage)
         ? `${winsPercentage}`
         : winsPercentage.toFixed(2);
+
+      currentStreak.textContent = `${options.statistics.currentStreak}`;
+      maxStreak.textContent = `${options.statistics.maxStreak}`;
     }
   }
 

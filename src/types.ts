@@ -101,6 +101,8 @@ export interface StoredGameStructure {
 export interface Stats {
   games: number;
   wins: number;
+  currentStreak: number;
+  maxStreak: number;
 }
 
 export interface StorageStructure {

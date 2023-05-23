@@ -285,6 +285,8 @@ class Game {
   }
 
   private lost() {
+    this.storage.setStats("currentStreak", 0);
+
     this.userInterface.openSuperModal(SuperModalType.lost);
 
     setTimeout(() => {
@@ -296,6 +298,16 @@ class Game {
 
   private win() {
     this.storage.setStats("wins", this.storage.statistics.wins + 1);
+    this.storage.setStats(
+      "currentStreak",
+      this.storage.statistics.currentStreak + 1
+    );
+
+    if (
+      this.storage.statistics.currentStreak > this.storage.statistics.maxStreak
+    ) {
+      this.storage.setStats("maxStreak", this.storage.statistics.currentStreak);
+    }
 
     this.userInterface.openSuperModal(SuperModalType.won);
 

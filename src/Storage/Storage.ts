@@ -16,7 +16,12 @@ class Storage implements StorageStructure {
 
   public isDarkTheme = false;
 
-  public statistics: Stats = { games: 1, wins: 0 };
+  public statistics: Stats = {
+    games: 0,
+    wins: 0,
+    currentStreak: 3,
+    maxStreak: 6,
+  };
 
   constructor(
     private readonly storageCurrentGuessNumberName: string,
