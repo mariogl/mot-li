@@ -152,7 +152,6 @@
 
         <li>Les lletres es poden repetir.</li>
       </ul>
-      <div class="info__letters"><span class="letter--correct">C</span>ABANA</div>
       <div class="guesses" data-letters="6">
         <div class="guess" data-number="0">
           <div class="letter letter--correct">c</div>
@@ -203,8 +202,12 @@
     </div>
     <div class="bigmodal__content">
       <h3>Preferències del joc</h3>
-      <label for="darkMode">Activa el mode fosc</label>
-      <input type="checkbox" role="switch" id="darkMode" class="switch" />
+      <label class="switch__wrapper">
+        <span class="switch__label">Activa el mode fosc</span>
+        <input type="checkbox" role="switch" id="darkMode" class="switch" />
+      </label>
+      <!-- <label for="darkMode">Activa el mode fosc</label>
+      <input type="checkbox" role="switch" id="darkMode" class="switch" /> -->
 
       <h3>Crèdits</h3>
       <p>Una iniciativa de <a href="//rodamots.cat" target="_blank" rel="noopener">RodaMots</a></p>
