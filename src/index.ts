@@ -10,4 +10,4 @@ const gamesRepository = new GamesApiRepository(
   ""
 );
 
-const game = new Game(gamesRepository);
+new Game(gamesRepository);
