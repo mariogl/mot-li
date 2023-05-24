@@ -11,11 +11,11 @@ export interface BigModalOptions {
 }
 class BigModal {
   modal: HTMLElement;
-  closeButton: HTMLElement;
+  closeButtons: NodeListOf<HTMLElement>;
 
   constructor(type: string, options?: BigModalOptions) {
     this.modal = document.querySelector(`.bigmodal--${type}`)!;
-    this.closeButton = this.modal.querySelector(".button--close")!;
+    this.closeButtons = this.modal.querySelectorAll(".button--close");
 
     if (options?.solution) {
       const word = document.querySelector(".bigmodal__solution")!;
@@ -139,7 +139,7 @@ class BigModal {
 
     document.body.classList.add("modal--open");
 
-    this.closeButton.focus();
+    this.closeButtons[0].focus();
 
     this.addEventsListeners(actions);
   }
@@ -161,8 +161,10 @@ class BigModal {
   };
 
   private addEventsListeners(actions?: Array<() => void>) {
-    this.closeButton.addEventListener("click", () => {
-      this.close();
+    this.closeButtons.forEach((closeButton) => {
+      closeButton.addEventListener("click", () => {
+        this.close();
+      });
     });
 
     setTimeout(() => {
@@ -177,11 +179,11 @@ class BigModal {
   }
 
   private removeEventsListeners() {
-    const clonedCloseButton = this.closeButton.cloneNode(true);
-    this.closeButton.parentNode?.replaceChild(
-      clonedCloseButton,
-      this.closeButton
-    );
+    this.closeButtons.forEach((closeButton) => {
+      const clonedCloseButton = closeButton.cloneNode(true);
+
+      closeButton.parentNode?.replaceChild(clonedCloseButton, closeButton);
+    });
 
     document.removeEventListener("click", this.handleClose);
   }
