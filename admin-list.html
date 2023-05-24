@@ -10,19 +10,21 @@
   <script type="module" src="/src/admin/index.ts"></script>
 </head>
 
+
 <body class="admin">
 
   <header class="header">
     <div class="container">
       <a href="//www.vilaweb.cat" title="Ves a VilaWeb" class="logo--vilaweb"><img src="logo_vilaweb.svg" width="42" height="42" alt="VilaWeb"></a>
       <h1 class="logo--motli"><span class="title--colored">Mot</span>-li! / Administració</h1>
-      <button class="button button--logout">Sortir</button>
+      <button class="button button--icon button--logout" title="Sortir"><i class="fas fa-door-open"></i><span class="sr-only">Sortir</span>
+      </button>
     </div>
   </header>
   <main class="container">
     <div class="main-header">
       <h2 class="admin__title">Llistat de jocs programats</h2>
-      <a href="admin-new-game.html" class="button button--icon button--new"><i class="fas fa-plus"></i><span class="sr-only">Crear nou
+      <a href="admin-new-game.html" class="button button--icon button--new" title="Crear nou joc"><i class="fas fa-plus"></i><span class="sr-only">Crear nou
           joc</span></a>
     </div>
     <ul class="games-list">
@@ -30,9 +32,9 @@
         <article class="game">
           <span class="game__date"></span>
           <span class="game__word"></span>
-          <a href="admin-edit-game.html" class="button button--icon button--edit"><i class=" fas fa-pen"></i><span class="sr-only">Edita</span>
+          <a href="admin-edit-game.html" class="button button--icon button--edit" title="Edita el joc"><i class=" fas fa-pen"></i><span class="sr-only">Edita</span>
           </a>
-          <button class="button button--icon button--delete"><i class="fas fa-trash"></i><span class="sr-only">Esborra</span>
+          <button class="button button--icon button--delete" title="Esborra el joc"><i class="fas fa-trash"></i><span class="sr-only">Esborra</span>
           </button>
         </article>
       </li>
