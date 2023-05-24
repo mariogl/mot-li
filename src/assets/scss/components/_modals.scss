@@ -249,3 +249,15 @@ blockquote {
     border-radius: 10px;
   }
 }
+
+/* admin: bigmodal delete */
+
+.bigmodal--delete {
+  min-height: 20%;
+  .confirmation {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
