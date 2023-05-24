@@ -24,6 +24,7 @@
 
 .button--text-icon {
   font-weight: 400;
+  max-width: fit-content;
   background-color: transparent;
   padding: 0 10px 0 0;
   border: 0;
@@ -48,12 +49,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  &:hover,
+  &:focus {
+    background-color: var(--letter-key-focus);
+    color: var(--dark);
+  }
 }
 
 .button--icon {
   background-color: transparent;
   border: 2px solid var(--button-border);
   border-radius: 30px;
+  width: 40px;
+  height: 40px;
   svg {
     width: 30px;
     height: 30px;
@@ -61,12 +69,12 @@
   padding: 0;
   &:hover,
   &:focus {
-    background-color: var(--brand-logo);
-    color: var(--light-color);
+    background-color: var(--letter-key-focus);
+    color: var(--dark);
   }
 }
 
-.button--text-icon {
+/* .button--text-icon {
   &:hover,
   &:focus {
     .button--icon {
@@ -74,8 +82,20 @@
       color: var(--light-color);
     }
   }
-}
+} */
 
 .dark .button {
   border: none;
+}
+
+.button--new {
+  width: 40px;
+  height: 40px;
+}
+
+.button--logout {
+  @media screen and (max-width: 850px) {
+    padding: 5px;
+    font-size: 0.8rem;
+  }
 }

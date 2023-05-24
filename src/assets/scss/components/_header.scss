@@ -50,12 +50,11 @@
 
   &:hover,
   &:focus {
-    background-color: var(--brand-logo);
-    border: 2px solid var(--brand-logo);
+    background-color: var(--letter-key-focus);
     transition: all 500ms linear;
     .menu__toggle i {
-      background-color: var(--light-color);
-      transition: background-color 500ms linear;
+      //   background-color: var(--light-color);
+      // transition: background-color 500ms linear;
     }
   }
   li {
