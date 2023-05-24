@@ -4,6 +4,7 @@
 }
 
 .admin .logo--motli {
+  font-size: 1.2rem; //fallback for clamp
   font-size: clamp(1.5rem, 1rem + 3vw, 3rem);
   @media screen and (max-width: 460px) {
     //  font-size: 1.6rem;
@@ -16,15 +17,17 @@
 }
 
 .admin .main-header {
-  margin-bottom: 4em;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3em;
+  position: relative;
   .button--text-icon {
     margin: 0 auto;
   }
   @media screen and (min-width: 850px) {
-    padding-top: 40px;
-    display: flex;
-    justify-content: space-between;
+    padding-top: 30px;
+
     .button--text-icon {
       margin: 0;
     }
@@ -32,10 +35,15 @@
 }
 
 .admin__title {
-  margin-bottom: 20px;
-  @media screen and (min-width: 850px) {
-    margin-bottom: 0;
-  }
+  text-align: left;
+  font-size: 1.2rem;
+  font-size: clamp(1.125rem, 1rem + 1vw, 1.5rem);
+  margin-right: 10px;
+}
+
+.admin--login .admin__title {
+  text-align: center;
+  margin-bottom: 2em;
 }
 
 .loading,
@@ -55,6 +63,7 @@
   @media screen and (min-width: 850px) {
     width: 250px;
     margin-bottom: 0;
+    padding-right: 15px;
   }
 }
 
@@ -131,9 +140,19 @@ textarea,
     padding: 0 15px;
     background-color: var(--letter-invalid);
     color: var(--light-color);
+    .button--icon {
+      color: var(--light-color);
+      &:hover,
+      &:focus {
+        color: var(--dark);
+      }
+    }
     &:nth-child(odd) {
       background-color: var(--general-background);
       color: var(--dark);
+      .button--icon {
+        color: var(--dark);
+      }
     }
 
     &--dummy {
@@ -146,21 +165,29 @@ textarea,
   }
 }
 .game {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 0;
-  position: relative;
-  div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px 0;
+  > span,
+  > a,
+  > button {
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 390px) {
     display: flex;
-    justify-content: flex-start;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    position: relative;
+    span.game__word {
+      margin-left: 20px;
+    }
   }
 }
 .game__word {
   font-weight: 700;
   flex: 2;
-  margin-left: 20px;
 }
 
 .button--edit:before {
@@ -170,6 +197,15 @@ textarea,
 }
 .button--delete {
   z-index: 2;
+}
+
+.button--new {
+  /*  position: absolute;
+  right: 0;
+  top: -3px;
+  @media screen and (min-width: 850px) {
+    top: 37px;
+  } */
 }
 
 /* toasts (modal) */
