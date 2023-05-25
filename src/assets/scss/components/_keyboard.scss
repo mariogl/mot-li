@@ -49,10 +49,9 @@
     font-size: 1.2rem;
   }
 }
-
-.letter--correct,
-.keyboard__key--correct {
-  background-color: var(--letter-positioned);
+.letter--absent,
+.keyboard__key--absent {
+  background-color: var(--letter-invalid);
   color: var(--general-background);
 }
 
@@ -62,9 +61,9 @@
   color: var(--general-background);
 }
 
-.letter--absent,
-.keyboard__key--absent {
-  background-color: var(--letter-invalid);
+.letter--correct,
+.keyboard__key--correct {
+  background-color: var(--letter-positioned);
   color: var(--general-background);
 }
 

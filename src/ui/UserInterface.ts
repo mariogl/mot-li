@@ -80,17 +80,58 @@ class UserInterface implements UserInterfaceStructure {
   public setKeysStatus(letters: GuessLetterStructure[]) {
     const usedKeys: GuessLetterStructure[] = [];
 
-    letters.forEach((letter) => {
+    /* Letters.forEach((letter) => {
       document.querySelectorAll(".keyboard__key").forEach((keyElement) => {
         if (letter.symbol === keyElement.textContent?.toLowerCase()) {
           keyElement.classList.remove(
-            "keyboard__key--unused",
             "keyboard__key--present",
             "keyboard__key--correct",
             "keyboard__key--absent"
           );
-          keyElement.classList.add(`keyboard__key--${letter.status}`);
+        }
+      });
+    }); */
 
+    letters
+      .filter((letter) => letter.status === "absent")
+      .forEach((letter) => {
+        document.querySelectorAll(".keyboard__key").forEach((keyElement) => {
+          if (
+            letter.symbol === keyElement.textContent?.toLowerCase() &&
+            !keyElement.classList.contains("keyboard__key--present") &&
+            !keyElement.classList.contains("keyboard__key--correct")
+          ) {
+            keyElement.classList.add(`keyboard__key--${letter.status}`);
+          }
+        });
+      });
+
+    letters
+      .filter((letter) => letter.status === "present")
+      .forEach((letter) => {
+        document.querySelectorAll(".keyboard__key").forEach((keyElement) => {
+          if (
+            letter.symbol === keyElement.textContent?.toLowerCase() &&
+            !keyElement.classList.contains("keyboard__key--correct")
+          ) {
+            keyElement.classList.add(`keyboard__key--${letter.status}`);
+          }
+        });
+      });
+
+    letters
+      .filter((letter) => letter.status === "correct")
+      .forEach((letter) => {
+        document.querySelectorAll(".keyboard__key").forEach((keyElement) => {
+          if (letter.symbol === keyElement.textContent?.toLowerCase()) {
+            keyElement.classList.add(`keyboard__key--${letter.status}`);
+          }
+        });
+      });
+
+    letters.forEach((letter) => {
+      document.querySelectorAll(".keyboard__key").forEach((keyElement) => {
+        if (letter.symbol === keyElement.textContent?.toLowerCase()) {
           if (letter.status !== "unchecked") {
             usedKeys.push({ symbol: letter.symbol, status: letter.status });
           }
