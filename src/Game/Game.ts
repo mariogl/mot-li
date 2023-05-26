@@ -141,9 +141,15 @@ class Game {
       });
     };
 
+    const copyToClipboard = async () => {
+      await navigator.clipboard.writeText("Compartint");
+
+      this.userInterface.openModal("Copiat");
+    };
+
     this.userInterface.createBigModal(
       "solution",
-      [openStatistics, openStatistics],
+      [copyToClipboard, openStatistics],
       {
         solution: {
           word: this.config.wordToGuess,
