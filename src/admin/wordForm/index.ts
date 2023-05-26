@@ -6,6 +6,13 @@ import { adminUrls } from "../urls";
 
 const currentUrl = new URL(window.location.href);
 
+const convertTags = (html: string): string => {
+  let newHtml = html.replaceAll("<b>", "<strong>");
+  newHtml = newHtml.replaceAll("</b>", "</strong>");
+
+  return newHtml;
+};
+
 if (
   currentUrl.pathname === adminUrls.newGame ||
   currentUrl.pathname === adminUrls.editGame
@@ -72,7 +79,7 @@ if (
       link: wordLink.value,
       linkText: wordTextLink.value,
       guesses: +wordGuesses.value,
-      definition: wordDefinition.innerHTML,
+      definition: convertTags(wordDefinition.innerHTML),
     };
 
     if (isEditing) {
