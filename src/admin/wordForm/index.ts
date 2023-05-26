@@ -9,6 +9,9 @@ const currentUrl = new URL(window.location.href);
 const convertTags = (html: string): string => {
   let newHtml = html.replaceAll("<b>", "<strong>");
   newHtml = newHtml.replaceAll("</b>", "</strong>");
+  newHtml = newHtml.replaceAll("<i>", "<em>");
+  newHtml = newHtml.replaceAll("</i>", "</em>");
+  newHtml = newHtml.replace(/style="[^"]*"/g, "");
 
   return newHtml;
 };
