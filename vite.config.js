@@ -7,6 +7,9 @@ export default defineConfig({
       input: {
         index: "index.html",
         admin: "admin-login.html",
+        adminList: "admin-list.html",
+        adminNewGame: "admin-new-game.html",
+        adminEditGame: "admin-edit-game.html",
       },
     },
   },
