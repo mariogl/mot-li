@@ -37,6 +37,8 @@ class KeyboardBuilder {
       row.classList.add("keyboard__row");
       this.domAccessor.getKeyboardElement().appendChild(row);
 
+      let nAction = 1;
+
       keyRow.forEach((key) => {
         const keyButton = document.createElement("button");
 
@@ -49,10 +51,19 @@ class KeyboardBuilder {
         }`;
         if (key.type === "action") {
           keyButton.classList.add("keyboard__key--double");
+
+          const srOnly = document.createElement("span");
+          srOnly.classList.add("sr-only");
+          srOnly.textContent = nAction === 1 ? "Esborrar" : "Enviar";
+
+          keyButton.appendChild(srOnly);
+
+          nAction++;
+        } else {
+          keyButton.textContent = key.symbol;
         }
 
         keyButton.dataset.type = key.type;
-        keyButton.textContent = key.symbol;
 
         row.appendChild(keyButton);
       });
