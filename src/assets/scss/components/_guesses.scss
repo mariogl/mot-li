@@ -18,141 +18,144 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 5px;
+  padding: 10px var(--padding-gap);
   @media screen and (max-width: 350px) {
-    padding: 10px 5px;
+    padding: 10px var(--padding-gap);
   }
 }
 
 .guesses {
+  --max-width: calc(
+    (60 * var(--guess-letters)) +
+      (var(--gap-num) * (var(--guess-letters) - 1 + 2))
+  );
   display: grid;
   flex-wrap: wrap;
   width: 100%;
-  max-width: 330px;
-  gap: 5px;
+  max-width: calc(var(--max-width) * 1px);
+  gap: var(--padding-gap);
 }
 
 .guess {
+  max-width: var(--max-width);
   display: grid;
-  flex-wrap: nowrap;
-  width: 100%;
-  justify-content: space-between;
-  gap: 5px;
+  grid-template-columns: repeat(
+    var(--guess-letters),
+    minmax(
+      calc(
+        (
+            (
+              (
+                  100 -
+                    (
+                      calc(
+                        (var(--max-width) / var(--guess-letters)) -
+                          (var(--gap-num) * ((var(--guess-letters) - 1) + 2))
+                      )
+                    )
+                ) / var(--guess-letters)
+            )
+          ) * 1vw
+      ),
+      60px
+    )
+  );
+  gap: var(--padding-gap);
+  margin: 0 auto;
 }
 
 .letter {
+  aspect-ratio: 1/1;
   border: 1px solid var(--letter-key-focus);
-  border-radius: 18px;
   background-color: var(--general-background);
-  font-size: 2.5rem;
+  font-size: clamp(1.2rem, 1rem + 3vw, 2.5rem);
   text-transform: uppercase;
-  width: 100%;
-  line-height: 3.75rem;
-  max-width: 3.75rem;
-  height: 3.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 3vw;
 }
 .dark .letter:not(.letter--unchecked) {
   border: var(--general-background);
 }
 
 .guesses[data-letters="4"] {
-  max-width: 260px;
-  .guess {
-    max-width: 260px;
-    grid-template-columns: repeat(4, 1fr);
+  .letter {
+    border-radius: 6vw;
+  }
+  @media screen and (min-width: 265px) {
+    .guess {
+      grid-template-columns: repeat(var(--guess-letters), 60px);
+    }
+    .letter {
+      border-radius: 18px;
+    }
   }
 }
-.guesses[data-letters="5"] .guess {
-  grid-template-columns: repeat(5, 1fr);
-  @media screen and (max-width: 320px) {
+.guesses[data-letters="5"] {
+  .letter {
+    border-radius: 5vw;
+  }
+  @media screen and (min-width: 330px) {
+    .guess {
+      grid-template-columns: repeat(var(--guess-letters), 60px);
+    }
     .letter {
-      font-size: 2.2rem;
-      line-height: 3.1rem;
-      height: 3.1rem;
-      border-radius: 16px;
+      border-radius: 18px;
     }
   }
 }
 
 .guesses[data-letters="6"] {
-  max-width: 385px;
-  .guess {
-    max-width: 385px;
-    grid-template-columns: repeat(6, 1fr);
+  .letter {
+    border-radius: 4vw;
   }
-  @media screen and (max-width: 330px) {
+  @media screen and (min-width: 395px) {
+    .guess {
+      grid-template-columns: repeat(var(--guess-letters), 60px);
+    }
     .letter {
-      height: 2.75rem;
-      font-size: 2rem;
-      border-radius: 13px;
+      border-radius: 18px;
     }
   }
 }
 .guesses[data-letters="7"] {
-  max-width: 450px;
-  .guess {
-    max-width: 450px;
-    grid-template-columns: repeat(7, 1fr);
+  .letter {
+    border-radius: 4vw;
   }
-  @media screen and (max-width: 290px) {
-    .letter {
-      height: 2.2rem;
-      font-size: 1.4rem;
-      border-radius: 10px;
+  @media screen and (min-width: 470px) {
+    .guess {
+      grid-template-columns: repeat(var(--guess-letters), 60px);
     }
-  }
-  @media screen and (min-width: 290px) and (max-width: 380px) {
     .letter {
-      height: 2.75rem;
-      font-size: 2rem;
-      border-radius: 13px;
+      border-radius: 18px;
     }
   }
 }
-
 .guesses[data-letters="8"] {
-  max-width: 515px;
-  .guess {
-    max-width: 515px;
-    grid-template-columns: repeat(8, 1fr);
+  .letter {
+    border-radius: 3.5vw;
   }
-  @media screen and (max-width: 329px) {
-    .letter {
-      height: 2.2rem;
-      font-size: 1.4rem;
-      border-radius: 10px;
+  @media screen and (min-width: 530px) {
+    .guess {
+      grid-template-columns: repeat(var(--guess-letters), 60px);
     }
-  }
-  @media screen and (min-width: 330px) and (max-width: 440px) {
     .letter {
-      height: 2.75rem;
-      font-size: 2rem;
-      border-radius: 13px;
+      border-radius: 18px;
     }
   }
 }
 
 .guesses[data-letters="9"] {
-  max-width: 580px;
-  .guess {
-    max-width: 580px;
-    grid-template-columns: repeat(9, 1fr);
+  .letter {
+    border-radius: 3vw;
   }
-  @media screen and (max-width: 369px) {
-    .letter {
-      height: 1.9rem;
-      font-size: 1.3rem;
-      border-radius: 8px;
+  @media screen and (min-width: 595px) {
+    .guess {
+      grid-template-columns: repeat(var(--guess-letters), 60px);
     }
-  }
-  @media screen and (min-width: 370px) and (max-width: 550px) {
     .letter {
-      height: 2.75rem;
-      font-size: 2rem;
-      border-radius: 13px;
+      border-radius: 18px;
     }
   }
 }
