@@ -23,6 +23,10 @@ class GuessBuilder {
   private addLettersToGuessesParent() {
     const guessParent = this.domAccessor.getGuessesContainer();
     guessParent.dataset.letters = `${this.config.wordToGuess.length}`;
+    guessParent.style.setProperty(
+      "--guess-letters",
+      `${this.config.wordToGuess.length}`
+    );
   }
 
   private createGuess(number: number) {
