@@ -14,14 +14,12 @@ body.dark.modal--open:after {
 }
 
 .modal,
-.supermodal,
 .bigmodal {
   display: none;
   z-index: 2;
 }
 
 .modal--open,
-.supermodal--open,
 .bigmodal--open {
   display: block;
 }
@@ -30,11 +28,6 @@ body.dark.modal--open:after {
 }
 
 .modal {
-  padding: 8px;
-}
-
-.modal,
-.supermodal {
   position: absolute;
   top: 80px;
   left: 50%;
@@ -43,11 +36,11 @@ body.dark.modal--open:after {
   color: var(--general-background);
   font-size: 1.2rem;
   border-radius: 18px;
-  width: 90%;
+  width: fit-content;
+  padding: 8px 20px;
   text-align: center;
 
   @media screen and (min-width: 340px) {
-    width: 60%;
   }
 }
 
@@ -221,13 +214,17 @@ blockquote {
     margin: 10px 0;
   }
   .letter {
-    width: 45px;
-    height: 45px;
     font-size: 1.8rem;
     border-radius: 14px;
+    font-weight: 700;
   }
   .button--close-big {
     margin: 20px auto 0;
+    width: fit-content;
+    height: auto;
+    min-width: 80px;
+    padding: 8px 20px;
+    border-radius: 30px;
   }
 }
 
