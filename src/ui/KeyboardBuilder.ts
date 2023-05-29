@@ -20,11 +20,11 @@ class KeyboardBuilder {
       keys.push(
         keyList.split("").map((letterKey) => {
           if (letterKey === "C") {
-            return this.createKey("env", "action");
+            return this.createKey("", "action");
           }
 
           if (letterKey === "D") {
-            return this.createKey("esb", "action");
+            return this.createKey("", "action");
           }
 
           return this.createKey(letterKey);
