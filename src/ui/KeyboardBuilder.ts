@@ -20,11 +20,11 @@ class KeyboardBuilder {
       keys.push(
         keyList.split("").map((letterKey) => {
           if (letterKey === "C") {
-            return this.createKey("", "action");
+            return this.createKey("env", "action");
           }
 
           if (letterKey === "D") {
-            return this.createKey("", "action");
+            return this.createKey("esb", "action");
           }
 
           return this.createKey(letterKey);
@@ -36,8 +36,6 @@ class KeyboardBuilder {
       const row = document.createElement("div");
       row.classList.add("keyboard__row");
       this.domAccessor.getKeyboardElement().appendChild(row);
-
-      let nAction = 1;
 
       keyRow.forEach((key) => {
         const keyButton = document.createElement("button");
@@ -54,11 +52,9 @@ class KeyboardBuilder {
 
           const srOnly = document.createElement("span");
           srOnly.classList.add("sr-only");
-          srOnly.textContent = nAction === 1 ? "Enviar" : "Esborrar";
+          srOnly.textContent = key.symbol === "env" ? "Enviar" : "Esborrar";
 
           keyButton.appendChild(srOnly);
-
-          nAction++;
         } else {
           keyButton.textContent = key.symbol;
         }

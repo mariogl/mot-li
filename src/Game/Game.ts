@@ -116,9 +116,9 @@ class Game {
     this.userInterface.onLetterPressed = (pressedKey: string) => {
       const key = pressedKey.toLocaleLowerCase();
 
-      if (key === "backspace" || key === "esb") {
+      if (key === "backspace" || key === "esborrar") {
         this.deleteLetter();
-      } else if (key === "enter" || key === "env") {
+      } else if (key === "enter" || key === "enviar") {
         this.checkGuess();
       } else if (
         this.config.keyLetters.some((lettersGroup) =>
