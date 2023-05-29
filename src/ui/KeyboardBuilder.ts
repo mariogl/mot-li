@@ -54,7 +54,7 @@ class KeyboardBuilder {
 
           const srOnly = document.createElement("span");
           srOnly.classList.add("sr-only");
-          srOnly.textContent = nAction === 1 ? "Esborrar" : "Enviar";
+          srOnly.textContent = nAction === 1 ? "Enviar" : "Esborrar";
 
           keyButton.appendChild(srOnly);
 
