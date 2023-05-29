@@ -59,13 +59,14 @@ main {
       ),
       60px
     )
-  );
+  ); /* (100 - (max-width / row-letters) - ( gap * (10)) // 10 = row-letters - 1 (gaps inter cells) + 2 (row external paddings)  */
   gap: var(--padding-gap);
   margin: 0 auto;
 }
 
 .letter {
   aspect-ratio: 1/1;
+  line-height: 1rem;
   border: 1px solid var(--letter-key-focus);
   background-color: var(--general-background);
   font-size: clamp(1.2rem, 1rem + 3vw, 2.5rem);
@@ -89,6 +90,7 @@ main {
     }
     .letter {
       border-radius: 18px;
+      font-size: 2.5rem;
     }
   }
 }
@@ -102,6 +104,7 @@ main {
     }
     .letter {
       border-radius: 18px;
+      font-size: 2.5rem;
     }
   }
 }
@@ -116,6 +119,7 @@ main {
     }
     .letter {
       border-radius: 18px;
+      font-size: 2.5rem;
     }
   }
 }
@@ -129,6 +133,7 @@ main {
     }
     .letter {
       border-radius: 18px;
+      font-size: 2.5rem;
     }
   }
 }
@@ -142,6 +147,7 @@ main {
     }
     .letter {
       border-radius: 18px;
+      font-size: 2.5rem;
     }
   }
 }
@@ -156,6 +162,7 @@ main {
     }
     .letter {
       border-radius: 18px;
+      font-size: 2.5rem;
     }
   }
 }
