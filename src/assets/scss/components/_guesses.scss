@@ -9,6 +9,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   height: calc(100% - 60px);
+  touch-action: manipulation;
 }
 
 /* words pannel */
