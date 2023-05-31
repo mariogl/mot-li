@@ -14,12 +14,14 @@ body.dark.modal--open:after {
 }
 
 .modal,
+.supermodal,
 .bigmodal {
   display: none;
   z-index: 2;
 }
 
 .modal--open,
+.supermodal--open,
 .bigmodal--open {
   display: block;
 }
@@ -27,7 +29,8 @@ body.dark.modal--open:after {
   display: flex;
 }
 
-.modal {
+.modal,
+.supermodal {
   position: absolute;
   top: 80px;
   left: 50%;
