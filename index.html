@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/FaviconMotli.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <meta name="description" content="Joc de paraula amagada diària a descobrir en 6 intents" />
+
   <title>Mot-li</title>
   <script type="module" src="/src/index.ts"></script>
 </head>
@@ -78,7 +79,12 @@
     </div>
   </main>
   <div class="modal"></div>
-
+  <div class="supermodal supermodal--won">
+    <p>Has guanyat</p>
+  </div>
+  <div class="supermodal supermodal--lost">
+    <p>Has perdut</p>
+  </div>
   <div class="bigmodal bigmodal--solution" data-type="solution">
     <div class="bigmodal__header">
       <h2 class="bigmodal__title">Solució</h2>
