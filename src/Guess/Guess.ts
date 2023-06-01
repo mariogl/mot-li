@@ -47,11 +47,15 @@ class Guess implements GuessStructure {
     });
 
     this.currentGuess.forEach((letter, position) => {
-      if (word.at(position) === "0") {
+      if (letter.status === "correct") {
         return;
       }
 
       if (word.includes(letter.symbol.toLocaleLowerCase())) {
+        const wordLetterPosition = word.indexOf(
+          letter.symbol.toLocaleLowerCase()
+        );
+        word[wordLetterPosition] = "0";
         letter.status = "present";
       } else {
         letter.status = "absent";
