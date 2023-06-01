@@ -50,11 +50,15 @@ class KeyboardBuilder {
         if (key.type === "action") {
           keyButton.classList.add("keyboard__key--double");
 
-          const srOnly = document.createElement("span");
-          srOnly.classList.add("sr-only");
-          srOnly.textContent = key.symbol === "env" ? "Enviar" : "Esborrar";
+          if (key.symbol === "esb") {
+            const srOnly = document.createElement("span");
+            srOnly.classList.add("sr-only");
+            srOnly.textContent = "Esborrar";
 
-          keyButton.appendChild(srOnly);
+            keyButton.appendChild(srOnly);
+          } else if (key.symbol === "env") {
+            keyButton.textContent = "Enviar";
+          }
         } else {
           keyButton.textContent = key.symbol;
         }
