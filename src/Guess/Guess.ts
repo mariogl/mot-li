@@ -46,7 +46,7 @@ class Guess implements GuessStructure {
       }
     });
 
-    this.currentGuess.forEach((letter, position) => {
+    this.currentGuess.forEach((letter) => {
       if (letter.status === "correct") {
         return;
       }
