@@ -6,7 +6,6 @@ import {
   type GameState,
   type GuessLetterStructure,
   type UserInterfaceStructure,
-  type SuperModalType,
 } from "../types";
 import BigModal, { type BigModalOptions } from "./BigModal";
 
@@ -168,17 +167,6 @@ class UserInterface implements UserInterfaceStructure {
     this.bigModalOpened = modal;
 
     modal.open(actions);
-  }
-
-  public openSuperModal(type: SuperModalType): void {
-    this.domAccessor.openSuperModal(type);
-    setTimeout(() => {
-      this.domAccessor.closeSuperModal(type);
-    }, 2000);
-  }
-
-  public closeSuperModal(type: SuperModalType): void {
-    this.domAccessor.closeSuperModal(type);
   }
 
   private startCountdown() {

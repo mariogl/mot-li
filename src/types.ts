@@ -16,8 +16,6 @@ export interface UserInterfaceStructure {
   ): void;
   openModal(text: string): void;
   closeModal(): void;
-  openSuperModal(type: SuperModalType): void;
-  closeSuperModal(type: SuperModalType): void;
 }
 
 export interface KeyStructure {
@@ -72,8 +70,6 @@ export interface DomAccessorStructure {
   ): void;
   openModal(text: string): void;
   closeModal(): void;
-  openSuperModal(type: SuperModalType): void;
-  closeSuperModal(type: SuperModalType): void;
   getStatisticsOpener(): HTMLElement;
   getOptionsOpener(): HTMLElement;
   getInfoOpener(): HTMLElement;
@@ -124,9 +120,4 @@ export interface StorageStructure {
   saveUsedKeys: (keys: GuessLetterStructure[]) => void;
   addGuess: (guess: GuessLetterStructure[]) => void;
   setDarkTheme: (isDark: boolean) => void;
-}
-
-export enum SuperModalType {
-  won,
-  lost,
 }
