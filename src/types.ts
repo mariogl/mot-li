@@ -33,6 +33,7 @@ export interface GuessLetterStructure {
 
 export interface Config {
   maxGuesses: number;
+  originalWordToGuess: string;
   wordToGuess: string;
   allowedWords: Record<string, string[]>;
   keyLetters: string[];

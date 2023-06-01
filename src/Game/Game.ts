@@ -23,6 +23,7 @@ import { type GamesRepository } from "../admin/repository/games/types";
 
 class Game {
   private readonly config: Config = {
+    originalWordToGuess: "",
     wordToGuess: "",
     wordDefinition: "",
     wordLink: "",
@@ -63,7 +64,11 @@ class Game {
     (async () => {
       const gameOfTheDay = await gamesRepository.getCurrentGame();
 
-      this.config.wordToGuess = gameOfTheDay.word;
+      this.config.wordToGuess = gameOfTheDay.word
+        .replace(/[·.,:;()_?¿!¡-\s]/g, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      this.config.originalWordToGuess = gameOfTheDay.word;
       this.config.maxGuesses = gameOfTheDay.guesses;
       this.config.wordLink = gameOfTheDay.link;
       this.config.wordLinkText = gameOfTheDay.linkText;
@@ -152,7 +157,7 @@ class Game {
       [copyToClipboard, openStatistics],
       {
         solution: {
-          word: this.config.wordToGuess,
+          word: this.config.originalWordToGuess,
           definition: this.config.wordDefinition,
           link: this.config.wordLink,
           linkText: this.config.wordLinkText,
