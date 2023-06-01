@@ -68,17 +68,20 @@ main {
 .letter {
   aspect-ratio: 1/1;
   line-height: 1rem;
-  border: 1px solid var(--letter-key-focus);
-  background-color: var(--general-background);
+  border: 1px solid var(--soft-grey);
+  background-color: var(--light-color);
   font-size: clamp(1.2rem, 1rem + 3vw, 2.5rem);
   text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 3vw;
+  &.letter--unchecked {
+    border: 1px solid var(--letter-key-focus);
+  }
 }
 .dark .letter:not(.letter--unchecked) {
-  border: var(--general-background);
+  border: var(--light-color);
 }
 
 .guesses[data-letters="4"] {
@@ -169,7 +172,7 @@ main {
 }
 
 .letter:not(.letter--unchecked) {
-  color: var(--general-background);
+  color: var(--light-color);
 }
 
 .dark .letter:not(.letter--unchecked) {

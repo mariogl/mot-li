@@ -5,7 +5,7 @@
   background-color: var(--light-color);
   color: var(--dark);
   text-align: center;
-  border: 2px solid var(--button-border);
+  border: 2px solid var(--soft-grey);
   border-radius: 30px;
   font-weight: 700;
   text-decoration: none;
@@ -51,14 +51,14 @@
   justify-content: center;
   &:hover,
   &:focus {
-    background-color: var(--letter-key-focus);
+    background-color: var(--soft-grey);
     color: var(--dark);
   }
 }
 
 .button--icon {
   background-color: transparent;
-  border: 2px solid var(--button-border);
+  border: 2px solid var(--soft-grey);
   border-radius: 30px;
   width: 40px;
   height: 40px;
@@ -69,7 +69,7 @@
   padding: 0;
   &:hover,
   &:focus {
-    background-color: var(--letter-key-focus);
+    background-color: var(--soft-grey);
     color: var(--dark);
   }
 }
