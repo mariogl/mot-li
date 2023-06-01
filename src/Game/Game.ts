@@ -6,7 +6,6 @@ import {
   type DomAccessorStructure,
   type GuessStructure,
   type UserInterfaceStructure,
-  SuperModalType,
   type Stats,
 } from "../types";
 import DomAccessor from "../ui/DomAccessor";
@@ -299,7 +298,7 @@ class Game {
   private lost() {
     this.storage.setStats("currentStreak", 0);
 
-    this.userInterface.openSuperModal(SuperModalType.lost);
+    this.userInterface.openModal("Has perdut");
 
     setTimeout(() => {
       this.openSolutionModal();

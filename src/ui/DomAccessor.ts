@@ -1,8 +1,4 @@
-import {
-  SuperModalType,
-  type DomAccessorStructure,
-  type GuessLetterStructure,
-} from "../types";
+import { type DomAccessorStructure, type GuessLetterStructure } from "../types";
 
 class DomAccessor implements DomAccessorStructure {
   private readonly guessesContainer: HTMLElement;
@@ -15,7 +11,6 @@ class DomAccessor implements DomAccessorStructure {
   private readonly infoOpener: HTMLElement;
   private readonly themeSwitcher: HTMLElement;
   private readonly modal: HTMLElement;
-  private readonly superModals: Record<SuperModalType, HTMLElement>;
   private readonly countdown: HTMLElement;
 
   constructor() {
@@ -26,10 +21,6 @@ class DomAccessor implements DomAccessorStructure {
     this.menuToggler = document.querySelector(".menu__toggle")!;
     this.modal = document.querySelector(".modal")!;
     this.countdown = document.querySelector(".countdown__timer")!;
-    this.superModals = {
-      [SuperModalType.won]: document.querySelector(".supermodal--won")!,
-      [SuperModalType.lost]: document.querySelector(".supermodal--lost")!,
-    };
     this.statisticsOpener = document.querySelector(
       ".menu__navigation .button--stats"
     )!;
@@ -111,14 +102,6 @@ class DomAccessor implements DomAccessorStructure {
   public closeModal() {
     this.modal.textContent = "";
     this.modal.classList.remove("modal--open");
-  }
-
-  public openSuperModal(type: SuperModalType): void {
-    this.superModals[type].classList.add("supermodal--open");
-  }
-
-  public closeSuperModal(type: SuperModalType): void {
-    this.superModals[type].classList.remove("supermodal--open");
   }
 
   public getStatisticsOpener() {
