@@ -240,7 +240,7 @@ class Game {
         this.guess.getCurrentGuessWord()
       )
     ) {
-      this.userInterface.openModal("Paraula no trobada");
+      this.userInterface.openModal("Mot no trobat, esborra'l i torna-hi");
 
       return;
     }
