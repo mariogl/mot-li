@@ -33,7 +33,7 @@
   border: none;
   border-radius: 2px;
   background-color: var(--letter-key-focus);
-  color: var(--dark);
+  color: var(--light-color);
 }
 
 .dark .keyboard__key {
@@ -53,19 +53,19 @@
 .letter--absent,
 .keyboard__key--absent {
   background-color: var(--letter-invalid);
-  color: var(--general-background);
+  color: var(--light-color);
 }
 
 .letter--present,
 .keyboard__key--present {
   background-color: var(--letter-valid);
-  color: var(--general-background);
+  color: var(--light-color);
 }
 
 .letter--correct,
 .keyboard__key--correct {
   background-color: var(--letter-positioned);
-  color: var(--general-background);
+  color: var(--light-color);
 }
 
 .letter--current,
@@ -74,10 +74,10 @@
 }
 
 .keyboard__row {
-  .keyboard__key--double:first-child {
+  /*  .keyboard__key--double:first-child {
     background: var(--letter-key-focus) url("/src/assets/images/enter-key.svg")
       no-repeat center center;
-  }
+  } */
   .keyboard__key--double:last-child {
     background: var(--letter-key-focus) url("/src/assets/images/delete-key.svg")
       no-repeat center center;

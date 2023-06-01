@@ -17,7 +17,7 @@
 .logo--vilaweb {
   border-radius: 50%;
   img {
-    border: 2px solid var(--letter-key-focus);
+    border: 2px solid var(--soft-grey);
     border-radius: 50%;
   }
 }
@@ -45,16 +45,15 @@
   align-items: center;
   width: 42px;
   height: 42px;
-  border: 2px solid var(--letter-key-focus);
+  border: 2px solid var(--soft-grey);
   border-radius: 50%;
 
   &:hover,
   &:focus {
-    background-color: var(--letter-key-focus);
+    background-color: var(--soft-grey);
     transition: all 500ms linear;
     .menu__toggle i {
-      //   background-color: var(--light-color);
-      // transition: background-color 500ms linear;
+      transition: background-color 500ms linear;
     }
   }
   li {
@@ -65,10 +64,9 @@
   background-color: var(--letter-key-focus);
   &:hover,
   &:focus {
-    background-color: var(--brand-logo);
+    background-color: var(--light-color);
     .menu__toggle i {
       background-color: var(--dark);
-      transition: background-color 500ms linear;
     }
   }
 }
@@ -97,7 +95,6 @@
 }
 .dark .menu__toggle i {
   background-color: var(--dark);
-  transition: background-color 500ms linear;
 }
 
 .menu__toggle i:nth-child(1) {
