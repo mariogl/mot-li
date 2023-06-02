@@ -3,7 +3,10 @@ import { type BigModalOptions } from "./ui/BigModal";
 export type KeyType = "letter" | "action";
 
 export interface UserInterfaceStructure {
-  guessToHtml(guessLetters: GuessLetterStructure[]): void;
+  guessToHtml(
+    guessLetters: GuessLetterStructure[],
+    animation: GuessLetterAnimationsStructure
+  ): void;
   setCurrentLetterElement(): void;
   cancelEvents(): void;
   setKeysStatus(letters: GuessLetterStructure[]): void;
@@ -16,6 +19,7 @@ export interface UserInterfaceStructure {
   ): void;
   openModal(text: string): void;
   closeModal(): void;
+  setGuessRowAnimation(animation: GuessLetterAnimationsStructure): void;
 }
 
 export interface KeyStructure {
@@ -23,6 +27,14 @@ export interface KeyStructure {
   type: KeyType;
   status: "unused" | "valid" | "invalid" | "positioned";
 }
+
+export type GuessLetterAnimationsStructure =
+  | "flipLeft"
+  | "flipRight"
+  | "guessShake"
+  | "bounceIn"
+  | "zoomIn"
+  | "none";
 
 export interface GuessLetterStructure {
   symbol: string;
@@ -66,7 +78,8 @@ export interface DomAccessorStructure {
   setLetterStatus(
     currentGuessNumber: number,
     letter: GuessLetterStructure,
-    position: number
+    position: number,
+    animation: GuessLetterAnimationsStructure
   ): void;
   openModal(text: string): void;
   closeModal(): void;

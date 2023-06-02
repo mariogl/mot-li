@@ -5,6 +5,7 @@ import {
   type DomAccessorStructure,
   type GameState,
   type GuessLetterStructure,
+  type GuessLetterAnimationsStructure,
   type UserInterfaceStructure,
 } from "../types";
 import BigModal, { type BigModalOptions } from "./BigModal";
@@ -46,12 +47,23 @@ class UserInterface implements UserInterfaceStructure {
 
   public onActionPressed() {}
 
-  public guessToHtml(guessLetters: GuessLetterStructure[]) {
+  public setGuessRowAnimation(animation: GuessLetterAnimationsStructure) {
+    const currentGuess = this.domAccessor.getCurrentGuessElement(
+      this.gameState.currentGuessNumber
+    );
+    currentGuess.classList.add(`letter--${animation}`);
+  }
+
+  public guessToHtml(
+    guessLetters: GuessLetterStructure[],
+    animation: GuessLetterAnimationsStructure
+  ) {
     guessLetters.forEach((letter, position) => {
       this.domAccessor.setLetterStatus(
         this.gameState.currentGuessNumber,
         letter,
-        position
+        position,
+        animation
       );
     });
   }

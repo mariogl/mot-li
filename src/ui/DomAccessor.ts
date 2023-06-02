@@ -1,4 +1,8 @@
-import { type DomAccessorStructure, type GuessLetterStructure } from "../types";
+import {
+  type DomAccessorStructure,
+  type GuessLetterStructure,
+  type GuessLetterAnimationsStructure,
+} from "../types";
 
 class DomAccessor implements DomAccessorStructure {
   private readonly guessesContainer: HTMLElement;
@@ -71,10 +75,15 @@ class DomAccessor implements DomAccessorStructure {
     return this.guessesContainer;
   }
 
+  /*   Public setGuessRowAnimation(currentGuessNumber: number) {
+    this.getCurrentGuessElement(currentGuessNumber);
+  } */
+
   public setLetterStatus(
     currentGuessNumber: number,
     letter: GuessLetterStructure,
-    position: number
+    position: number,
+    animation: GuessLetterAnimationsStructure
   ) {
     const currentGuessLetterElement =
       this.getCurrentGuessLettersElements(currentGuessNumber)[position];
@@ -82,6 +91,8 @@ class DomAccessor implements DomAccessorStructure {
     currentGuessLetterElement.textContent = letter.symbol;
     currentGuessLetterElement.classList.remove("letter--unchecked");
     currentGuessLetterElement.classList.add(`letter--${letter.status}`);
+    currentGuessLetterElement.classList.remove("letter--none");
+    currentGuessLetterElement.classList.add(`letter--${animation}`);
   }
 
   public toggleMenu() {

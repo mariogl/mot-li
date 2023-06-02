@@ -244,6 +244,7 @@ class Game {
         this.guess.getCurrentGuessWord()
       )
     ) {
+      this.userInterface.setGuessRowAnimation("guessShake");
       this.userInterface.openModal("Mot no trobat, esborra'l i torna-hi");
 
       return;
@@ -256,6 +257,7 @@ class Game {
     this.storage.setLastWord(this.config.wordToGuess);
 
     if (this.guess.isCurrentGuessCorrect()) {
+      this.userInterface.setGuessRowAnimation("bounceIn");
       this.win();
       return;
     }
@@ -379,7 +381,7 @@ class Game {
       symbol
     );
 
-    this.userInterface.guessToHtml(this.guess.getCurrentGuess());
+    this.userInterface.guessToHtml(this.guess.getCurrentGuess(), "none");
   }
 
   private resetCurrentGuessLetterPosition() {

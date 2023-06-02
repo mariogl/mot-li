@@ -2,11 +2,13 @@ import {
   type GuessStructure,
   type Config,
   type UserInterfaceStructure,
+  type GuessLetterAnimationsStructure,
 } from "../types";
 import { type GuessLetterStructure } from "../types";
 
 class Guess implements GuessStructure {
   private currentGuess: GuessLetterStructure[] = [];
+  private currentAnimation: GuessLetterAnimationsStructure = "none";
 
   constructor(
     private readonly config: Config,
@@ -63,8 +65,8 @@ class Guess implements GuessStructure {
     });
 
     this.ui.setKeysStatus(this.currentGuess);
-
-    this.ui.guessToHtml(this.currentGuess);
+    this.currentAnimation = "flipLeft";
+    this.ui.guessToHtml(this.currentGuess, this.currentAnimation);
   }
 
   public isCurrentGuessCorrect() {
