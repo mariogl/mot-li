@@ -146,6 +146,8 @@ class Game {
     };
 
     const copyToClipboard = async () => {
+      /* He trobat el #Mot-li! d'avui (01/07/2023) en X intents. /n Voleu provar-ho? /n https://www.vilaweb.cat/motli */
+
       await navigator.clipboard.writeText("Compartint");
 
       this.userInterface.openModal("Copiat");

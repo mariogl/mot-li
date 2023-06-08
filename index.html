@@ -17,16 +17,18 @@
       <a href="//www.vilaweb.cat" title="Ves a VilaWeb" class="logo--vilaweb"><img src="logo_vilaweb.svg" width="42" height="42" alt="VilaWeb"></a>
       <h1 class="logo--motli"><span class="title--colored">Mot</span>-li!</h1>
 
-      <div class="menu" tabindex="0" aria-label="Obre el menú" role="button">
-        <span class="menu__toggle">
-          <i></i>
-          <i></i>
-          <i></i>
-        </span>
-        <nav class="menu__navigation">
+      <nav class="menu" aria-label="Obre el menú" role="button">
+        <button class="button button--menu menu__toggle" aria-label="Obre el menú" aria-expanded="false">
+          <span>
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+        </button>
+        <div class="menu__navigation">
           <ul>
             <li>
-              <button class="button button--icon button--info">
+              <button class="button button--icon button--info" aria-current="info">
                 <svg style="width:22px;height:25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="16" height="16" preserveAspectRatio="xMidYMid meet" fill="currentColor" viewBox="0 0 16 16">
                   <g fill="currentColor">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215c0 1.344-.665 2.288-1.79 2.973c-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712c1.03-.632 1.397-1.135 1.397-2.028c0-.979-.758-1.698-1.926-1.698c-1.009 0-1.71.529-1.938 1.402c-.066.254-.278.461-.54.461h-.777zM7.496 14c.622 0 1.095-.474 1.095-1.09c0-.618-.473-1.092-1.095-1.092c-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14z">
@@ -65,8 +67,8 @@
 
 
           </ul>
-        </nav>
-      </div>
+          </di>
+      </nav>
     </div>
   </header>
   <main class="container">
@@ -81,7 +83,7 @@
   <div class="modal"></div>
   <div class="bigmodal bigmodal--solution" data-type="solution">
     <div class="bigmodal__header">
-      <h2 class="bigmodal__title">Solució</h2>
+      <h2 class="bigmodal__title">Solució:</h2>
       <button class="button button--close">X</button>
     </div>
     <p class="bigmodal__solution"></p>
@@ -96,7 +98,7 @@
   </div>
   <div class="bigmodal bigmodal--statistics">
     <div class="bigmodal__header">
-      <h2 class="bigmodal__title">Estadístiques</h2>
+      <h2 class="bigmodal__title">Estadístiques:</h2>
       <button class="button button--close">X</button>
     </div>
     <table class="table table--statistics">

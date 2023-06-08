@@ -86,11 +86,18 @@ class DomAccessor implements DomAccessorStructure {
 
   public toggleMenu() {
     this.menu.classList.toggle("opened");
+    const expanded = this.menuToggler.getAttribute("aria-expanded");
+    this.menuToggler.setAttribute(
+      "aria-expanded",
+      `${expanded === "true" ? "false" : "true"}`
+    );
+
     this.menuToggler.classList.toggle("open");
   }
 
   public closeMenu() {
     this.menu.classList.remove("opened");
+    this.menuToggler.setAttribute("aria-expanded", "false");
     this.menuToggler.classList.remove("open");
   }
 
