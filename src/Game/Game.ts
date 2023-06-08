@@ -122,7 +122,7 @@ class Game {
 
       if (key === "backspace" || key === "esborrar") {
         this.deleteLetter();
-      } else if (key === "enter" || key === "enviar") {
+      } else if (key === "enter" || key === "envia") {
         this.checkGuess();
       } else if (
         this.config.keyLetters.some((lettersGroup) =>
