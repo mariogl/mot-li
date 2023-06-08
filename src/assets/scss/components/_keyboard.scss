@@ -79,23 +79,6 @@
 }
 
 .keyboard__row {
-  .keyboard__key--double:first-child {
-    /*  background: var(--letter-key-focus) url("/src/assets/images/enter-key.svg")
-      no-repeat center center; */
-    /* esborrar quan ho arreglem per JS si finalment es queda així */
-    span.sr-only {
-      position: unset;
-      width: unset;
-      height: unset;
-      padding: unset;
-      margin: unset;
-      overflow: unset;
-      clip: unset;
-      white-space: unset;
-      border-width: unset;
-    }
-  }
-
   .keyboard__key--double:last-child {
     background: var(--letter-key-focus) url("/src/assets/images/delete-key.svg")
       no-repeat center center;

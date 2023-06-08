@@ -88,9 +88,26 @@
   }
 }
 
-.dark .button--icon {
+.dark .button--icon,
+.dark .button--menu {
   border: 1px solid var(--soft-grey);
+  &:hover,
+  &:focus {
+    background-color: var(--soft-grey);
+  }
+}
 
+.button--menu {
+  padding: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  &:hover,
+  &:focus {
+    background-color: var(--soft-grey);
+  }
+}
+.dark .button--menu {
   &:hover,
   &:focus {
     background-color: var(--soft-grey);
