@@ -17,8 +17,16 @@
   &:hover,
   &:focus {
     background-color: var(--brand-logo);
-    color: var(--light-color);
+    color: var(--dark);
     text-decoration: none;
+  }
+}
+
+.dark .button {
+  border: none;
+  &:hover,
+  &:focus {
+    color: var(--light-color);
   }
 }
 
@@ -33,11 +41,10 @@
 
 .button--reverse {
   background-color: var(--brand-logo);
-  color: var(--light-color);
+
   &:hover,
   &:focus {
     background-color: var(--light-color);
-    color: var(--dark);
   }
 }
 
@@ -53,6 +60,13 @@
   &:focus {
     background-color: var(--soft-grey);
     color: var(--dark);
+  }
+}
+
+.dark .button--close {
+  &:hover,
+  &:focus {
+    color: var(--light-color);
   }
 }
 
@@ -74,18 +88,13 @@
   }
 }
 
-/* .button--text-icon {
+.dark .button--icon {
+  border: 1px solid var(--soft-grey);
+
   &:hover,
   &:focus {
-    .button--icon {
-      background-color: var(--brand-logo);
-      color: var(--light-color);
-    }
+    background-color: var(--soft-grey);
   }
-} */
-
-.dark .button {
-  border: none;
 }
 
 .button--new {
@@ -102,4 +111,11 @@
 
 .button--disabled {
   color: var(--letter-key-focus);
+}
+.button--close-big {
+  &:hover,
+  &:focus {
+    background-color: var(--brand-logo);
+    color: var(--dark);
+  }
 }

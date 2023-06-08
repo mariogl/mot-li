@@ -25,7 +25,7 @@
 }
 
 .keyboard__key {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   text-transform: uppercase;
   flex: 1;
   height: 50px;
@@ -33,11 +33,16 @@
   border: none;
   border-radius: 2px;
   background-color: var(--letter-key-focus);
-  color: var(--light-color);
+  color: var(--dark);
 }
 
 .dark .keyboard__key {
-  color: var(--dark);
+  color: var(--light-color);
+  &.keyboard__key--absent,
+  &.keyboard__key--correct,
+  &.keyboard__key--present {
+    color: var(--dark);
+  }
 }
 
 .keyboard__key--double {
@@ -62,15 +67,15 @@
   color: var(--light-color);
 }
 
+.letter--current,
+.keyboard__key--key-focus {
+  background-color: var(--letter-key-focus);
+}
+
 .letter--correct,
 .keyboard__key--correct {
   background-color: var(--letter-positioned);
   color: var(--light-color);
-}
-
-.letter--current,
-.keyboard__key--key-focus {
-  background-color: var(--letter-key-focus);
 }
 
 .keyboard__row {
