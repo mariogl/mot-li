@@ -2,22 +2,26 @@ body {
   --font-family: "Open Sans", sans-serif;
   --padding-gap: 5px;
   --gap-num: 5;
-  --letter-positioned: #59c99a;
-  --letter-valid: #c9a34f;
+  --letter-positioned: #05a864; //05a864
+  --letter-valid: #f06000; // #f06000
   --brand-logo: #63bcca;
   --soft-grey: #e7e7e7;
 }
 
 body:not(.dark) {
-  --letter-invalid: #595c63;
-  --letter-key-focus: #949494;
+  --letter-invalid: #595c63; // #595c63;
+  --letter-key-focus: #c7c7c7;
   --light-color: #fff;
   --dark: #000;
+  --hover-links: #c75000;
 }
 
 body.dark {
-  --letter-invalid: #3e4045;
-  --letter-key-focus: #6e6e6e;
+  --letter-invalid: #595c63; // #3e4045; b40e29
+  --letter-key-focus: #c7c7c7; //#c7c7c7
   --light-color: #000;
   --dark: #fff;
+  --hover-links: #7be4f4;
 }
+
+/* He trobat el #Mot-li! d'avui (00/00/2023) en X intents. Voleu provar-ho? https://www.vilaweb.cat/motli/ */

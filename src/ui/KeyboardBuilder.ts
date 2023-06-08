@@ -57,7 +57,7 @@ class KeyboardBuilder {
 
             keyButton.appendChild(srOnly);
           } else if (key.symbol === "env") {
-            keyButton.textContent = "Enviar";
+            keyButton.textContent = "Envia";
           }
         } else {
           keyButton.textContent = key.symbol;

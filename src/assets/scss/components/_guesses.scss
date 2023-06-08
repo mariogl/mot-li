@@ -84,6 +84,10 @@ main {
   border: var(--light-color);
 }
 
+.dark .bigmodal--info .letter.letter--absent {
+  border: 1px solid var(--letter-key-focus) !important;
+}
+
 .guesses[data-letters="4"] {
   .letter {
     border-radius: 6vw;

@@ -61,7 +61,7 @@
   }
 }
 .dark .menu {
-  background-color: var(--letter-key-focus);
+  background-color: var(--dark);
   &:hover,
   &:focus {
     background-color: var(--light-color);
@@ -94,7 +94,7 @@
   cursor: pointer;
 }
 .dark .menu__toggle i {
-  background-color: var(--dark);
+  background-color: var(--light-color);
 }
 
 .menu__toggle i:nth-child(1) {

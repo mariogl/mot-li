@@ -23,7 +23,8 @@ body.dark.modal--open:after {
 .bigmodal--open {
   display: block;
 }
-.bigmodal--statistics.bigmodal--open {
+.bigmodal--statistics.bigmodal--open,
+.bigmodal--options.bigmodal--open {
   display: flex;
 }
 
@@ -70,7 +71,15 @@ body.dark.modal--open:after {
 }
 
 .dark .bigmodal {
-  background-color: var(--letter-key-focus);
+  background-color: var(--letter-invalid);
+  border-color: var(--letter-invalid);
+  a,
+  a:visited {
+    &:hover,
+    &:focus {
+      color: var(--hover-links);
+    }
+  }
 }
 
 /* bigmodal general */
@@ -85,18 +94,6 @@ body.dark.modal--open:after {
 .bigmodal__title {
   font-size: 1.4rem;
   text-transform: uppercase;
-}
-
-.bigmodal__content {
-  h3 {
-    margin: 30px 0 15px;
-    font-size: 1.2rem;
-    text-decoration: underline dotted;
-    text-underline-offset: 2px;
-  }
-  p {
-    margin-bottom: 10px;
-  }
 }
 
 /* bigmodal--solution */
@@ -164,7 +161,7 @@ blockquote {
   gap: 5px;
   td {
     background-color: var(--brand-logo);
-    color: var(--light-color);
+    color: var(--dark);
     font-size: 0.8rem;
     font-weight: 400;
     line-height: 1;
@@ -178,6 +175,10 @@ blockquote {
       font-size: 1.8rem;
     }
   }
+}
+
+.dark .row td {
+  color: var(--light-color);
 }
 
 .countdown {
@@ -248,6 +249,37 @@ blockquote {
   }
 }
 
+/* bigmodal--options */
+
+.bigmodal--options {
+  flex-direction: column;
+  justify-content: space-between;
+  h3 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    text-decoration: underline dotted;
+    text-underline-offset: 2px;
+  }
+  p {
+    margin-bottom: 10px;
+  }
+  .bigmodal__options {
+    flex: 2;
+  }
+  .bigmodal__credits {
+    display: flex;
+    font-size: 0.9rem;
+    flex-direction: column;
+    p {
+      margin-bottom: 0.25em;
+      line-height: 1;
+    }
+    .small {
+      margin-top: 1em;
+      font-size: 0.8rem;
+    }
+  }
+}
 /* admin: bigmodal delete */
 
 .bigmodal--delete {
