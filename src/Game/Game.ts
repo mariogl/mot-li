@@ -146,9 +146,19 @@ class Game {
     };
 
     const copyToClipboard = async () => {
-      /* He trobat el #Mot-li! d'avui (01/07/2023) en X intents. /n Voleu provar-ho? /n https://www.vilaweb.cat/motli */
+      const today = new Date();
 
-      await navigator.clipboard.writeText("Compartint");
+      const day = `${today.getDate()}`.padStart(2, "0");
+      const month = `${today.getMonth() + 1}`.padStart(2, "0");
+      const year = today.getFullYear();
+
+      const todayFormattedDate = `${day}/${month}/${year}`;
+
+      const textToCopy = `He trobat el #Mot-li! d'avui (${todayFormattedDate}) en ${
+        this.gameState.currentGuessNumber + 1
+      } intents.\nVoleu provar-ho?\n${import.meta.env.VITE_APP_URL}`;
+
+      await navigator.clipboard.writeText(textToCopy);
 
       this.userInterface.openModal("Copiat");
     };
