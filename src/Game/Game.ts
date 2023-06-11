@@ -129,6 +129,9 @@ class Game {
           lettersGroup.includes(key)
         )
       ) {
+        this.domAccessor.closeMenu();
+        this.userInterface.closeModal();
+        this.userInterface.bigModalOpened?.close();
         this.setLetterAndAdvance(key);
       }
     };

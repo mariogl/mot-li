@@ -1,8 +1,10 @@
+import type BigModal from "./ui/BigModal";
 import { type BigModalOptions } from "./ui/BigModal";
 
 export type KeyType = "letter" | "action";
 
 export interface UserInterfaceStructure {
+  bigModalOpened: BigModal | undefined;
   guessToHtml(guessLetters: GuessLetterStructure[]): void;
   setCurrentLetterElement(): void;
   cancelEvents(): void;
