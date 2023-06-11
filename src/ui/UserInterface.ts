@@ -10,6 +10,7 @@ import {
 import BigModal, { type BigModalOptions } from "./BigModal";
 
 class UserInterface implements UserInterfaceStructure {
+  public bigModalOpened: BigModal | undefined;
   private readonly keyboard: HTMLElement;
   private readonly menu: HTMLElement;
   private readonly menuToggler: HTMLElement;
@@ -17,7 +18,6 @@ class UserInterface implements UserInterfaceStructure {
   private readonly optionsOpener: HTMLElement;
   private readonly infoOpener: HTMLElement;
   private readonly themeSwitcher: HTMLElement;
-  private bigModalOpened: BigModal | undefined;
 
   constructor(
     readonly domAccessor: DomAccessorStructure,
