@@ -74,7 +74,7 @@ if (currentUrl.pathname === adminUrls.list) {
 
     gameDummyElement.remove();
   } catch (error) {
-    if ((error as AxiosError).status === 401) {
+    if ((error as AxiosError).response!.status === 401) {
       auth.logoutUser();
       const authLocalStorageRepository = new AuthLocalStorageRepository();
       authLocalStorageRepository.logOut();
