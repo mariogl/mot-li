@@ -1,7 +1,9 @@
+import { type AxiosError } from "axios";
 import auth from "../auth";
 import BigModal from "../modals/BigModal";
 import Modal from "../modals/Modal";
 import GamesApiRepository from "../repository/games/GamesApiRepository";
+import AuthLocalStorageRepository from "../repository/localStorage/AuthLocalStorageRepository";
 import { adminUrls } from "../urls";
 
 const currentUrl = new URL(window.location.href);
@@ -35,39 +37,49 @@ if (currentUrl.pathname === adminUrls.list) {
     token
   );
 
-  const games = await gamesRepository.getGames();
+  try {
+    const games = await gamesRepository.getGames();
 
-  const gamesListElement = document.querySelector(".games-list");
-  const gameDummyElement = document.querySelector(".game-container--dummy")!;
+    const gamesListElement = document.querySelector(".games-list");
+    const gameDummyElement = document.querySelector(".game-container--dummy")!;
 
-  games.forEach((game) => {
-    const gameElement = gameDummyElement.cloneNode(true) as HTMLElement;
+    games.forEach((game) => {
+      const gameElement = gameDummyElement.cloneNode(true) as HTMLElement;
 
-    gameElement.dataset.id = game.id;
+      gameElement.dataset.id = game.id;
 
-    const gameWord = gameElement.querySelector(".game__word")!;
-    gameWord.textContent = game.word;
+      const gameWord = gameElement.querySelector(".game__word")!;
+      gameWord.textContent = game.word;
 
-    const gameDate = gameElement.querySelector(".game__date")!;
-    gameDate.textContent = new Date(game.date).toLocaleDateString("ca-ES", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
+      const gameDate = gameElement.querySelector(".game__date")!;
+      gameDate.textContent = new Date(game.date).toLocaleDateString("ca-ES", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+
+      const gameEditLink: HTMLAnchorElement =
+        gameElement.querySelector(".button--edit")!;
+      gameEditLink.href += `?id=${game.id}`;
+
+      const gameDeleteButton = gameElement.querySelector(".button--delete")!;
+      gameDeleteButton.addEventListener("click", () => {
+        deleteModal.open(game.id);
+      });
+
+      gameElement.classList.remove("game-container--dummy");
+
+      gamesListElement?.appendChild(gameElement);
     });
 
-    const gameEditLink: HTMLAnchorElement =
-      gameElement.querySelector(".button--edit")!;
-    gameEditLink.href += `?id=${game.id}`;
+    gameDummyElement.remove();
+  } catch (error) {
+    if ((error as AxiosError).status === 401) {
+      auth.logoutUser();
+      const authLocalStorageRepository = new AuthLocalStorageRepository();
+      authLocalStorageRepository.logOut();
+    }
 
-    const gameDeleteButton = gameElement.querySelector(".button--delete")!;
-    gameDeleteButton.addEventListener("click", () => {
-      deleteModal.open(game.id);
-    });
-
-    gameElement.classList.remove("game-container--dummy");
-
-    gamesListElement?.appendChild(gameElement);
-  });
-
-  gameDummyElement.remove();
+    window.location.href = adminUrls.login;
+  }
 }
