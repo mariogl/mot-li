@@ -1,24 +1,24 @@
 import Guess from "../Guess/Guess";
 import GuessBuilder from "../Guess/GuessBuilder";
-import {
-  type GameState,
-  type Config,
-  type DomAccessorStructure,
-  type GuessStructure,
-  type UserInterfaceStructure,
-  type Stats,
-} from "../types";
-import DomAccessor from "../ui/DomAccessor";
-import KeyboardBuilder from "../ui/KeyboardBuilder";
-import UserInterface from "../ui/UserInterface";
 import Storage from "../Storage/Storage";
+import { type GamesRepository } from "../admin/repository/games/types";
 import allowedWordsWith4Letters from "../allowedWords/words4.js";
 import allowedWordsWith5Letters from "../allowedWords/words5.js";
 import allowedWordsWith6Letters from "../allowedWords/words6.js";
 import allowedWordsWith7Letters from "../allowedWords/words7.js";
 import allowedWordsWith8Letters from "../allowedWords/words8.js";
 import allowedWordsWith9Letters from "../allowedWords/words9.js";
-import { type GamesRepository } from "../admin/repository/games/types";
+import {
+  type Config,
+  type DomAccessorStructure,
+  type GameState,
+  type GuessStructure,
+  type Stats,
+  type UserInterfaceStructure,
+} from "../types";
+import DomAccessor from "../ui/DomAccessor";
+import KeyboardBuilder from "../ui/KeyboardBuilder";
+import UserInterface from "../ui/UserInterface";
 
 class Game {
   private readonly config: Config = {
@@ -63,10 +63,7 @@ class Game {
     (async () => {
       const gameOfTheDay = await gamesRepository.getCurrentGame();
 
-      this.config.wordToGuess = gameOfTheDay.word
-        .replace(/[·.,:;()_?¿!¡-\s]/g, "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+      this.config.wordToGuess = this.normalizeWord(gameOfTheDay.word);
       this.config.originalWordToGuess = gameOfTheDay.word;
       this.config.maxGuesses = gameOfTheDay.guesses;
       this.config.wordLink = gameOfTheDay.link;
@@ -75,6 +72,36 @@ class Game {
 
       this.startGame();
     })();
+  }
+
+  normalizeWord(word: string): string {
+    const accents: Record<string, string> = {
+      á: "a",
+      é: "e",
+      í: "i",
+      ó: "o",
+      ú: "u",
+      à: "a",
+      è: "e",
+      ì: "i",
+      ò: "o",
+      ù: "u",
+      ä: "a",
+      ë: "e",
+      ï: "i",
+      ö: "o",
+      ü: "u",
+      â: "a",
+      ê: "e",
+      î: "i",
+      ô: "o",
+      û: "u",
+      ç: "ç",
+    };
+
+    return word
+      .replace(/[·.,:;()_?¿!¡-\s]/g, "")
+      .replace(/[áéíóúàèìòùäëïöüâêîôûñ]/g, (match) => accents[match]);
   }
 
   startGame() {
