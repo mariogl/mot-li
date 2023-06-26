@@ -1,8 +1,8 @@
 import {
-  type StorageStructure,
   type GuessLetterStructure,
-  type StoredGameStructure,
   type Stats,
+  type StorageStructure,
+  type StoredGameStructure,
 } from "../types";
 
 class Storage implements StorageStructure {
@@ -77,8 +77,25 @@ class Storage implements StorageStructure {
   }
 
   public saveUsedKeys(keys: GuessLetterStructure[]) {
-    this.game.usedKeys = keys;
-    localStorage.setItem(this.storageUsedKeysName, JSON.stringify(keys));
+    const keys2 = this.game.usedKeys.map((key) => {
+      const newKey = keys.find((obj2) => obj2.symbol === key.symbol);
+
+      if (newKey) {
+        return { symbol: key.symbol, status: newKey.status };
+      }
+
+      return key;
+    });
+
+    keys.forEach((obj2) => {
+      const found = keys2.some((obj) => obj.symbol === obj2.symbol);
+      if (!found) {
+        keys2.push(obj2);
+      }
+    });
+
+    this.game.usedKeys = keys2;
+    localStorage.setItem(this.storageUsedKeysName, JSON.stringify(keys2));
   }
 
   public getDarkTheme() {
