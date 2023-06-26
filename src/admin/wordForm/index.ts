@@ -95,11 +95,17 @@ if (
 
         window.location.href = "admin-list.html?message=modified";
       } catch (error) {
-        modal.setMessage(
-          (error as Error).message.includes("409")
-            ? "Ja existeix un joc per aquest dia. Prova una altra data"
-            : "Ha ocurregut un error"
-        );
+        let errorMessage: string;
+        if ((error as Error).message.includes("409")) {
+          errorMessage =
+            (error as any).response.data.error === "Word scheduled"
+              ? "Aquesta paraula ja està programada. Prova una altra."
+              : "Ja existeix un joc per aquest dia. Prova una altra data";
+        } else {
+          errorMessage = "Ha ocurregut un error";
+        }
+
+        modal.setMessage(errorMessage);
         modal.open();
       }
     } else {
@@ -108,11 +114,17 @@ if (
 
         window.location.href = "admin-list.html?message=created";
       } catch (error) {
-        modal.setMessage(
-          (error as Error).message.includes("409")
-            ? "Ja existeix un joc per aquest dia. Prova una altra data"
-            : "Ha ocurregut un error"
-        );
+        let errorMessage: string;
+        if ((error as Error).message.includes("409")) {
+          errorMessage =
+            (error as any).response.data.error === "Word scheduled"
+              ? "Aquesta paraula ja està programada. Prova una altra."
+              : "Ja existeix un joc per aquest dia. Prova una altra data";
+        } else {
+          errorMessage = "Ha ocurregut un error";
+        }
+
+        modal.setMessage(errorMessage);
         modal.open();
       }
     }
