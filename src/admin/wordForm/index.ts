@@ -129,4 +129,15 @@ if (
       }
     }
   });
+
+  wordWord.addEventListener("blur", async () => {
+    if (!wordWord.value) {
+      return;
+    }
+
+    if (await gamesRepository.isWordScheduled(wordWord.value)) {
+      modal.setMessage("Aquesta paraula ja està programada. Prova una altra.");
+      modal.open();
+    }
+  });
 }

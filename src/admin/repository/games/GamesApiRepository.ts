@@ -1,12 +1,25 @@
 import axios from "axios";
-import { type GamesPrivateRepository } from "./types";
 import { type GameDataStructure, type GameStructure } from "../../types";
+import { type GamesPrivateRepository } from "./types";
 
 class GamesApiRepository implements GamesPrivateRepository {
   constructor(
     private readonly apiUrl: string,
     private readonly token: string
   ) {}
+
+  async isWordScheduled(word: string): Promise<boolean> {
+    const {
+      data: { isScheduled },
+    } = await axios.get<{ isScheduled: boolean }>(
+      `${this.apiUrl}/games/is-word-scheduled?word=${word}`,
+      {
+        headers: { authorization: `Bearer ${this.token}` },
+      }
+    );
+
+    return isScheduled;
+  }
 
   async getGames(): Promise<GameStructure[]> {
     const {

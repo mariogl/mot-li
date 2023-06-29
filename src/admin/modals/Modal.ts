@@ -18,7 +18,7 @@ class Modal {
 
     setTimeout(() => {
       this.modal.classList.remove("modal--open");
-    }, 1000);
+    }, 2000);
   }
 }
 
