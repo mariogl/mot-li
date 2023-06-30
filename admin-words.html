@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/FaviconMotli.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mot-li: administració - llistat mots</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <script type="module" src="/src/admin/index.ts"></script>
+</head>
+
+
+<body class="admin">
+
+  <header class="header">
+    <div class="container">
+      <a href="//www.vilaweb.cat" title="Ves a VilaWeb" class="logo--vilaweb"><img src="logo_vilaweb.svg" width="42"
+          height="42" alt="VilaWeb"></a>
+      <h1 class="logo--motli"><span class="title--colored">Mot</span>-li! / Administració</h1>
+      <button class="button button--icon button--logout" title="Sortir"><i class="fas fa-door-open"></i><span
+          class="sr-only">Sortir</span>
+      </button>
+    </div>
+  </header>
+  <main class="container">
+    <div class="main-header">
+      <h2 class="admin__title">Llistat de mots de <span class="length"></span> lletres (<a href="admin-games.html">veure
+          jocs</a>)</h2>
+      <a href="admin-new-word.html" class="button button--icon button--new" title="Crear nou mot"><i
+          class="fas fa-plus"></i><span class="sr-only">Crear nou
+          mot</span></a>
+    </div>
+    <div class="filters">
+      <a href="admin-words.html?length=4">4 lletres</a>
+      <a href="admin-words.html?length=5">5 lletres</a>
+      <a href="admin-words.html?length=6">6 lletres</a>
+      <a href="admin-words.html?length=7">7 lletres</a>
+      <a href="admin-words.html?length=8">8 lletres</a>
+      <a href="admin-words.html?length=9">9 lletres</a>
+    </div>
+
+    <ul class="games-list">
+      <li class="game-container game-container--dummy">
+        <article class="game">
+          <span class="game__word"></span>
+          <button class="button button--icon button--delete" title="Esborra el mot"><i class="fas fa-trash"></i><span
+              class="sr-only">Esborra</span>
+          </button>
+        </article>
+      </li>
+    </ul>
+  </main>
+  <div class="modal">
+    <p class="modal__text"></p>
+  </div>
+  <div class="bigmodal bigmodal--delete" data-id="">
+    <p>Estàs segur que vols esborrar aquest registre?</p>
+    <div class="confirmation">
+      <button class="button button-small" data-action="confirm">Sí</button>
+      <button class="button button-small" data-action="close">No</button>
+    </div>
+  </div>
+
+
+</body>

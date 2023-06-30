@@ -11,7 +11,7 @@ const currentUrl = new URL(window.location.href);
 
 if (currentUrl.pathname === adminUrls.login) {
   if (token) {
-    window.location.href = adminUrls.list;
+    window.location.href = adminUrls.gamesList;
   }
 } else {
   if (token) {

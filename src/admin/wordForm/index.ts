@@ -93,7 +93,7 @@ if (
           id: gameId,
         });
 
-        window.location.href = "admin-list.html?message=modified";
+        window.location.href = "admin-games.html?message=modified";
       } catch (error) {
         let errorMessage: string;
         if ((error as Error).message.includes("409")) {
@@ -112,7 +112,7 @@ if (
       try {
         await gamesRepository.addGame(newGameData);
 
-        window.location.href = "admin-list.html?message=created";
+        window.location.href = "admin-games.html?message=created";
       } catch (error) {
         let errorMessage: string;
         if ((error as Error).message.includes("409")) {

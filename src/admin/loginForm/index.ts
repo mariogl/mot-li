@@ -29,7 +29,7 @@ if (currentUrl.pathname === adminUrls.login) {
       const authRepository = new AuthLocalStorageRepository();
       authRepository.logIn(token);
 
-      window.location.href = "admin-list.html";
+      window.location.href = "admin-games.html";
     } catch {
       error.textContent = "Credencials invàlides";
     }
