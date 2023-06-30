@@ -19,6 +19,10 @@ if (currentUrl.pathname === adminUrls.wordsList) {
     modal.open();
   }
 
+  const defaultLength = 4;
+  const length =
+    new URLSearchParams(currentUrl.search).get("length") ?? defaultLength;
+
   const token = auth.getToken();
 
   const wordsRepository = new WordsApiRepository(
@@ -27,7 +31,11 @@ if (currentUrl.pathname === adminUrls.wordsList) {
   );
 
   try {
-    const words = await wordsRepository.getWordsByLength(4);
+    const lengthElement = document.querySelector(".length")!;
+
+    lengthElement.textContent = `${length}`;
+
+    const words = await wordsRepository.getWordsByLength(+length);
 
     const wordsListElement = document.querySelector(".games-list");
     const wordDummyElement = document.querySelector(".game-container--dummy")!;
