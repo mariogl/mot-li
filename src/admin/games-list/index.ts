@@ -8,7 +8,7 @@ import { adminUrls } from "../urls";
 
 const currentUrl = new URL(window.location.href);
 
-if (currentUrl.pathname === adminUrls.list) {
+if (currentUrl.pathname === adminUrls.gamesList) {
   const message = new URLSearchParams(currentUrl.search).get("message");
   const modal = new Modal();
   const deleteModal = new BigModal(async (id: string) => {

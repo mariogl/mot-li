@@ -9,9 +9,10 @@ export default defineConfig(({ mode }) => {
         input: {
           index: "index.html",
           admin: "admin-login.html",
-          adminList: "admin-list.html",
+          adminList: "admin-games.html",
           adminNewGame: "admin-new-game.html",
           adminEditGame: "admin-edit-game.html",
+          adminWords: "admin-words.html",
         },
       },
     },
