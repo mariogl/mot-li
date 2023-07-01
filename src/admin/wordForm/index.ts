@@ -1,142 +1,49 @@
 import auth from "../auth";
 import Modal from "../modals/Modal";
-import GamesApiRepository from "../repository/games/GamesApiRepository";
-import { type GameDataStructure } from "../types";
+import WordsApiRepository from "../repository/words/WordsApiRepository";
+import { type WordDataStructure } from "../types";
 import { adminUrls } from "../urls";
 
 const currentUrl = new URL(window.location.href);
 
-const convertTags = (html: string): string => {
-  let newHtml = html.replaceAll("<b>", "<strong>");
-  newHtml = newHtml.replaceAll("</b>", "</strong>");
-  newHtml = newHtml.replaceAll("<i>", "<em>");
-  newHtml = newHtml.replaceAll("</i>", "</em>");
-  newHtml = newHtml.replace(/style="[^"]*"/g, "");
-
-  return newHtml;
-};
-
-if (
-  currentUrl.pathname === adminUrls.newGame ||
-  currentUrl.pathname === adminUrls.editGame
-) {
+if (currentUrl.pathname === adminUrls.newWord) {
   const modal = new Modal();
-
-  const isEditing = currentUrl.pathname === adminUrls.editGame;
-  let gameId: string;
 
   const form = document.querySelector(".form--admin")!;
 
-  const wordDate: HTMLInputElement = form.querySelector("#dateGame")!;
-  const wordWord: HTMLInputElement = form.querySelector("#wordToGuess")!;
-  const wordLink: HTMLInputElement = form.querySelector("#urlLink")!;
-  const wordTextLink: HTMLInputElement = form.querySelector("#textLink")!;
-  const wordDefinition = form.querySelector("[data-tiny-editor]")!;
-  const wordGuesses: HTMLInputElement = form.querySelector("#numGuesses")!;
+  const word: HTMLInputElement = form.querySelector("#word")!;
 
   const token = auth.getToken();
 
-  const gamesRepository = new GamesApiRepository(
+  const wordsRepository = new WordsApiRepository(
     import.meta.env.VITE_API_URL,
     token
   );
 
-  if (isEditing) {
-    gameId = new URLSearchParams(currentUrl.search).get("id")!;
-
-    const loadingElement = document.querySelector(".loading")!;
-
-    loadingElement.classList.add("on");
-    form.classList.add("off");
-
-    const game = await gamesRepository.getGameById(gameId);
-
-    loadingElement.classList.remove("on");
-    form.classList.remove("off");
-
-    wordDate.value = game.date.split("T")[0];
-    wordWord.value = game.word;
-    wordDefinition.innerHTML = game.definition;
-    wordLink.value = game.link;
-    wordTextLink.value = game.linkText;
-    wordGuesses.value = `${game.guesses}`;
-  }
-
   form.addEventListener("submit", async (event: Event) => {
     event.preventDefault();
 
-    if (
-      !wordDate.value ||
-      !wordWord.value ||
-      !wordDefinition.innerHTML ||
-      !wordGuesses.value ||
-      !wordLink.value ||
-      !wordTextLink.value
-    ) {
+    if (!word.value) {
       return;
     }
 
-    const newGameData: GameDataStructure = {
-      word: wordWord.value,
-      date: wordDate.value,
-      link: wordLink.value,
-      linkText: wordTextLink.value,
-      guesses: +wordGuesses.value,
-      definition: convertTags(wordDefinition.innerHTML),
+    const newWordData: WordDataStructure = {
+      word: word.value,
     };
 
-    if (isEditing) {
-      try {
-        await gamesRepository.updateGame({
-          ...newGameData,
-          length: wordWord.value.length,
-          id: gameId,
-        });
+    try {
+      await wordsRepository.addWord(newWordData);
 
-        window.location.href = "admin-games.html?message=modified";
-      } catch (error) {
-        let errorMessage: string;
-        if ((error as Error).message.includes("409")) {
-          errorMessage =
-            (error as any).response.data.error === "Word scheduled"
-              ? "Aquesta paraula ja està programada. Prova una altra."
-              : "Ja existeix un joc per aquest dia. Prova una altra data";
-        } else {
-          errorMessage = "Ha ocurregut un error";
-        }
-
-        modal.setMessage(errorMessage);
-        modal.open();
+      window.location.href = "admin-words.html?message=created";
+    } catch (error) {
+      let errorMessage: string;
+      if ((error as Error).message.includes("409")) {
+        errorMessage = "Aquesta paraula ja existeix.";
+      } else {
+        errorMessage = "Ha ocurregut un error";
       }
-    } else {
-      try {
-        await gamesRepository.addGame(newGameData);
 
-        window.location.href = "admin-games.html?message=created";
-      } catch (error) {
-        let errorMessage: string;
-        if ((error as Error).message.includes("409")) {
-          errorMessage =
-            (error as any).response.data.error === "Word scheduled"
-              ? "Aquesta paraula ja està programada. Prova una altra."
-              : "Ja existeix un joc per aquest dia. Prova una altra data";
-        } else {
-          errorMessage = "Ha ocurregut un error";
-        }
-
-        modal.setMessage(errorMessage);
-        modal.open();
-      }
-    }
-  });
-
-  wordWord.addEventListener("blur", async () => {
-    if (!wordWord.value) {
-      return;
-    }
-
-    if (await gamesRepository.isWordScheduled(wordWord.value)) {
-      modal.setMessage("Aquesta paraula ja està programada. Prova una altra.");
+      modal.setMessage(errorMessage);
       modal.open();
     }
   });
