@@ -1,6 +1,7 @@
 import auth from "../auth";
 import Modal from "../modals/Modal";
 import GamesApiRepository from "../repository/games/GamesApiRepository";
+import WordsApiRepository from "../repository/words/WordsApiRepository";
 import { type GameDataStructure } from "../types";
 import { adminUrls } from "../urls";
 
@@ -41,6 +42,11 @@ if (
     token
   );
 
+  const wordsRepository = new WordsApiRepository(
+    import.meta.env.VITE_API_URL,
+    token
+  );
+
   if (isEditing) {
     gameId = new URLSearchParams(currentUrl.search).get("id")!;
 
@@ -73,6 +79,13 @@ if (
       !wordLink.value ||
       !wordTextLink.value
     ) {
+      return;
+    }
+
+    if (!(await wordsRepository.doesWordExist(wordWord.value))) {
+      modal.setMessage("Aquesta paraula no existeix. Prova una altra.");
+      modal.open();
+
       return;
     }
 
@@ -133,6 +146,11 @@ if (
   wordWord.addEventListener("blur", async () => {
     if (!wordWord.value) {
       return;
+    }
+
+    if (!(await wordsRepository.doesWordExist(wordWord.value))) {
+      modal.setMessage("Aquesta paraula no existeix. Prova una altra.");
+      modal.open();
     }
 
     if (await gamesRepository.isWordScheduled(wordWord.value)) {
