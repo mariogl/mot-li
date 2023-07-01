@@ -111,9 +111,7 @@ if (
         let errorMessage: string;
         if ((error as Error).message.includes("409")) {
           errorMessage =
-            (error as any).response.data.error === "Word scheduled"
-              ? "Aquesta paraula ja està programada. Prova una altra."
-              : "Ja existeix un joc per aquest dia. Prova una altra data";
+            "Ja existeix un joc per aquest dia. Prova una altra data";
         } else {
           errorMessage = "Ha ocurregut un error";
         }
@@ -130,9 +128,7 @@ if (
         let errorMessage: string;
         if ((error as Error).message.includes("409")) {
           errorMessage =
-            (error as any).response.data.error === "Word scheduled"
-              ? "Aquesta paraula ja està programada. Prova una altra."
-              : "Ja existeix un joc per aquest dia. Prova una altra data";
+            "Ja existeix un joc per aquest dia. Prova una altra data";
         } else {
           errorMessage = "Ha ocurregut un error";
         }
