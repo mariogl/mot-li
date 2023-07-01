@@ -1,5 +1,6 @@
 import { type AxiosError } from "axios";
 import auth from "../auth";
+import BigModal from "../modals/BigModal";
 import Modal from "../modals/Modal";
 import AuthLocalStorageRepository from "../repository/localStorage/AuthLocalStorageRepository";
 import WordsApiRepository from "../repository/words/WordsApiRepository";
@@ -10,6 +11,15 @@ const currentUrl = new URL(window.location.href);
 if (currentUrl.pathname === adminUrls.wordsList) {
   const message = new URLSearchParams(currentUrl.search).get("message");
   const modal = new Modal();
+
+  const deleteModal = new BigModal(async (id: string) => {
+    await wordsRepository.deleteWord(id);
+
+    document.querySelector(`.game-container[data-id='${id}']`)?.remove();
+
+    modal.setMessage("Mot esborrat");
+    modal.open();
+  });
 
   if (message) {
     if (message === "created") {
@@ -47,6 +57,12 @@ if (currentUrl.pathname === adminUrls.wordsList) {
 
       const wordWord = wordElement.querySelector(".game__word")!;
       wordWord.textContent = word.word;
+
+      const wordDeleteButton = wordElement.querySelector(".button--delete")!;
+
+      wordDeleteButton.addEventListener("click", () => {
+        deleteModal.open(word.id);
+      });
 
       wordElement.classList.remove("game-container--dummy");
 

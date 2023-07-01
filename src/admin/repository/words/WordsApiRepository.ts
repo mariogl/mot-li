@@ -34,6 +34,16 @@ class WordsApiRepository implements WordsRepository {
 
     return word;
   }
+
+  async deleteWord(wordId: string): Promise<string> {
+    const {
+      data: { id },
+    } = await axios.delete<{ id: string }>(`${this.apiUrl}/words/${wordId}`, {
+      headers: { authorization: `Bearer ${this.token}` },
+    });
+
+    return id;
+  }
 }
 
 export default WordsApiRepository;
