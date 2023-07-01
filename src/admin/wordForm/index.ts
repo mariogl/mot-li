@@ -27,6 +27,12 @@ if (currentUrl.pathname === adminUrls.newWord) {
       return;
     }
 
+    if (word.value.length < 4 || word.value.length > 9) {
+      modal.setMessage("El mot ha de tenir entre 4 i 9 lletres");
+      modal.open();
+      return;
+    }
+
     const newWordData: WordDataStructure = {
       word: word.value,
     };
