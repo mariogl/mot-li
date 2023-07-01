@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => {
           adminNewGame: "admin-new-game.html",
           adminEditGame: "admin-edit-game.html",
           adminWords: "admin-words.html",
+          adminNewWord: "admin-new-word.html",
         },
       },
     },

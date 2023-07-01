@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/FaviconMotli.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mot-li: administració</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <script type="module" src="/src/admin/index.ts"></script>
+</head>
+
+<body class="admin">
+
+  <header class="header">
+    <div class="container">
+      <a href="//www.vilaweb.cat" title="Ves a VilaWeb" class="logo--vilaweb"><img src="logo_vilaweb.svg" width="42"
+          height="42" alt="VilaWeb"></a>
+      <h1 class="logo--motli"><span class="title--colored">Mot</span>-li! / Administració</h1>
+      <button class="button button--icon button--logout" title="Sortir"><i class="fas fa-door-open"></i><span
+          class="sr-only">Sortir</span>
+      </button>
+    </div>
+  </header>
+  <main class="container">
+    <div class="main-header">
+      <h2 class="admin__title">Introduïr un mot nou</h2>
+      <a href="admin-words.html" class="button button--icon button--list"><i class="fas fa-list"
+          title="Llistat de mots"></i><span class="sr-only">Llistat de mots</span></a>
+    </div>
+    <form class="form form--admin" id="newWord">
+      <div class="form__wrap-element">
+        <label class="form__label" for="word">
+          Mot:
+        </label>
+        <input type="text" id="word" required />
+      </div>
+      <div class="form__wrap-element">
+        <button type="submit" form="newWord" class="button button--submit button--reverse">Desa el nou
+          mot</button>
+      </div>
+    </form>
+    <div class="modal modal--info">
+      <p class="modal__text"></p>
+    </div>
+  </main>
+
+</body>
