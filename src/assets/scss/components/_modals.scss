@@ -29,7 +29,7 @@ body.dark.modal--open:after {
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 80px;
   left: 50%;
   transform: translateX(-50%);
@@ -46,7 +46,7 @@ body.dark.modal--open:after {
 }
 
 .bigmodal {
-  position: absolute;
+  position: fixed;
   width: 95%;
   max-width: 450px;
   min-height: 50%;
