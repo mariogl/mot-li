@@ -44,6 +44,19 @@ class WordsApiRepository implements WordsRepository {
 
     return id;
   }
+
+  async doesWordExist(word: string): Promise<boolean> {
+    const {
+      data: { exists },
+    } = await axios.get<{ exists: boolean }>(
+      `${this.apiUrl}/words/exists?word=${word}`,
+      {
+        headers: { authorization: `Bearer ${this.token}` },
+      }
+    );
+
+    return exists;
+  }
 }
 
 export default WordsApiRepository;
