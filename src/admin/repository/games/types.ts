@@ -1,7 +1,12 @@
-import { type GameDataStructure, type GameStructure } from "../../types";
+import {
+  type GameDataStructure,
+  type GameStructure,
+  type WordStructure,
+} from "../../types";
 
 export interface GamesRepository {
   getCurrentGame(): Promise<GameStructure>;
+  getAllowedWordsByLength(length: number): Promise<WordStructure[]>;
 }
 export interface GamesPrivateRepository extends GamesRepository {
   isWordScheduled(word: string): Promise<boolean>;

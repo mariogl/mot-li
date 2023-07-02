@@ -2,12 +2,6 @@ import Guess from "../Guess/Guess";
 import GuessBuilder from "../Guess/GuessBuilder";
 import Storage from "../Storage/Storage";
 import { type GamesRepository } from "../admin/repository/games/types";
-import allowedWordsWith4Letters from "../allowedWords/words4.js";
-import allowedWordsWith5Letters from "../allowedWords/words5.js";
-import allowedWordsWith6Letters from "../allowedWords/words6.js";
-import allowedWordsWith7Letters from "../allowedWords/words7.js";
-import allowedWordsWith8Letters from "../allowedWords/words8.js";
-import allowedWordsWith9Letters from "../allowedWords/words9.js";
 import {
   type Config,
   type DomAccessorStructure,
@@ -27,14 +21,7 @@ class Game {
     wordDefinition: "",
     wordLink: "",
     wordLinkText: "",
-    allowedWords: {
-      l4: allowedWordsWith4Letters,
-      l5: allowedWordsWith5Letters,
-      l6: allowedWordsWith6Letters,
-      l7: allowedWordsWith7Letters,
-      l8: allowedWordsWith8Letters,
-      l9: allowedWordsWith9Letters,
-    },
+    allowedWords: [],
     maxGuesses: 0,
     keyLetters: ["qwertyuiop", "asdfghjklç", "CzxcvbnmD"],
     storageCurrentGuessNumberName: "currentGuessNumber",
@@ -71,6 +58,12 @@ class Game {
       this.config.wordDefinition = gameOfTheDay.definition;
 
       this.startGame();
+
+      const allowedWords = await gamesRepository.getAllowedWordsByLength(
+        gameOfTheDay.length
+      );
+
+      this.config.allowedWords = allowedWords.map((word) => word.word);
     })();
   }
 
@@ -281,11 +274,7 @@ class Game {
       return;
     }
 
-    if (
-      !this.config.allowedWords[`l${this.config.wordToGuess.length}`].includes(
-        this.guess.getCurrentGuessWord()
-      )
-    ) {
+    if (!this.config.allowedWords.includes(this.guess.getCurrentGuessWord())) {
       this.userInterface.openModal("Mot no trobat, esborra'l i torna-hi");
 
       return;

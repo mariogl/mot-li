@@ -35,7 +35,7 @@ export interface Config {
   maxGuesses: number;
   originalWordToGuess: string;
   wordToGuess: string;
-  allowedWords: Record<string, string[]>;
+  allowedWords: string[];
   keyLetters: string[];
   storageCurrentGuessNumberName: string;
   storagePreviousGuessesName: string;
