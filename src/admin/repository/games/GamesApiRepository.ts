@@ -1,5 +1,9 @@
 import axios from "axios";
-import { type GameDataStructure, type GameStructure } from "../../types";
+import {
+  type GameDataStructure,
+  type GameStructure,
+  type WordStructure,
+} from "../../types";
 import { type GamesPrivateRepository } from "./types";
 
 class GamesApiRepository implements GamesPrivateRepository {
@@ -97,6 +101,16 @@ class GamesApiRepository implements GamesPrivateRepository {
     );
 
     return updatedGame;
+  }
+
+  async getAllowedWordsByLength(length: number): Promise<WordStructure[]> {
+    const {
+      data: { words },
+    } = await axios.get<{ words: WordStructure[] }>(
+      `${this.apiUrl}/words?length=${length}`
+    );
+
+    return words;
   }
 }
 
