@@ -28,7 +28,7 @@ if (currentUrl.pathname === adminUrls.newWord) {
     }
 
     if (word.value.length < 4 || word.value.length > 9) {
-      modal.setMessage("El mot ha de tenir entre 4 i 9 lletres");
+      modal.setMessage("El mot ha de tenir entre 4 i 9 lletres.");
       modal.open();
       return;
     }
@@ -44,9 +44,9 @@ if (currentUrl.pathname === adminUrls.newWord) {
     } catch (error) {
       let errorMessage: string;
       if ((error as Error).message.includes("409")) {
-        errorMessage = "Aquesta paraula ja existeix.";
+        errorMessage = "Aquesta paraula ja existeix, proveu-ne una altra.";
       } else {
-        errorMessage = "Ha ocurregut un error";
+        errorMessage = "S'ha produït un error.";
       }
 
       modal.setMessage(errorMessage);

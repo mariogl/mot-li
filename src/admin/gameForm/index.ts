@@ -83,7 +83,7 @@ if (
     }
 
     if (!(await wordsRepository.doesWordExist(wordWord.value))) {
-      modal.setMessage("Aquesta paraula no existeix. Prova una altra.");
+      modal.setMessage("Aquesta paraula no existeix, proveu-ne una altra.");
       modal.open();
 
       return;
@@ -111,9 +111,9 @@ if (
         let errorMessage: string;
         if ((error as Error).message.includes("409")) {
           errorMessage =
-            "Ja existeix un joc per aquest dia. Prova una altra data";
+            "Ja existeix un joc per aquest dia, proveu una altra data.";
         } else {
-          errorMessage = "Ha ocurregut un error";
+          errorMessage = "S'ha produït un error.";
         }
 
         modal.setMessage(errorMessage);
@@ -128,9 +128,9 @@ if (
         let errorMessage: string;
         if ((error as Error).message.includes("409")) {
           errorMessage =
-            "Ja existeix un joc per aquest dia. Prova una altra data";
+            "Ja existeix un joc per aquest dia, proveu una altra data.";
         } else {
-          errorMessage = "Ha ocurregut un error";
+          errorMessage = "S'ha produït un error.";
         }
 
         modal.setMessage(errorMessage);
@@ -145,12 +145,14 @@ if (
     }
 
     if (!(await wordsRepository.doesWordExist(wordWord.value))) {
-      modal.setMessage("Aquesta paraula no existeix. Prova una altra.");
+      modal.setMessage("Aquesta paraula no existeix, proveu-ne una altra.");
       modal.open();
     }
 
     if (await gamesRepository.isWordScheduled(wordWord.value)) {
-      modal.setMessage("Aquesta paraula ja està programada. Prova una altra.");
+      modal.setMessage(
+        "Aquesta paraula ja està programada, proveu-ne una altra."
+      );
       modal.open();
     }
   });
