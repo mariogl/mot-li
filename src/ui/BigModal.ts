@@ -127,7 +127,7 @@ class BigModal {
       games.textContent = `${options.statistics.games}`;
       wins.textContent = Number.isInteger(winsPercentage)
         ? `${winsPercentage}`
-        : winsPercentage.toFixed(2);
+        : winsPercentage.toFixed();
 
       currentStreak.textContent = `${options.statistics.currentStreak}`;
       maxStreak.textContent = `${options.statistics.maxStreak}`;
