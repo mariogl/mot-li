@@ -13,7 +13,10 @@ import "./words-list";
 (() => {
   document.querySelectorAll("a").forEach((link) => {
     const url = new URL(link.href);
-    if (url.pathname.startsWith("/admin")) {
+    if (
+      url.pathname.startsWith("/admin") ||
+      link.classList.contains("logo--link")
+    ) {
       const newUrl =
         url.origin + import.meta.env.BASE_URL + url.pathname.slice(1);
       link.href = newUrl;

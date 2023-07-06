@@ -11,6 +11,14 @@
   }
 }
 
+.admin .logo--link {
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    color: inherit;
+  }
+}
+
 .admin .container {
   max-width: 850px;
   padding: 20px;

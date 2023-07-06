@@ -10,7 +10,7 @@ Igualment, en aquesta versió, es pot corregir qualsevol lletra en qualsevol pos
 
 ## Us de l'aplicació
 
-Caldrà substituir el domini actual de netlify pel de vilaweb.
+Nota: caldrà substituir el domini actual de netlify pel de vilaweb.
 
 ### Joc
 
@@ -27,7 +27,21 @@ Inici de sessió: https://mot-li.netlify.app/mot-li/admin-login.html
     npm >= 8.1
     node >= 19
 
-### Instal·lació i execució
+### Instal·lació i execució a Producció
+
+**Configuració ruta base /mot-li/**
+
+Es pot fer de dues maneres:
+
+1 - Pel fitxer vite.config.js afegint:
+
+    base: "/mot-li/"
+
+2 - En fer la build:
+
+    npm run build -- --base=/mot-li/
+
+Ara mateix està amb l'opció 2. Si es volen fer proves en local, cal usar l'opció 1.
 
 **Back**<br>
 
@@ -40,8 +54,20 @@ Inici de sessió: https://mot-li.netlify.app/mot-li/admin-login.html
     npm i
     npm run build -- --base=/mot-li/
 
-Cal executar un servidor en el port adequat per a poder navegar per l'aplicació  
-Per a fer proves en local es pot executar directament npm run dev que ja executa el seu propi servidor
+Cal executar un servidor en el port adequat per a poder navegar per l'aplicació
+
+### Instal·lació i execució en Local (development)
+
+**Back**<br>
+
+    npm i
+    npm run build:dev
+    npm start
+
+**Front**<br>
+
+    npm i
+    npm run dev (ja executa servidor)
 
 ## Instal·lació amb Docker
 
@@ -58,7 +84,7 @@ Un cop desplegada la imatge cal:
 
 Es un MongoDb allotjat a Atlas. Hi ha la informació de connexió al fitxer .env del back
 
-## ENDPOINTS API
+## Endpoints API
 
 **Front:**
 
