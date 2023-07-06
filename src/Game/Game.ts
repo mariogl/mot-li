@@ -329,7 +329,9 @@ class Game {
   private lost() {
     this.storage.setStats("currentStreak", 0);
 
-    this.userInterface.openModal("Has perdut");
+    this.userInterface.openModal(
+      "Oh! No has trobat el mot d'avui. Torna-hi demà."
+    );
 
     setTimeout(() => {
       this.openSolutionModal();
