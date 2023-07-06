@@ -12,10 +12,11 @@ import "./words-list";
 
 (() => {
   document.querySelectorAll("a").forEach((link) => {
-    let url = link.href;
-    if (url?.startsWith("/")) {
-      url = import.meta.env.BASE_URL + url.slice(1);
-      link.href = url;
+    const url = new URL(link.href);
+    if (url.pathname.startsWith("/admin")) {
+      const newUrl =
+        url.origin + import.meta.env.BASE_URL + url.pathname.slice(1);
+      link.href = newUrl;
     }
   });
 })();
