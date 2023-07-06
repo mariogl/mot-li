@@ -18,7 +18,10 @@ import "./words-list";
       link.classList.contains("logo--link")
     ) {
       const newUrl =
-        url.origin + import.meta.env.BASE_URL + url.pathname.slice(1);
+        url.origin +
+        import.meta.env.BASE_URL +
+        url.pathname.slice(1) +
+        url.search;
       link.href = newUrl;
     }
   });
