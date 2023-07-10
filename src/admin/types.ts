@@ -8,6 +8,7 @@ export interface WordStructure extends WordDataStructure {
 }
 
 export interface GameDataStructure {
+  actualWord: string;
   word: string;
   date: string;
   guesses: number;

@@ -1,3 +1,4 @@
+import { normalizeWord } from "../../utils";
 import auth from "../auth";
 import Modal from "../modals/Modal";
 import GamesApiRepository from "../repository/games/GamesApiRepository";
@@ -61,7 +62,7 @@ if (
     form.classList.remove("off");
 
     wordDate.value = game.date.split("T")[0];
-    wordWord.value = game.word;
+    wordWord.value = game.actualWord;
     wordDefinition.innerHTML = game.definition;
     wordLink.value = game.link;
     wordTextLink.value = game.linkText;
@@ -82,7 +83,9 @@ if (
       return;
     }
 
-    if (!(await wordsRepository.doesWordExist(wordWord.value))) {
+    const normalizedWord = normalizeWord(wordWord.value);
+
+    if (!(await wordsRepository.doesWordExist(normalizedWord))) {
       modal.setMessage("Aquesta paraula no existeix, proveu-ne una altra.");
       modal.open();
 
@@ -90,7 +93,8 @@ if (
     }
 
     const newGameData: GameDataStructure = {
-      word: wordWord.value,
+      actualWord: wordWord.value,
+      word: normalizedWord,
       date: wordDate.value,
       link: wordLink.value,
       linkText: wordTextLink.value,
@@ -144,12 +148,14 @@ if (
       return;
     }
 
-    if (!(await wordsRepository.doesWordExist(wordWord.value))) {
+    const normalizedWord = normalizeWord(wordWord.value);
+
+    if (!(await wordsRepository.doesWordExist(normalizedWord))) {
       modal.setMessage("Aquesta paraula no existeix, proveu-ne una altra.");
       modal.open();
     }
 
-    if (await gamesRepository.isWordScheduled(wordWord.value)) {
+    if (await gamesRepository.isWordScheduled(normalizedWord)) {
       modal.setMessage(
         "Aquesta paraula ja està programada, proveu-ne una altra."
       );
