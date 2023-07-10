@@ -49,7 +49,7 @@ if (currentUrl.pathname === adminUrls.gamesList) {
       gameElement.dataset.id = game.id;
 
       const gameWord = gameElement.querySelector(".game__word")!;
-      gameWord.textContent = game.word;
+      gameWord.textContent = game.actualWord;
 
       const gameDate = gameElement.querySelector(".game__date")!;
       gameDate.textContent = new Date(game.date).toLocaleDateString("ca-ES", {
