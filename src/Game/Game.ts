@@ -52,7 +52,7 @@ class Game {
       const gameOfTheDay = await gamesRepository.getCurrentGame();
 
       this.config.wordToGuess = normalizeWord(gameOfTheDay.word);
-      this.config.originalWordToGuess = gameOfTheDay.word;
+      this.config.originalWordToGuess = gameOfTheDay.actualWord;
       this.config.maxGuesses = gameOfTheDay.guesses;
       this.config.wordLink = gameOfTheDay.link;
       this.config.wordLinkText = gameOfTheDay.linkText;
