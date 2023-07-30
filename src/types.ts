@@ -7,6 +7,7 @@ export interface UserInterfaceStructure {
   bigModalOpened: BigModal | undefined;
   guessToHtml(guessLetters: GuessLetterStructure[]): void;
   setCurrentDate(): void;
+  setCurrentYear(): void;
   setCurrentLetterElement(): void;
   cancelEvents(): void;
   setKeysStatus(letters: GuessLetterStructure[]): void;
