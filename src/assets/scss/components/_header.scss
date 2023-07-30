@@ -2,33 +2,15 @@
 @use "../base/base";
 
 .header {
-  border-bottom: 1px solid var(--brand-logo);
   .container {
     height: 60px;
     margin-bottom: 30px;
     padding: 10px 15px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin: 0 auto;
-  }
-}
-
-.logo--vilaweb {
-  border-radius: 50%;
-  img {
-    border: 2px solid var(--soft-grey);
-    border-radius: 50%;
-  }
-}
-
-.logo--motli {
-  text-align: center;
-  font-size: 2.5rem;
-  font-family: "Saira Extra Condensed", sans-serif;
-
-  @media screen and (min-width: 440px) {
-    font-size: 3rem;
+    max-width: 100%;
   }
 }
 
@@ -36,94 +18,17 @@
   color: var(--brand-logo);
 }
 
+.date-current {
+  margin-right: 20px;
+}
+
 /* navigation */
 
-.menu__toggle {
-  position: relative;
-  &:hover,
-  &:focus {
-    transition: all 500ms linear;
-    .menu__toggle i {
-      transition: background-color 500ms linear;
-    }
-  }
-  li {
-    color: var(--dark);
-  }
-}
-.dark .menu__toggle {
-  i {
-    background-color: var(--dark);
-  }
-  &:hover,
-  &:focus {
-    i {
-      background-color: var(--light-color);
-    }
-  }
-}
-
-.menu__toggle span {
-  width: 20px;
-  height: 16px;
-  display: inline-block;
-  position: relative;
-  top: 0;
-  right: 0;
-  z-index: 1000;
-  cursor: pointer;
-}
-
-.menu__toggle i {
-  position: absolute;
-  display: block;
-  height: 2px;
-  background-color: var(--letter-invalid);
-  width: 20px;
-  right: 0;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  cursor: pointer;
-}
-
-.menu__toggle i:nth-child(1) {
-  top: 0;
-}
-
-.menu__toggle i:nth-child(2) {
-  top: 7px;
-}
-
-.menu__toggle i:nth-child(3) {
-  top: 14px;
-}
-
-.menu__toggle.open i:nth-child(1) {
-  top: 7px;
-  -webkit-transform: rotateZ(45deg);
-  transform: rotateZ(45deg);
-}
-
-.dark .menu__toggle.open i:nth-child(2),
-.menu__toggle.open i:nth-child(2) {
-  background: transparent;
-}
-
-.menu__toggle.open i:nth-child(3) {
-  top: 7px;
-  -webkit-transform: rotateZ(-45deg);
-  transform: rotateZ(-45deg);
-}
-
 .menu__navigation {
-  display: none;
   color: var(--letter-positioned);
   width: 150px;
   padding: 0;
-  position: absolute;
-  right: -1850px;
   top: 75px;
-  transition: right linear 0.2s;
 }
 
 .menu__navigation .button--icon {
@@ -137,13 +42,7 @@
   height: 20px;
 }
 
-.menu__navigation.opened {
-  right: 15px;
-  z-index: 1;
-  display: block;
-}
-
-.menu__navigation.opened ul {
+.menu__navigation ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
