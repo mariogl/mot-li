@@ -51,6 +51,7 @@ export interface GameState {
   currentGuessNumber: number;
   currentGuessLetterPosition: number;
   hasFinished: boolean;
+  hasWon: boolean;
 }
 
 export interface DomAccessorStructure {
