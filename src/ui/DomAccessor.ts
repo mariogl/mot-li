@@ -4,8 +4,6 @@ class DomAccessor implements DomAccessorStructure {
   private readonly guessesContainer: HTMLElement;
   private readonly keyboard: HTMLElement;
   private readonly keyboardKeys: NodeListOf<HTMLElement>;
-  private readonly menu: HTMLElement;
-  private readonly menuToggler: HTMLElement;
   private readonly statisticsOpener: HTMLElement;
   private readonly optionsOpener: HTMLElement;
   private readonly infoOpener: HTMLElement;
@@ -17,8 +15,6 @@ class DomAccessor implements DomAccessorStructure {
     this.guessesContainer = document.querySelector(".guesses")!;
     this.keyboard = document.querySelector(".keyboard")!;
     this.keyboardKeys = this.keyboard.querySelectorAll(".key");
-    this.menu = document.querySelector(".menu__navigation")!;
-    this.menuToggler = document.querySelector(".menu__toggle")!;
     this.modal = document.querySelector(".modal")!;
     this.countdown = document.querySelector(".countdown__timer")!;
     this.statisticsOpener = document.querySelector(
@@ -51,14 +47,6 @@ class DomAccessor implements DomAccessorStructure {
     );
   }
 
-  public getMenuElement(): HTMLElement {
-    return this.menu;
-  }
-
-  public getMenuTogglerElement(): HTMLElement {
-    return this.menuToggler;
-  }
-
   public getKeyboardElement(): HTMLElement {
     return this.keyboard;
   }
@@ -82,23 +70,6 @@ class DomAccessor implements DomAccessorStructure {
     currentGuessLetterElement.textContent = letter.symbol;
     currentGuessLetterElement.classList.remove("letter--unchecked");
     currentGuessLetterElement.classList.add(`letter--${letter.status}`);
-  }
-
-  public toggleMenu() {
-    this.menu.classList.toggle("opened");
-    const expanded = this.menuToggler.getAttribute("aria-expanded");
-    this.menuToggler.setAttribute(
-      "aria-expanded",
-      `${expanded === "true" ? "false" : "true"}`
-    );
-
-    this.menuToggler.classList.toggle("open");
-  }
-
-  public closeMenu() {
-    this.menu.classList.remove("opened");
-    this.menuToggler.setAttribute("aria-expanded", "false");
-    this.menuToggler.classList.remove("open");
   }
 
   public openModal(text: string) {

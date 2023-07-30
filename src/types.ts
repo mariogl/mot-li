@@ -6,6 +6,7 @@ export type KeyType = "letter" | "action";
 export interface UserInterfaceStructure {
   bigModalOpened: BigModal | undefined;
   guessToHtml(guessLetters: GuessLetterStructure[]): void;
+  setCurrentDate(): void;
   setCurrentLetterElement(): void;
   cancelEvents(): void;
   setKeysStatus(letters: GuessLetterStructure[]): void;
@@ -61,10 +62,6 @@ export interface DomAccessorStructure {
   getKeyboardKeyElements(): NodeListOf<HTMLElement>;
   getCountdown(): HTMLElement;
   getGuessesContainer(): HTMLElement;
-  getMenuTogglerElement(): HTMLElement;
-  getMenuElement(): HTMLElement;
-  toggleMenu(): void;
-  closeMenu(): void;
   setLetterStatus(
     currentGuessNumber: number,
     letter: GuessLetterStructure,

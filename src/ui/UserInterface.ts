@@ -12,8 +12,6 @@ import BigModal, { type BigModalOptions } from "./BigModal";
 class UserInterface implements UserInterfaceStructure {
   public bigModalOpened: BigModal | undefined;
   private readonly keyboard: HTMLElement;
-  private readonly menu: HTMLElement;
-  private readonly menuToggler: HTMLElement;
   private readonly statisticsOpener: HTMLElement;
   private readonly optionsOpener: HTMLElement;
   private readonly infoOpener: HTMLElement;
@@ -25,8 +23,8 @@ class UserInterface implements UserInterfaceStructure {
     private readonly storage: StorageStructure
   ) {
     this.keyboard = domAccessor.getKeyboardElement();
-    this.menuToggler = domAccessor.getMenuTogglerElement();
-    this.menu = domAccessor.getMenuElement();
+    /*    This.menuToggler = domAccessor.getMenuTogglerElement();
+    this.menu = domAccessor.getMenuElement(); */
     this.statisticsOpener = domAccessor.getStatisticsOpener();
     this.optionsOpener = domAccessor.getOptionsOpener();
     this.infoOpener = domAccessor.getInfoOpener();
@@ -54,6 +52,17 @@ class UserInterface implements UserInterfaceStructure {
         position
       );
     });
+  }
+
+  public setCurrentDate() {
+    const today = new Date().toLocaleDateString("ca-ES", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    const todayDate = document.querySelector(".date-current")!;
+    todayDate.textContent = today.replace(/\//g, ".");
+    todayDate.setAttribute("datetime", today.toString());
   }
 
   public setCurrentLetterElement() {
@@ -235,22 +244,9 @@ class UserInterface implements UserInterfaceStructure {
   }
 
   private menuAddEventListeners() {
-    this.menuToggler.addEventListener("click", () => {
-      this.domAccessor.toggleMenu();
-    });
-
-    document.addEventListener("click", (event: MouseEvent) => {
+    /*   Document.addEventListener("click", (event: MouseEvent) => {
       const clickedElement = event.target as HTMLElement;
-
-      if (
-        this.menuToggler.contains(clickedElement) ||
-        this.menu.contains(clickedElement)
-      ) {
-        return;
-      }
-
-      this.domAccessor.closeMenu();
-    });
+    }); */
 
     this.statisticsOpener.addEventListener("click", () => {
       this.createBigModal("statistics", [], {
