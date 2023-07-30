@@ -106,7 +106,7 @@ if (
       try {
         await gamesRepository.updateGame({
           ...newGameData,
-          length: wordWord.value.length,
+          length: normalizedWord.length,
           id: gameId,
         });
 
