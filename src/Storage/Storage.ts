@@ -16,6 +16,8 @@ class Storage implements StorageStructure {
 
   public isDarkTheme = false;
 
+  public hasWon = false;
+
   public statistics: Stats = {
     games: 0,
     wins: 0,
@@ -39,6 +41,8 @@ class Storage implements StorageStructure {
     this.getStoredGame();
 
     this.getDarkTheme();
+
+    this.getHasWon();
 
     this.getStoredStats();
   }
@@ -112,6 +116,16 @@ class Storage implements StorageStructure {
     this.statistics[key as keyof Stats] = number;
 
     localStorage.setItem("stats", JSON.stringify(this.statistics));
+  }
+
+  public getHasWon() {
+    this.hasWon = JSON.parse(localStorage.getItem("has-won")!) as boolean;
+  }
+
+  public setHasWon(hasWon: boolean) {
+    this.hasWon = hasWon;
+
+    localStorage.setItem("has-won", String(hasWon));
   }
 
   public resetGame() {

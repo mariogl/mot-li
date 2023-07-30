@@ -112,6 +112,7 @@ export interface Stats {
 export interface StorageStructure {
   game: StoredGameStructure;
   isDarkTheme: boolean;
+  hasWon: boolean;
   statistics: Stats;
   resetGame: () => void;
   setLastWord: (word: string) => void;

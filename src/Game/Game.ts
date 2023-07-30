@@ -90,6 +90,7 @@ class Game {
     this.guess = new Guess(this.config, this.userInterface);
 
     this.gameState.hasFinished = this.storage.game.isComplete;
+    this.gameState.hasWon = this.storage.hasWon;
 
     const keyboardBuilder = new KeyboardBuilder(
       this.domAccessor,
@@ -308,6 +309,7 @@ class Game {
 
   private lost() {
     this.storage.setStats("currentStreak", 0);
+    this.storage.setHasWon(false);
     this.gameState.hasWon = false;
 
     this.userInterface.openModal(
@@ -327,6 +329,7 @@ class Game {
       "currentStreak",
       this.storage.statistics.currentStreak + 1
     );
+    this.storage.setHasWon(true);
     this.gameState.hasWon = true;
 
     if (
