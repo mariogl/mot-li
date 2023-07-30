@@ -3,12 +3,14 @@
   background-color: #f3f4f6;
 }
 
+.admin header .container {
+  justify-content: space-between;
+}
+
 .admin .logo--motli {
+  font-family: "Saira Extra Condensed", sans-serif;
   font-size: 1.2rem; //fallback for clamp
   font-size: clamp(1.5rem, 1rem + 3vw, 3rem);
-  @media screen and (max-width: 460px) {
-    //  font-size: 1.6rem;
-  }
 }
 
 .admin .logo--link {
@@ -16,6 +18,14 @@
   &:hover,
   &:focus {
     color: inherit;
+  }
+}
+
+.admin .logo--vilaweb {
+  border-radius: 50%;
+  img {
+    border: 2px solid var(--soft-grey);
+    border-radius: 50%;
   }
 }
 
