@@ -52,6 +52,7 @@ export interface GameState {
   currentGuessNumber: number;
   currentGuessLetterPosition: number;
   hasFinished: boolean;
+  hasWon: boolean;
 }
 
 export interface DomAccessorStructure {
@@ -112,6 +113,7 @@ export interface Stats {
 export interface StorageStructure {
   game: StoredGameStructure;
   isDarkTheme: boolean;
+  hasWon: boolean;
   statistics: Stats;
   resetGame: () => void;
   setLastWord: (word: string) => void;

@@ -35,6 +35,7 @@ class Game {
     currentGuessNumber: 0,
     currentGuessLetterPosition: 0,
     hasFinished: false,
+    hasWon: false,
   };
 
   private readonly domAccessor: DomAccessorStructure;
@@ -89,6 +90,7 @@ class Game {
     this.guess = new Guess(this.config, this.userInterface);
 
     this.gameState.hasFinished = this.storage.game.isComplete;
+    this.gameState.hasWon = this.storage.hasWon;
 
     const keyboardBuilder = new KeyboardBuilder(
       this.domAccessor,
@@ -149,9 +151,17 @@ class Game {
 
       const todayFormattedDate = `${day}/${month}/${year}`;
 
-      const textToCopy = `He trobat el #Mot-li! d'avui (${todayFormattedDate}) en ${
-        this.gameState.currentGuessNumber + 1
-      } intents.\nVoleu provar-ho?\n${import.meta.env.VITE_APP_URL}`;
+      let textToCopy: string;
+
+      if (this.gameState.hasWon) {
+        textToCopy = `He trobat el #Mot-li! d'avui (${todayFormattedDate}) en ${
+          this.gameState.currentGuessNumber + 1
+        } intents.\nVoleu provar-ho?\n${import.meta.env.VITE_APP_URL}`;
+      } else {
+        textToCopy = `No he trobat el #Mot-li! d'avui (${todayFormattedDate}), però demà hi torno.\nVoleu provar-ho?\n${
+          import.meta.env.VITE_APP_URL
+        }`;
+      }
 
       await navigator.clipboard.writeText(textToCopy);
 
@@ -300,6 +310,8 @@ class Game {
 
   private lost() {
     this.storage.setStats("currentStreak", 0);
+    this.storage.setHasWon(false);
+    this.gameState.hasWon = false;
 
     this.userInterface.openModal(
       "Oh! No has trobat el mot d'avui. Torna-hi demà."
@@ -318,6 +330,8 @@ class Game {
       "currentStreak",
       this.storage.statistics.currentStreak + 1
     );
+    this.storage.setHasWon(true);
+    this.gameState.hasWon = true;
 
     if (
       this.storage.statistics.currentStreak > this.storage.statistics.maxStreak
