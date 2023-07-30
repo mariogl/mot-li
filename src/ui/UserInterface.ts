@@ -23,8 +23,6 @@ class UserInterface implements UserInterfaceStructure {
     private readonly storage: StorageStructure
   ) {
     this.keyboard = domAccessor.getKeyboardElement();
-    /*    This.menuToggler = domAccessor.getMenuTogglerElement();
-    this.menu = domAccessor.getMenuElement(); */
     this.statisticsOpener = domAccessor.getStatisticsOpener();
     this.optionsOpener = domAccessor.getOptionsOpener();
     this.infoOpener = domAccessor.getInfoOpener();
@@ -63,6 +61,13 @@ class UserInterface implements UserInterfaceStructure {
     const todayDate = document.querySelector(".date-current")!;
     todayDate.textContent = today.replace(/\//g, ".");
     todayDate.setAttribute("datetime", today.toString());
+  }
+
+  public setCurrentYear() {
+    const year = new Date().getFullYear();
+    const currentYear = document.querySelector(".date-currentyear")!;
+    currentYear.textContent = year.toString();
+    currentYear.setAttribute("datetime", year.toString());
   }
 
   public setCurrentLetterElement() {
@@ -244,10 +249,6 @@ class UserInterface implements UserInterfaceStructure {
   }
 
   private menuAddEventListeners() {
-    /*   Document.addEventListener("click", (event: MouseEvent) => {
-      const clickedElement = event.target as HTMLElement;
-    }); */
-
     this.statisticsOpener.addEventListener("click", () => {
       this.createBigModal("statistics", [], {
         statistics: this.storage.statistics,

@@ -111,6 +111,7 @@ class Game {
     this.setCurrentGuessNumber(this.storage.game.currentGuessNumber ?? 0);
 
     this.userInterface.setCurrentDate();
+    this.userInterface.setCurrentYear();
     this.userInterface.onLetterPressed = (pressedKey: string) => {
       const key = pressedKey.toLocaleLowerCase();
 
