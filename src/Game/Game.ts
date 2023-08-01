@@ -288,16 +288,17 @@ class Game {
 
     const todayFormattedDate = `${day}/${month}/${year}`;
 
+    let urlSponsor = import.meta.env.VITE_APP_URL;
+    urlSponsor = "https://www.vilaweb.cat/motli";
+
     let textToCopy: string;
 
     if (this.gameState.hasWon) {
       textToCopy = `He trobat el #Mot-li! d'avui (${todayFormattedDate}) en ${
         this.gameState.currentGuessNumber + 1
-      } intents.\nVoleu provar-ho?\n${import.meta.env.VITE_APP_URL}`;
+      } intents.\nVoleu provar-ho?\n${urlSponsor}`;
     } else {
-      textToCopy = `No he trobat el #Mot-li! d'avui (${todayFormattedDate}), però demà hi torno.\nVoleu provar-ho?\n${
-        import.meta.env.VITE_APP_URL
-      }`;
+      textToCopy = `No he trobat el #Mot-li! d'avui (${todayFormattedDate}), però demà hi torno.\nVoleu provar-ho?\n${urlSponsor}`;
     }
 
     await navigator.clipboard.writeText(textToCopy);

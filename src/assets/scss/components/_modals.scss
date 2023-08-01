@@ -24,7 +24,8 @@ body.dark.modal--open:after {
   display: block;
 }
 .bigmodal--statistics.bigmodal--open,
-.bigmodal--options.bigmodal--open {
+.bigmodal--options.bigmodal--open,
+.bigmodal--solution.bigmodal--open {
   display: flex;
 }
 
@@ -98,6 +99,14 @@ body.dark.modal--open:after {
 }
 
 /* bigmodal--solution */
+
+.bigmodal--solution {
+  .bigmodal__solution,
+  .bigmodal__definition,
+  .bigmodal__external-link {
+    flex: 1;
+  }
+}
 
 .bigmodal__solution {
   text-align: center;
