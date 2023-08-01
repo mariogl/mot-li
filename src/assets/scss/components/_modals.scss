@@ -40,6 +40,7 @@ body.dark.modal--open:after {
   width: fit-content;
   padding: 8px 20px;
   text-align: center;
+  z-index: 10;
 
   @media screen and (min-width: 340px) {
   }
