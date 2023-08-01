@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import CountDownTimer from "../CountDownTimer/CountDownTimer";
 import {
-  type StorageStructure,
   type DomAccessorStructure,
   type GameState,
   type GuessLetterStructure,
+  type StorageStructure,
   type UserInterfaceStructure,
 } from "../types";
 import BigModal, { type BigModalOptions } from "./BigModal";
@@ -20,7 +20,8 @@ class UserInterface implements UserInterfaceStructure {
   constructor(
     readonly domAccessor: DomAccessorStructure,
     private readonly gameState: GameState,
-    private readonly storage: StorageStructure
+    private readonly storage: StorageStructure,
+    private readonly onClickStatisticsIcon: (ui: UserInterfaceStructure) => void
   ) {
     this.keyboard = domAccessor.getKeyboardElement();
     this.statisticsOpener = domAccessor.getStatisticsOpener();
@@ -250,9 +251,17 @@ class UserInterface implements UserInterfaceStructure {
 
   private menuAddEventListeners() {
     this.statisticsOpener.addEventListener("click", () => {
-      this.createBigModal("statistics", [], {
-        statistics: this.storage.statistics,
-      });
+      this.createBigModal(
+        "statistics",
+        [
+          () => {
+            this.onClickStatisticsIcon(this);
+          },
+        ],
+        {
+          statistics: this.storage.statistics,
+        }
+      );
     });
 
     this.optionsOpener.addEventListener("click", () => {

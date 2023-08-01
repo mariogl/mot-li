@@ -84,7 +84,8 @@ class Game {
     this.userInterface = new UserInterface(
       this.domAccessor,
       this.gameState,
-      this.storage
+      this.storage,
+      this.copyToClipboard
     );
 
     this.guess = new Guess(this.config, this.userInterface);
@@ -137,40 +138,18 @@ class Game {
 
   public openSolutionModal() {
     const openStatistics = () => {
-      this.userInterface.createBigModal("statistics", [], {
-        statistics: this.storage.statistics,
-      });
-    };
-
-    const copyToClipboard = async () => {
-      const today = new Date();
-
-      const day = `${today.getDate()}`.padStart(2, "0");
-      const month = `${today.getMonth() + 1}`.padStart(2, "0");
-      const year = today.getFullYear();
-
-      const todayFormattedDate = `${day}/${month}/${year}`;
-
-      let textToCopy: string;
-
-      if (this.gameState.hasWon) {
-        textToCopy = `He trobat el #Mot-li! d'avui (${todayFormattedDate}) en ${
-          this.gameState.currentGuessNumber + 1
-        } intents.\nVoleu provar-ho?\n${import.meta.env.VITE_APP_URL}`;
-      } else {
-        textToCopy = `No he trobat el #Mot-li! d'avui (${todayFormattedDate}), però demà hi torno.\nVoleu provar-ho?\n${
-          import.meta.env.VITE_APP_URL
-        }`;
-      }
-
-      await navigator.clipboard.writeText(textToCopy);
-
-      this.userInterface.openModal("Copiat");
+      this.userInterface.createBigModal(
+        "statistics",
+        [async () => this.copyToClipboard(this.userInterface)],
+        {
+          statistics: this.storage.statistics,
+        }
+      );
     };
 
     this.userInterface.createBigModal(
       "solution",
-      [copyToClipboard, openStatistics],
+      [async () => this.copyToClipboard(this.userInterface), openStatistics],
       {
         solution: {
           word: this.config.originalWordToGuess,
@@ -298,6 +277,32 @@ class Game {
 
   public hasFinished() {
     return this.gameState.hasFinished;
+  }
+
+  private async copyToClipboard(ui: UserInterfaceStructure) {
+    const today = new Date();
+
+    const day = `${today.getDate()}`.padStart(2, "0");
+    const month = `${today.getMonth() + 1}`.padStart(2, "0");
+    const year = today.getFullYear();
+
+    const todayFormattedDate = `${day}/${month}/${year}`;
+
+    let textToCopy: string;
+
+    if (this.gameState.hasWon) {
+      textToCopy = `He trobat el #Mot-li! d'avui (${todayFormattedDate}) en ${
+        this.gameState.currentGuessNumber + 1
+      } intents.\nVoleu provar-ho?\n${import.meta.env.VITE_APP_URL}`;
+    } else {
+      textToCopy = `No he trobat el #Mot-li! d'avui (${todayFormattedDate}), però demà hi torno.\nVoleu provar-ho?\n${
+        import.meta.env.VITE_APP_URL
+      }`;
+    }
+
+    await navigator.clipboard.writeText(textToCopy);
+
+    ui.openModal("Copiat");
   }
 
   private endGame() {
