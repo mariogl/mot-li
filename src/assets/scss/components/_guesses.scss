@@ -79,7 +79,15 @@ main {
   &.letter--unchecked {
     border: 1px solid var(--letter-key-focus);
   }
+
+  @supports not (aspect-ratio) {
+    padding-top: 100%;
+    height: 0;
+    position: relative;
+    overflow: hidden;
+  }
 }
+
 .dark .letter:not(.letter--unchecked) {
   border: var(--light-color);
 }
