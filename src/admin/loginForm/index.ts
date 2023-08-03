@@ -1,11 +1,9 @@
 import auth from "../auth";
 import AuthLocalStorageRepository from "../repository/localStorage/AuthLocalStorageRepository";
 import UserApiRepository from "../repository/user/UserApiRepository";
-import { adminUrls } from "../urls";
+import { adminUrls, isValidUrl } from "../urls";
 
-const currentUrl = new URL(window.location.href);
-
-if (currentUrl.pathname === adminUrls.login) {
+if (isValidUrl(adminUrls.login)) {
   const form = document.querySelector(".form--admin")!;
   const password: HTMLInputElement = form.querySelector("#password")!;
   const error = document.querySelector(".error")!;

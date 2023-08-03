@@ -8,3 +8,12 @@ export const adminUrls = {
   wordsList: `${baseUrl}admin-words.html`,
   newWord: `${baseUrl}admin-new-word.html`,
 };
+
+export const isValidUrl = (url: string) => {
+  const currentUrl = new URL(window.location.href);
+
+  return (
+    currentUrl.pathname === url ||
+    currentUrl.pathname === url.replace(".html", "")
+  );
+};

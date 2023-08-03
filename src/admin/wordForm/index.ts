@@ -2,11 +2,9 @@ import auth from "../auth";
 import Modal from "../modals/Modal";
 import WordsApiRepository from "../repository/words/WordsApiRepository";
 import { type WordDataStructure } from "../types";
-import { adminUrls } from "../urls";
+import { adminUrls, isValidUrl } from "../urls";
 
-const currentUrl = new URL(window.location.href);
-
-if (currentUrl.pathname === adminUrls.newWord) {
+if (isValidUrl(adminUrls.newWord)) {
   const modal = new Modal();
 
   const form = document.querySelector(".form--admin")!;

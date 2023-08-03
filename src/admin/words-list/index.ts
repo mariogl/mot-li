@@ -4,11 +4,11 @@ import BigModal from "../modals/BigModal";
 import Modal from "../modals/Modal";
 import AuthLocalStorageRepository from "../repository/localStorage/AuthLocalStorageRepository";
 import WordsApiRepository from "../repository/words/WordsApiRepository";
-import { adminUrls } from "../urls";
+import { adminUrls, isValidUrl } from "../urls";
 
 const currentUrl = new URL(window.location.href);
 
-if (currentUrl.pathname === adminUrls.wordsList) {
+if (isValidUrl(adminUrls.wordsList)) {
   const message = new URLSearchParams(currentUrl.search).get("message");
   const modal = new Modal();
 
