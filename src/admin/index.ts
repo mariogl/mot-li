@@ -11,6 +11,7 @@ import "./wordForm";
 import "./words-list";
 
 (() => {
+  debugger;
   document.querySelectorAll("a").forEach((link) => {
     const url = new URL(link.href);
     if (
