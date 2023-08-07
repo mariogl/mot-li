@@ -81,7 +81,8 @@ main {
   }
 
   @supports not (aspect-ratio) {
-    padding-top: 100%;
+    padding-top: 50%;
+    padding-bottom: 50%;
     height: 0;
     position: relative;
     overflow: hidden;
