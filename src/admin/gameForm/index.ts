@@ -4,7 +4,7 @@ import Modal from "../modals/Modal";
 import GamesApiRepository from "../repository/games/GamesApiRepository";
 import WordsApiRepository from "../repository/words/WordsApiRepository";
 import { type GameDataStructure } from "../types";
-import { adminUrls } from "../urls";
+import { adminUrls, isValidUrl } from "../urls";
 
 const currentUrl = new URL(window.location.href);
 
@@ -18,10 +18,7 @@ const convertTags = (html: string): string => {
   return newHtml;
 };
 
-if (
-  currentUrl.pathname === adminUrls.newGame ||
-  currentUrl.pathname === adminUrls.editGame
-) {
+if (isValidUrl(adminUrls.newGame) || isValidUrl(adminUrls.editGame)) {
   const modal = new Modal();
 
   const isEditing = currentUrl.pathname === adminUrls.editGame;
