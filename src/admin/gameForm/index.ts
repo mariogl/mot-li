@@ -21,7 +21,7 @@ const convertTags = (html: string): string => {
 if (isValidUrl(adminUrls.newGame) || isValidUrl(adminUrls.editGame)) {
   const modal = new Modal();
 
-  const isEditing = currentUrl.pathname === adminUrls.editGame;
+  const isEditing = isValidUrl(adminUrls.editGame);
   let gameId: string;
 
   const form = document.querySelector(".form--admin")!;
